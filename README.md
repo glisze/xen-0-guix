@@ -1,2 +1,2 @@
-# xen-0-guix
-Experimentl: running xen on guix
+# Virtualisation and GNU Guix -*- mode: org; -*-
+ Experimental: running xen on guix
