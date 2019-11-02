@@ -1,0 +1,5 @@
+b__ () 
+{ 
+    local D="guix environment --ad-hoc xen-0-boot";
+    guix environment --load-path=./here --ad-hoc xen-0-boot
+}
