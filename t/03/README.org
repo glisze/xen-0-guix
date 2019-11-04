@@ -1,0 +1,14 @@
+# t/03/README.org (c) 2019 Gunter Liszewski -*- mode: org; -*-
+* For example: make a bootloader for a Xen Domu
+  Enter an ad-hoc environment that has the ~grub-hybrid-xen~ GNU Guix package, here:
+: guix environment --load-path=./here --ad-hoc grub-hybrid-xen
+  Then, use the ~grub-mkimage~ command to make a suitable binary image to be used as the
+Xen ~kernel~.  (The bash script "[[grub-mkimage-x86_64-xen.sh]]," and the bash shell function [[Fn/g___]["g___()"]] do just that.)
+: a="$( dirname $( dirname $( readlink -e $( which grub-mkimage ))))";
+: b="grub-x86_64-xen.bin";
+: c="/boot/grub";
+: d="./grub.cfg";
+: grub-mkimage --config=$d --format=x86_64-xen --directory="$a/lib/grub/x86_64-xen/" --output="./$b" --prefix="$c" $a/lib/grub/x86_64-xen/*.mod
+
+
+

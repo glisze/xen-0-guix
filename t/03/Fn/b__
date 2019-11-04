@@ -1,0 +1,5 @@
+b__ () 
+{ 
+    local D="guix environment --ad-hoc grub-hybrid-xen";
+    guix environment --load-path=./here --ad-hoc grub-hybrid-xen
+}
