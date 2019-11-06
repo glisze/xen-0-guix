@@ -1,0 +1,4 @@
+console-tmux-tty14 () 
+{ 
+    openvt -c ${1:-14} -f -- guix environment --ad-hoc tmux -- tmux
+}

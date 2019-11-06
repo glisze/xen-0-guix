@@ -1,0 +1,17 @@
+# xen-0-tools t/20 (c) 2019 Gunter Liszewski -*- mode: org; -*-
+* A direct kernel example
+  Using a Linux container to collect a selection of ~/gnu/store~ items for a small Linux disk image.  The essentials, for now are
+two GNU Guix packages: ~bash~, and ~busybox~.
+: guix environment -C --user=this --no-cwd --link-profile --preserve=TERM --share=xchng=/home/xchng --ad-hoc bash busybox cpio file
+  Before going into this environment a ~200M~ disk image was allocated, and a ~150M ext4~ file system was made on partition 1. This
+partition was then mounted on the ~./xchng~ folder.  The container environment will then facilitate the disk image population at ~/home/xchng~.
+* Creating this machine
+  First set the environment.
+  (Note that ~perl~ is included.  This is an issue with the ~xen-0-tools~ package; a fix is in the making.)
+: guix environment --load-path=here --ad-hoc xen-0-tools perl
+  Then boot the machine.
+: sudo xl create -c to_xen/0.cfg
+  Now, here it displays the ~initrd~ system's shell prompt.  (To be continued...)
+
+
+

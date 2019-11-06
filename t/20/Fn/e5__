@@ -1,0 +1,5 @@
+e5__ () 
+{ 
+    local D="mount /dev/loop${1:-0}p1 xchng/";
+    sudo mount /dev/loop${1:-0}p1 xchng/
+}

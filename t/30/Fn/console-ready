@@ -1,0 +1,7 @@
+console-ready () 
+{ 
+    echo -ne '\e[H\e[J';
+    tty;
+    "$@";
+    sleep 900000000001
+}

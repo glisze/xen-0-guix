@@ -1,0 +1,5 @@
+n_ () 
+{ 
+    local D="git status --oneline";
+    git log --oneline --date relative -- ${1:-.}
+}

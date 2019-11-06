@@ -1,0 +1,5 @@
+e_ () 
+{ 
+    local D="guix environment -C --preserve=TERM --share=xchng=/home/xchng --ad-hoc (a small collection to get started)";
+    guix environment -C --user=${1:-this} --no-cwd --link-profile --share=xchng=/home/xchng --ad-hoc bash busybox linux-libre
+}

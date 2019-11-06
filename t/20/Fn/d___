@@ -1,0 +1,6 @@
+d___ () 
+{ 
+    local D="xen-0-tools: init.d/xencommons [start|stop|...]";
+    local a=$( dirname $( dirname $( readlink -e $( which xl ))));
+    sudo $a/etc/init.d/xencommons ${1:-start}
+}
