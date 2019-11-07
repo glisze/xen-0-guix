@@ -9,7 +9,7 @@ partition was then mounted on the ~./xchng~ folder.  The container environment w
   First set the environment.
   (Note that ~perl~ is included.  This is an issue with the ~xen-0-tools~ package; a fix is in the making.)
 : guix environment --load-path=here --ad-hoc xen-0-tools perl
-  Then boot the machine.
+  Then boot the machine.  (Defined in [[to_xen/0.cfg]].)
 : sudo xl create -c to_xen/0.cfg
   Now, here it displays the ~initrd~ system's shell prompt.  (To be continued...)
 
