@@ -1,0 +1,5 @@
+e3__ () 
+{ 
+    local D="losetup -P -f i/disk.raw";
+    sudo losetup -P -f i/disk.raw
+}

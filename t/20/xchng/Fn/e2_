@@ -1,0 +1,5 @@
+e2_ () 
+{ 
+    local D="xl create -c to_xen/0.cfg";
+    sudo xl create -c to_xen/0.cfg
+}
