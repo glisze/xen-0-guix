@@ -1,0 +1,8 @@
+i0_files () 
+{ 
+    local D="The files for i0.cpio.gz";
+    for a in 'bin/busybox' 'bin/sh';
+    do
+        echo /gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/$a;
+    done
+}

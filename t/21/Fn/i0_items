@@ -1,0 +1,9 @@
+i0_items () 
+{ 
+    local D="The list of items for i0.cpio.gz";
+    echo -e "/gnu/\n/gnu/store/";
+    for a in '' 'bin/' 'bin/busybox' 'bin/sh';
+    do
+        echo /gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/$a;
+    done
+}

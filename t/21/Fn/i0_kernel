@@ -1,0 +1,5 @@
+i0_kernel () 
+{ 
+    local D="The kernel to boot, here, now";
+    echo /gnu/store/k5fb8v0ncjgml6sifni27qv81pjwmw9k-linux-libre-5.2.9/bzImage
+}
