@@ -5,17 +5,18 @@ for this example. The ~cpio~ and ~gzip~ applets are used to copy ~busybox~,
 and it's ~sh~ applet out into ~i/i0.cpio.gz~. 
 
 ** Making this minimal ramdisk
- Enter the ~busybox~ environment  
-: guix environemnt --load-path=here xen-0-busybox
+ Enter the ~busybox~ environment
+: guix environemnt --load-path=here --ad-hoc xen-0-busybox
  Use only ~busybox~ builtins
 : PATH= $( which busybox ) sh
  Define the shell function called ~i0_items~
 : . Fn/i0_items
 
  Copy those items out to the ~i0.cpio.gz~ archive.  (Note:
-GNU Guix restricts permissions of its store items.  The actual
-process, for now, involved a ~cp -a $( i0_itmes ) i/~ and
-adjustments to allow a successful ~cpio -i~.)
+GNU Guix restricts permissions to its store items.  The actual
+process, for now, involves a ~cp -a $( i0_itmes ) i/~ command line
+and then adjustments to those items' permissions to permit a
+successful ~cpio -i~.)
 : i0_items | cpio -o -H newc | gzip -9 > i/i0.cpio.gz
 
 ** Create a machine
