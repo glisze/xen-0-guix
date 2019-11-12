@@ -1,0 +1,5 @@
+xen-0-tools-dir () 
+{ 
+    local D="xen-0-tools in store";
+    echo $( dirname $( dirname $( readlink -e $( which xl ))))
+}

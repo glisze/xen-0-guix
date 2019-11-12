@@ -1,0 +1,9 @@
+substitute-perl () 
+{ 
+    local D="substitute shell-files perl with (which perl)";
+    for a in $( find $( cat t/01-xen-0-tools-dir.txt ) -name \*.sh );
+    do
+        echo == $a;
+        sed $a -n -e s,perl,$( which perl ),p;
+    done
+}
