@@ -1,0 +1,10 @@
+substitute-perl-and-mkdir () 
+{ 
+    local D="substitute shell-files: s,perl,(which perl), s,/bin/mkdir,(which mkdir),";
+    for a in $( find $( cat t/01-xen-0-tools-dir.txt )/etc/xen/scripts -type f );
+    do
+        echo == $a;
+        sed $a -n -e s,perl,$( readlink -f $( which perl )),p;
+        sed $a -n -e s,/bin/mkdir,$( readlink -f $( which mkdir )),p;
+    done
+}

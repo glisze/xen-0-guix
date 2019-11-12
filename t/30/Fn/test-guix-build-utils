@@ -1,0 +1,5 @@
+test-guix-build-utils () 
+{ 
+    local D="(guix build utils): in test";
+    guile -L test -s test/guix-build-utils.test
+}

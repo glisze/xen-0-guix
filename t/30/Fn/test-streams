@@ -1,0 +1,5 @@
+test-streams () 
+{ 
+    local D="rules of streams: in test";
+    guile -L test -s test/streams.test
+}

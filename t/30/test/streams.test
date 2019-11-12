@@ -1,0 +1,55 @@
+;;; srfi-41 streams.test (C) Gunter Liszewski -*- mode: scheme; -*-
+;;;  stream-null stream-cons, stream? stream-null? stream-pair?,
+;;;  stream-car stream-cdr, stream-lambda
+
+(add-to-load-path "test")
+(use-modules (test-suite lib) (srfi srfi-41))
+(load "streams.scm")
+
+(define-syntax the
+  (syntax-rules (name type binding transformer all)
+    ((<1> a) (module-ref (current-module) (quote a)))
+    ((<2> a name) (macro-name (the a)))
+    ((<3> a type) (macro-type (the a)))
+    ((<4> a binding) (macro-binding (the a)))
+    ((<5> a transformer) (macro-transformer (the a)))
+    ((<some> a b b* ...) (cons (the a b) (the a b* ...)))
+    ((<all> a all) (the a name type binding transformer))
+    ((<usage>) "try: the if [name|type|binding|transformer|all|]*")))
+
+(with-test-prefix "stream"
+  (with-test-prefix "constructors"
+    (with-test-prefix "stream-null"
+      (pass-if "stream: stream-null" (stream? stream-null)))
+    (with-test-prefix "stream-cons a bs"
+      (pass-if "macro: stream-cons" (eq? 'macro (the stream-cons type)))
+      (let ((a (stream-cons 1 2)))
+	(pass-if "stream: (stream-cons 1 2)" (stream? a)))
+      (pass-if "stream-pair: (stream-cons 1 2))" (stream-pair? (stream-cons 1 2)))))
+  
+  (with-test-prefix "recognizers"
+    (with-test-prefix "stream? a"
+      (pass-if "procedure: stream?" (procedure? stream?)))
+    (with-test-prefix "stream-null? as"
+      (pass-if "procedure: stream-null?" (procedure? stream-null?)))
+    (with-test-prefix "stream-pair? as"
+      (pass-if "procedure: stream-pair?" (procedure? stream-pair?))))
+  
+  (with-test-prefix "accessors"
+    (with-test-prefix "stream-car as"
+      (pass-if "procedure: stream-car" (procedure? stream-car)))
+    (with-test-prefix "stream-cdr as"
+      (pass-if "procedure: stream-cdr" (procedure? stream-cdr))))
+
+  (with-test-prefix "stream-lambda"
+    (with-test-prefix "stream-lambda as b"
+      (pass-if "macro: stream-lambda" (eq? 'macro (the stream-lambda type))))))
+
+(with-test-prefix "primitives"
+  (with-test-prefix "constructors"
+    (define strm123
+      (stream-cons 1
+	(stream-cons 2
+	   (stream-cons 3
+	     stream-null))))
+    (pass-if "(stream-car strm123) => 1" (= 1 (stream-car strm123)))))

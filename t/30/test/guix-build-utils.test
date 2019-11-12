@@ -1,0 +1,41 @@
+;;; srfi-41 streams.test (C) Gunter Liszewski -*- mode: scheme; -*-
+;;;  stream-null stream-cons, stream? stream-null? stream-pair?,
+;;;  stream-car stream-cdr, stream-lambda
+
+(add-to-load-path "test")
+(use-modules (test-suite lib) (guix build utils))
+(load "guix-build-utils.scm")
+
+(define-syntax the
+  (syntax-rules (name type binding transformer all)
+    ((<1> a) (module-ref (current-module) (quote a)))
+    ((<2> a name) (macro-name (the a)))
+    ((<3> a type) (macro-type (the a)))
+    ((<4> a binding) (macro-binding (the a)))
+    ((<5> a transformer) (macro-transformer (the a)))
+    ((<some> a b b* ...) (cons (the a b) (the a b* ...)))
+    ((<all> a all) (the a name type binding transformer))
+    ((<usage>) "try: the if [name|type|binding|transformer|all|]*")))
+
+(with-test-prefix "(guix build utils)"
+  (let ((a-dir (mkdir-p "/tmp/t1234"))
+	(a-name "/tmp/t1234"))
+    (with-test-prefix "recognizers"
+      (pass-if "a name" (eq? "/tmp/t1234" a-name))
+      (pass-if "directory-exists?" (directory-exists? a-name))
+      (pass-if "symbolic-link?" (procedure? symbolic-link?))
+      (pass-if "ar-file?" (procedure? ar-file?))
+      (pass-if "elf-file?" (procedure? elf-file?))
+      (pass-if "gzip-file?" (procedure? gzip-file?))
+      (pass-if "executable-file?" (procedure? executable-file?)))
+    (with-test-prefix "commands"
+      (pass-if "invoke" #f)
+      (pass-if "which" #f)      
+      (pass-if "find-files" #f)
+      (pass-if "mkdir-p" #f)
+      (pass-if "install-file" #f))
+    (with-test-prefix "utilities"
+      (pass-if "set-file-time" #f)
+      (pass-if "substitute" #f)
+      (pass-if "substitute*" #f)
+      (pass-if "patch-shebang" #f))))
