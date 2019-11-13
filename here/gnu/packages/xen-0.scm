@@ -685,6 +685,16 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              (assoc-ref outputs "out")
                              "/lib'],\nlibrary_dirs =")))
             #t))
+	(add-after 'configure 'patch-perl-and-mkdir
+	  (lambda* (#:key inputs outputs #:allow-other-keys)
+	    (substitute* '("tools/hotplug/Linux/locking.sh")
+			 (("perl") (which "perl"))
+			 (("mkdir") (which "mkdir")))
+	    (substitute* '("tools/hotplug/Linux/launch-xenstore.in" "tools/hotplug/Linux/launch-xenstore")
+			 (("/bin/mkdir") (which "mkdir")))
+	    (substitute* '("tools/hotplug/Linux/xen-network-common.sh")
+			 (("false") (which "false")))
+	    #t))
         (add-before 'configure 'patch-xen-script-directory
           (lambda* (#:key outputs #:allow-other-keys)
             (substitute* '("configure"
