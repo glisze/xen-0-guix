@@ -1,0 +1,283 @@
+gunter@S8 /home/source-6/6/github/glisze/xen-0-guix/t/53 [env]$ sudo xl create -c to_xen/0.cfg
+Password:
+Parsing config from to_xen/0.cfg
+[    0.000000] Linux version 5.4.0-rc8S9+ (gunter@S8) (gcc version 7.4.0 (GCC)) #8 SMP Sun Nov 24 20:46:03 GMT 2019
+[    0.000000] Command line: root=/dev/xvda1 rdinit=/gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/bin/sh
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai
+[    0.000000] x86/fpu: x87 FPU will use FXSAVE
+[    0.000000] ACPI in unprivileged domain disabled
+[    0.000000] Released 0 page(s)
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] Xen: [mem 0x0000000000000000-0x000000000009ffff] usable
+[    0.000000] Xen: [mem 0x00000000000a0000-0x00000000000fffff] reserved
+[    0.000000] Xen: [mem 0x0000000000100000-0x000000003fffffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] DMI not present or invalid.
+[    0.000000] Hypervisor detected: Xen PV
+[    0.196366] tsc: Fast TSC calibration failed
+[    0.196376] tsc: Detected 998.190 MHz processor
+[    0.196453] last_pfn = 0x40000 max_arch_pfn = 0x400000000
+[    0.196460] Disabled
+[    0.196466] x86/PAT: MTRRs disabled, skipping PAT initialization too.
+[    0.196487] x86/PAT: Configuration [0-7]: WB  WT  UC- UC  WC  WP  UC  UC
+[    0.386234] check: Scanning 1 areas for low memory corruption
+[    0.770363] RAMDISK: [mem 0x03400000-0x07aaefff]
+[    0.771623] NUMA turned off
+[    0.771631] Faking a node at [mem 0x0000000000000000-0x000000003fffffff]
+[    0.771652] NODE_DATA(0) allocated [mem 0x3fe22000-0x3fe25fff]
+[    0.781234] Zone ranges:
+[    0.781245]   DMA32    [mem 0x0000000000001000-0x000000003fffffff]
+[    0.781253]   Normal   empty
+[    0.781258]   Device   empty
+[    0.781263] Movable zone start for each node
+[    0.781268] Early memory node ranges
+[    0.781273]   node   0: [mem 0x0000000000001000-0x000000000009ffff]
+[    0.781280]   node   0: [mem 0x0000000000100000-0x000000003fffffff]
+[    0.781293] Zeroed struct page in unavailable ranges: 97 pages
+[    0.781299] Initmem setup node 0 [mem 0x0000000000001000-0x000000003fffffff]
+[    0.800919] p2m virtual area at (____ptrval____), size is 40000000
+[    2.090555] Remapped 0 page(s)
+[    2.090794] SFI: Simple Firmware Interface v0.81 http://simplefirmware.org
+[    2.091163] smpboot: Allowing 1 CPUs, 0 hotplug CPUs
+[    2.091191] PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    2.091199] PM: Registered nosave memory: [mem 0x000a0000-0x000fffff]
+[    2.091208] [mem 0x40000000-0xffffffff] available for PCI devices
+[    2.091221] Booting paravirtualized kernel on Xen
+[    2.091227] Xen version: 4.12.1 (preserve-AD)
+[    2.091241] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    2.091263] setup_percpu: NR_CPUS:256 nr_cpumask_bits:256 nr_cpu_ids:1 nr_node_ids:1
+[    2.093144] percpu: Embedded 53 pages/cpu s178392 r8192 d30504 u2097152
+[    2.093350] Built 1 zonelists, mobility grouping on.  Total pages: 257930
+[    2.093358] Policy zone: DMA32
+[    2.093366] Kernel command line: root=/dev/xvda1 rdinit=/gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/bin/sh
+[    2.094259] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    2.094660] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    2.095025] mem auto-init: stack:byref_all, heap alloc:off, heap free:off
+[    2.114718] Memory: 920568K/1048188K available (18435K kernel code, 2124K rwdata, 6128K rodata, 2092K init, 1772K bss, 127620K reserved, 0K cma-reserved)
+[    2.114749] random: get_random_u64 called from __kmem_cache_create+0x46/0x570 with crng_init=0
+[    2.115391] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    2.116492] ftrace: allocating 54294 entries in 213 pages
+[    2.190329] rcu: Hierarchical RCU implementation.
+[    2.190342] rcu:     RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    2.190349] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    2.190354] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    2.208370] Using NULL legacy PIC
+[    2.208385] NR_IRQS: 16640, nr_irqs: 32, preallocated irqs: 0
+[    2.208604] xen:events: Using FIFO-based ABI
+[    2.208884] Console: colour dummy device 80x25
+[    2.209311] printk: console [tty0] enabled
+[    2.210765] printk: console [hvc0] enabled
+[    2.210961] clocksource: xen: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    2.211416] installing Xen timer for CPU 0
+[    2.211828] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x1cc6d271c01, max_idle_ns: 881590423366 ns
+[    2.211892] Calibrating delay loop (skipped), value calculated using timer frequency.. 1996.38 BogoMIPS (lpj=3992760)
+[    2.211925] pid_max: default: 32768 minimum: 301
+[    2.212214] LSM: Security Framework initializing
+[    2.212267] Yama: becoming mindful.
+[    2.212439] AppArmor: AppArmor initialized
+[    2.212465] TOMOYO Linux initialized
+[    2.212754] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    2.212793] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    2.212912] *** VALIDATE tmpfs ***
+[    2.214676] *** VALIDATE proc ***
+[    2.215095] *** VALIDATE cgroup1 ***
+[    2.215116] *** VALIDATE cgroup2 ***
+[    2.215598] Last level iTLB entries: 4KB 512, 2MB 8, 4MB 4
+[    2.215621] Last level dTLB entries: 4KB 512, 2MB 8, 4MB 4, 1GB 0
+[    2.215649] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    2.215674] Spectre V2 : Mitigation: Full AMD retpoline
+[    2.215689] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    2.215710] Speculative Store Bypass: Vulnerable
+[    2.389250] Freeing SMP alternatives memory: 36K
+[    2.394573] VPMU disabled by hypervisor.
+[    2.396057] Performance Events: PMU not available due to virtualization, using software events only.
+[    2.396982] rcu: Hierarchical SRCU implementation.
+[    2.399766] NMI watchdog: Perf NMI watchdog permanently disabled
+[    2.400945] smp: Bringing up secondary CPUs ...
+[    2.400991] smp: Brought up 1 node, 1 CPU
+[    2.401006] smpboot: Max logical packages: 1
+[    2.401707] devtmpfs: initialized
+[    2.402493] x86/mm: Memory block size: 128MB
+[    2.403791] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    2.403841] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    2.404118] xor: measuring software checksum speed
+[    2.443901]    prefetch64-sse:  2359.000 MB/sec
+[    2.483909]    generic_sse:  2192.000 MB/sec
+[    2.483950] xor: using function: prefetch64-sse (2359.000 MB/sec)
+[    2.483980] pinctrl core: initialized pinctrl subsystem
+[    2.484795]
+[    2.484834] *************************************************************
+[    2.484851] **     NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE    **
+[    2.484868] **                                                         **
+[    2.484884] **  IOMMU DebugFS SUPPORT HAS BEEN ENABLED IN THIS KERNEL  **
+[    2.484900] **                                                         **
+[    2.484917] ** This means that this kernel is built to expose internal **
+[    2.484933] ** IOMMU data structures, which may compromise security on **
+[    2.484949] ** your system.                                            **
+[    2.484965] **                                                         **
+[    2.484981] ** If you see this message and you are not debugging the   **
+[    2.484997] ** kernel, report this immediately to your vendor!         **
+[    2.485013] **                                                         **
+[    2.485029] **     NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE    **
+[    2.485045] *************************************************************
+[    2.504889] PM: RTC time: 165:165:165, date: 2065-165-165
+[    2.505541] NET: Registered protocol family 16
+[    2.505629] xen:grant_table: Grant tables using version 1 layout
+[    2.505703] Grant table initialized
+[    2.505927] audit: initializing netlink subsys (disabled)
+[    2.506558] audit: type=2000 audit(1574633405.246:1): state=initialized audit_enabled=0 res=1
+[    2.509899] PCI: setting up Xen PCI frontend stub
+[    2.603973] raid6: sse2x4   gen()   572 MB/s
+[    2.671939] raid6: sse2x4   xor()   473 MB/s
+[    2.739989] raid6: sse2x2   gen()   448 MB/s
+[    2.807928] raid6: sse2x2   xor()   826 MB/s
+[    2.875950] raid6: sse2x1   gen()   835 MB/s
+[    2.943952] raid6: sse2x1   xor()   668 MB/s
+[    2.943993] raid6: using algorithm sse2x1 gen() 835 MB/s
+[    2.944009] raid6: .... xor() 668 MB/s, rmw enabled
+[    2.944025] raid6: using ssse3x2 recovery algorithm
+[    2.944954] ACPI: Interpreter disabled.
+[    2.945025] xen:balloon: Initialising balloon driver
+[    2.952259] iommu: Default domain type: Passthrough
+[    2.952465] vgaarb: loaded
+[    2.953544] SCSI subsystem initialized
+[    2.956325] usbcore: registered new interface driver usbfs
+[    2.956383] usbcore: registered new interface driver hub
+[    2.956469] usbcore: registered new device driver usb
+[    2.956561] mc: Linux media interface: v0.10
+[    2.956599] videodev: Linux video capture interface: v2.00
+[    2.956858] EDAC MC: Ver: 3.0.0
+[    2.957487] Advanced Linux Sound Architecture Driver Initialized.
+[    2.957543] PCI: System does not support PCI
+[    2.958003] NetLabel: Initializing
+[    2.958023] NetLabel:  domain hash size = 128
+[    2.958037] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    2.958120] NetLabel:  unlabeled traffic allowed by default
+[    2.959842] clocksource: Switched to clocksource xen
+[    3.042331] *** VALIDATE bpf ***
+[    3.042888] VFS: Disk quotas dquot_6.6.0
+[    3.042999] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    3.043103] *** VALIDATE ramfs ***
+[    3.043125] hugetlbfs: disabling because there are no supported hugepage sizes
+[    3.043551] AppArmor: AppArmor Filesystem Enabled
+[    3.043661] pnp: PnP ACPI: disabled
+[    3.051119] thermal_sys: Registered thermal governor 'fair_share'
+[    3.051124] thermal_sys: Registered thermal governor 'bang_bang'
+[    3.051168] thermal_sys: Registered thermal governor 'step_wise'
+[    3.051185] thermal_sys: Registered thermal governor 'user_space'
+[    3.051202] thermal_sys: Registered thermal governor 'power_allocator'
+[    3.051548] NET: Registered protocol family 2
+[    3.052838] tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+[    3.052903] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    3.052983] TCP bind hash table entries: 8192 (order: 5, 131072 bytes, linear)
+[    3.053098] TCP: Hash tables configured (established 8192 bind 8192)
+[    3.053278] UDP hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    3.053323] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    3.053539] NET: Registered protocol family 1
+[    3.054563] PCI: CLS 0 bytes, default 64
+[    3.054778] Trying to unpack rootfs image as initramfs...
+[    3.159975] random: fast init done
+[    3.337700] Freeing initrd memory: 72380K
+[    3.338414] check: Scanning for low memory corruption every 60 seconds
+[    3.339716] Initialise system trusted keyrings
+[    3.340593] workingset: timestamp_bits=40 max_order=18 bucket_order=0
+[    3.346618] zbud: loaded
+[    3.349906] fuse: init (API version 7.31)
+[    3.350641] *** VALIDATE fuse ***
+[    3.350668] *** VALIDATE fuse ***
+[    3.350946] 9p: Installing v9fs 9p2000 file system support
+[    3.351723] Allocating IMA blacklist keyring.
+[    3.365752] Key type asymmetric registered
+[    3.365786] Asymmetric key parser 'x509' registered
+[    3.365853] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 246)
+[    3.366002] io scheduler mq-deadline registered
+[    3.366516] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    3.369236] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    3.377343] Linux agpgart interface v0.103
+[    3.378171] AMD-Vi: AMD IOMMUv2 driver by Joerg Roedel <jroedel@suse.de>
+[    3.378196] AMD-Vi: AMD IOMMUv2 functionality not available on this system
+[    3.378320] [drm] radeon kernel modesetting enabled.
+[    3.389806] brd: module loaded
+[    3.398812] loop: module loaded
+[    3.400075] isci: Intel(R) C600 SAS Controller Driver - version 1.2.0
+[    3.401842] Rounding down aligned max_sectors from 4294967295 to 4294967288
+[    3.402074] db_root: cannot open: /etc/target
+[    3.402324] libphy: Fixed MDIO Bus: probed
+[    3.402533] tun: Universal TUN/TAP device driver, 1.6
+[    3.402796] PPP generic driver version 2.4.2
+[    3.403139] VFIO - User Level meta-driver version: 0.3
+[    3.403512] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    3.403551] ehci-pci: EHCI PCI platform driver
+[    3.403605] ehci-platform: EHCI generic platform driver
+[    3.403645] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    3.403670] ohci-pci: OHCI PCI platform driver
+[    3.403715] ohci-platform: OHCI generic platform driver
+[    3.403755] uhci_hcd: USB Universal Host Controller Interface driver
+[    3.404010] usbcore: registered new interface driver uas
+[    3.404066] usbcore: registered new interface driver usb-storage
+[    3.404151] i8042: PNP: No PS/2 controller found.
+[    3.404168] i8042: Probing ports directly.
+[    4.438821] i8042: No controller found
+[    4.438942] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1cc6d271c01, max_idle_ns: 881590423366 ns
+[    4.439699] mousedev: PS/2 mouse device common for all mice
+[    4.440222] input: PC Speaker as /devices/platform/pcspkr/input/input0
+[    4.440562] i2c /dev entries driver
+[    4.440803] usbcore: registered new interface driver dvb_usb_dib0700
+[    4.441345] usbcore: registered new interface driver uvcvideo
+[    4.441375] USB Video Class driver (1.1.1)
+[    4.441608] device-mapper: uevent: version 1.0.3
+[    4.441986] device-mapper: ioctl: 4.41.0-ioctl (2019-09-16) initialised: dm-devel@redhat.com
+[    4.442342] ledtrig-cpu: registered to indicate activity on CPUs
+[    4.442436] hidraw: raw HID events driver (C) Jiri Kosina
+[    4.442599] usbcore: registered new interface driver usbhid
+[    4.442618] usbhid: USB HID core driver
+[    4.442630] asus_wmi: ASUS WMI generic driver loaded
+[    4.442787] asus_wmi: ASUS Management GUID not found
+[    4.444087] NET: Registered protocol family 10
+[    4.445105] Segment Routing with IPv6
+[    4.445203] NET: Registered protocol family 17
+[    4.445329] 9pnet: Installing 9P2000 support
+[    4.445370] Key type dns_resolver registered
+[    4.445756] IPI shorthand broadcast: enabled
+[    4.445813] sched_clock: Marking stable (4440692025, 3245662)->(4452493414, -8555727)
+[    4.446502] registered taskstats version 1
+[    4.446534] Loading compiled-in X.509 certificates
+[    4.446624] zswap: loaded using pool lzo/zbud
+[    4.448321] Btrfs loaded, crc32c=crc32c-generic
+[    4.450806] Key type big_key registered
+[    4.452637] Key type encrypted registered
+[    4.452688] AppArmor: AppArmor sha1 policy hashing enabled
+[    4.452735] ima: No TPM chip found, activating TPM-bypass!
+[    4.452771] ima: Allocated hash algorithm: sha1
+[    4.452812] ima: No architecture policies found
+[    4.452861] evm: Initialising EVM extended attributes:
+[    4.452877] evm: security.selinux
+[    4.452889] evm: security.SMACK64
+[    4.452900] evm: security.SMACK64EXEC
+[    4.452911] evm: security.SMACK64TRANSMUTE
+[    4.452923] evm: security.SMACK64MMAP
+[    4.452934] evm: security.apparmor
+[    4.452945] evm: security.ima
+[    4.452956] evm: security.capability
+[    4.452967] evm: HMAC attrs: 0x1
+[    4.453725] xenbus_probe_frontend: Device with no driver: device/vbd/2048
+[    4.453870] PM:   Magic number: 1:252:3141
+[    4.454016] hctosys: unable to open rtc device (rtc0)
+[    4.454364] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    4.456417] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    4.456464] ALSA device list:
+[    4.456479]   No soundcards found.
+[    4.456820] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    4.456852] cfg80211: failed to load regulatory.db
+[    4.466405] Freeing unused kernel image memory: 2092K
+[    4.472150] Write protecting the kernel read-only data: 26624k
+[    4.503544] Freeing unused kernel image memory: 2036K
+[    4.503681] Freeing unused kernel image memory: 16K
+[    4.503707] Run /gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/bin/sh as init process
+/gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/bin/sh: can't access tty; job control turned off
+/ #

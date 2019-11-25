@@ -1,0 +1,9 @@
+# xen-0-tools t/53 (c) 2019 Gunter Liszewski -*- mode: org; -*-
+* Configuring the linux kernel
+  The [[i/t53.config.x501u][Linux onfiguration]] has been reduced to some essential items. It runs, here,
+both as ~Dom0~ and as ~DomU~ within the ~Xen~ environment.
+
+  A [[_/_/20191124222019-xl-create-c-to_xen-0.cfg][log file of the start]] of a paravirtualised machine creation (~xl create -c to_xen/0.cfg~)
+shows some promise towards these efforts, here.
+
+  - Note that this is unfinished work.
