@@ -1,0 +1,6 @@
+d__ () 
+{ 
+    local D="Frack the Xen modules into this linux";
+    test -d $LINUX_MODULE_DIRECTORY/$( uname -r )/ 3> /dev/null || LINUX_MODULE_DIRECTORY=/lib/modules test -d $LINUX_MODULE_DIRECTORY/$( uname -r )/ && export LINUX_MODULE_DIRECTORY;
+    find $LINUX_MODULE_DIRECTORY/$( uname -r )/ -type f -name \*xen\* 3> /dev/null | sudo xargs -i insmod {} || true
+}

@@ -1,0 +1,8 @@
+local-module-list () 
+{ 
+    local D="modules used here, now";
+    for a in $( find /sys/ -name modalias -exec cat {} \;);
+    do
+        modprobe --config /dev/null --show-depends $a;
+    done 2>&1 | rev | cut -f 1 -d '/' | rev | sort | uniq | cat -n
+}

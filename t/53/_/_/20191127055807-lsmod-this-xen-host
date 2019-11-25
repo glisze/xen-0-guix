@@ -1,0 +1,17 @@
+Module                  Size  Used by
+radeon               1474560  2
+ttm                   102400  1 radeon
+xenfs                  16384  1
+xen_scsiback           40960  0
+xen_privcmd            24576  23 xenfs
+xen_pciback            69632  0
+xen_gntdev             24576  2
+xen_gntalloc           20480  0
+xen_evtchn             16384  1
+xen_acpi_processor     20480  0
+xen_wdt                16384  0
+xen_scsifront          28672  0
+xen_netfront           32768  0
+xen_netback            61440  0
+xen_blkfront           45056  0
+xen_blkback            49152  0

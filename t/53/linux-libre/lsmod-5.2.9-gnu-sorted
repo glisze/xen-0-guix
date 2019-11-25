@@ -1,0 +1,98 @@
+ahci                   40960  5
+arc4                   16384  2
+asus_nb_wmi            28672  0
+asus_wireless          20480  0
+asus_wmi               28672  1 asus_nb_wmi
+btrfs                1216512  3
+cfg80211              700416  2 rt2x00lib,mac80211
+dm_bufio               28672  1 dm_snapshot
+dm_crypt               40960  0
+dm_snapshot            40960  10
+drm                   409600  5 drm_kms_helper,radeon,ttm
+drm_kms_helper        180224  1 radeon
+eeprom_93cx6           16384  1 rt2800pci
+fb_sys_fops            16384  1 drm_kms_helper
+hid                   131072  3 usbhid,hid_apple,hid_generic
+hid_apple              16384  0
+hid_generic            16384  0
+i2c_algo_bit           16384  1 radeon
+i2c_piix4              28672  0
+input_leds             16384  0
+isci                  139264  0
+joydev                 24576  0
+k10temp                16384  0
+ledtrig_audio          16384  2 snd_hda_codec_generic,snd_hda_codec_realtek
+libahci                32768  1 ahci
+libcrc32c              16384  1 btrfs
+libsas                 81920  1 isci
+mac80211              839680  3 rt2x00pci,rt2x00lib,rt2800lib
+mac_hid                16384  0
+media                  53248  4 videodev,videobuf2_v4l2,uvcvideo,videobuf2_common
+Module                  Size  Used by
+nls_iso8859_1          16384  1
+pata_acpi              16384  0
+pata_atiixp            16384  0
+pcspkr                 16384  0
+psmouse               151552  0
+r8169                  90112  0
+radeon               1437696  2
+raid6_pq              114688  1 btrfs
+realtek                20480  1
+rt2800lib             122880  2 rt2800mmio,rt2800pci
+rt2800mmio             20480  1 rt2800pci
+rt2800pci              16384  0
+rt2x00lib              61440  5 rt2x00mmio,rt2x00pci,rt2800mmio,rt2800pci,rt2800lib
+rt2x00mmio             16384  2 rt2800mmio,rt2800pci
+rt2x00pci              16384  1 rt2800pci
+scsi_transport_sas     40960  2 isci,libsas
+serio_raw              20480  0
+serpent_generic        28672  0
+snd                    86016  8 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek,snd_timer,snd_pcm
+snd_hda_codec         131072  4 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_realtek
+snd_hda_codec_generic    77824  1 snd_hda_codec_realtek
+snd_hda_codec_hdmi     53248  1
+snd_hda_codec_realtek   114688  1
+snd_hda_core           90112  5 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek
+snd_hda_intel          45056  0
+snd_hwdep              20480  1 snd_hda_codec
+snd_pcm               106496  4 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_core
+snd_timer              36864  1 snd_pcm
+soundcore              16384  1 snd
+sp5100_tco             20480  0
+sparse_keymap          16384  1 asus_wmi
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+ttm                   102400  1 radeon
+uas                    24576  0
+usbhid                 53248  0
+usb_storage            73728  1 uas
+uvcvideo               94208  0
+video                  45056  1 asus_wmi
+videobuf2_common       49152  2 videobuf2_v4l2,uvcvideo
+videobuf2_memops       20480  1 videobuf2_vmalloc
+videobuf2_v4l2         24576  1 uvcvideo
+videobuf2_vmalloc      20480  1 uvcvideo
+videodev              204800  3 videobuf2_v4l2,uvcvideo,videobuf2_common
+virtio                 16384  6 virtio_rng,virtio_console,virtio_balloon,virtio_pci,virtio_blk,virtio_net
+virtio_balloon         24576  0
+virtio_blk             20480  0
+virtio_console         32768  0
+virtio_net             53248  0
+virtio_pci             24576  0
+virtio_ring            32768  6 virtio_rng,virtio_console,virtio_balloon,virtio_pci,virtio_blk,virtio_net
+virtio_rng             16384  0
+wmi                    28672  1 asus_wmi
+wp512                  36864  0
+xen_blkback            49152  0
+xen_evtchn             16384  1
+xenfs                  16384  1
+xen_gntalloc           20480  0
+xen_gntdev             24576  2
+xen_netback            61440  0
+xen_pciback            65536  0
+xen_privcmd            24576  23 xenfs
+xor                    24576  1 btrfs
+xts                    16384  0
+zstd_compress         163840  1 btrfs
+zstd_decompress        86016  1 btrfs
