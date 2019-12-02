@@ -38,7 +38,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "5.4-rc8"))
+  (let* ((version "v5.4-rc8"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -51,7 +51,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0c95nz2kssp20024p73409pyqdsxghv97kk8g4qjrfr8ydmkp4g1"))))
+		"15cpf0rzcsz4lk18jlnk8qsmcx2jpkr5lb2594wsfjg2a8sah4a3"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -59,7 +59,7 @@
 
 (define-public linux-x501u
   (let* ((machine "x501u")
-	 (version "5.4-rc8"))
+	 (version "v5.4-rc8"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-x501u")
@@ -71,13 +71,46 @@
 	      (lambda* (#:key inputs native-inputs target #:allow-other-keys)
 		(setenv "KCONFIG_NOTIMESTAMP" "1")
 		(setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
-		(let ((config (assoc-ref inputs "Kconfig")))
-		  (apply invoke "make" "mrproper" make-flags)
-		  (if config-file
+		(for-each (lambda (a)
+			    ;; Mung our own include/ out of our environment
+			    (setenv a
+				    (string-join
+				     (cdr (string-split (getenv a) #\:))
+				     ":")))
+			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
+		(let ((build  (assoc-ref %standard-phases 'build))
+		      (config (assoc-ref inputs "Kconfig")))
+		  (invoke "make" "mrproper")
+		  (if config
 		      (begin
 			(copy-file config ".config")
-			(apply-invoke "make" "olddefconfig" make-flags)))
-		  #t)))))))
+			(chmod ".config" #o666)
+			(invoke "make" "olddefconfig")))
+		  #t)))
+	    (replace 'install
+	      (lambda* (#:key inputs native-inputs outputs #:allow-other-keys)
+		(let* ((out    (assoc-ref outputs "out"))
+		       (moddir (string-append out "/lib/modules"))
+		       (dtbdir (string-append out "/lib/dtbs"))
+		       (kmod   (assoc-ref (or native-inputs inputs) "kmod")))
+		  (for-each (lambda (a) (install-file a out))
+			    (find-files "." "^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
+		  (unless (null? (find-files "." "\\.dtb$"))
+		    (mkdir-p dtbdir)
+		    (invoke "make" (string-append "INSTALL_DTBS_PATH=" dtbdir)
+			    "dtbs_install"))
+		  (mkdir-p moddir)
+		  #;(invoke "make"
+			  (string-append "INSTALL_PATH=" out)
+			  (string-append "INSTALL_HDR_PATH=" out)
+			  "headers_install")
+		  (invoke "make"
+			  (string-append "DEPMOD=" kmod "/bin/depmod")
+			  (string-append "MODULE_DIR=" moddir)
+			  (string-append "INSTALL_PATH=" out)
+			  (string-append "INSTALL_MOD_PATH=" out)
+			  "INSTALL_MOD_STRIP=1"
+			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
 	 ,(search-auxiliary-file "linux-0/x501u.5.4-rc8.config")
