@@ -27,11 +27,14 @@
 
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages)  
   #:use-module (gnu packages linux)
   #:use-module (gnu packages tls)
   #:use-module (guix build-system trivial)
+;  #:use-module (guix build-system gnu)  
   #:use-module (guix git-download)
   #:use-module (guix packages)
+  #:use-module (guix utils)  
   #:use-module (guix download))
 
 (define-public linux-machine-base
@@ -48,7 +51,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0123456789012345678901234567890123456789"))))
+		"0c95nz2kssp20024p73409pyqdsxghv97kk8g4qjrfr8ydmkp4g1"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -60,13 +63,26 @@
     (package
      (inherit linux-machine-base)
      (name "linux-for-x501u")
+     (arguments
+      (substitute-keyword-arguments (package-arguments linux-libre)
+	((#:phases phases '%standard-phases)
+	 `(modify-phases ,phases
+	    (replace 'configure
+	      (lambda* (#:key inputs native-inputs target #:allow-other-keys)
+		(setenv "KCONFIG_NOTIMESTAMP" "1")
+		(setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+		(let ((config (assoc-ref inputs "Kconfig")))
+		  (apply invoke "make" "mrproper" make-flags)
+		  (if config-file
+		      (begin
+			(copy-file config ".config")
+			(apply-invoke "make" "olddefconfig" make-flags)))
+		  #t)))))))
      (inputs
-      '(("x501u-config"
-	 ,(search-auxiliary-file (string-append "linux-0/"
-						machine "." version
-						".config")))
-	,@(package-inputs linux-libre)))
-     (synopis "Linux for a x501u machine")
+      `(("Kconfig"
+	 ,(search-auxiliary-file "linux-0/x501u.5.4-rc8.config")
+	,@(package-inputs linux-libre))))
+     (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
 
 (define-public linux-firmware-x501u
@@ -80,7 +96,7 @@
                     (commit version)))
               (sha256
                (base32
-                "0123456789012345678901234567890123456789"))))
+                "03ycc55h7vgd4fmb7v7gl7lplf7pg7acs16aa2rramgldxqvyx7j"))))
     (build-system trivial-build-system)
     (arguments
      `(#:modules ((guix build utils))
@@ -90,20 +106,15 @@
 			  (fw-dir (string-append %output "/lib/firmware/"))
 			  (fw-dir-radeon (string-append fw-dir "radeon/")))
 		     (mkdir-p fw-dir-radeon)
-		     (copy-file (string-append source "/WHENCE")
-				fw-dir)
-		     (copy-file (string-append source "/LICENCE.ralink-firmware.txt")
-				fw-dir)
-		     (copy-file (string-append source "/rt2870.bin")
-				fw-dir)
-		     (copy-file (string-append source "/rt2860.bin")
-				fw-dir)
-		     (copy-file (string-append source "/LICENSE.dib0700")
-				fw-dir)
-		     (copy-file (string-append source "/dvb-usb-dib0700-1.20.fw")
-				fw-dir)
-		     (copy-file (string-append source "/LICENSE.radeon")
-				fw-dir)
+		     (for-each (lambda (file)
+				 (copy-file file
+					    (string-append fw-dir
+							   (basename file))))
+			       (map (lambda (a) (string-append source a))
+				    '("/WHENCE"
+				      "/LICENCE.ralink-firmware.txt" "/rt2870.bin" "/rt2860.bin"
+				      "/LICENSE.dib0700" "/dvb-usb-dib0700-1.20.fw"
+				      "/LICENSE.radeon")))
 		     (for-each (lambda (file)
                                  (copy-file file
                                             (string-append fw-dir "/radeon"
@@ -122,7 +133,7 @@ Licence: Redistributable. See LICENSE.radeon for details.
 ")
     (license (license:non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=WHENCE;hb=HEAD"))))
 
-(define-public perf-nonfree
+#;(define-public perf-nonfree
   (package
     (inherit perf)
     (name "perf-nonfree")

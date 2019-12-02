@@ -1,1 +1,0 @@
-/home/gunter/source-5/guix/b/guix-nonfree-wingo/gnu/packages/linux-nonfree.scm

@@ -1,1 +1,0 @@
-/home/gunter/source-5/guix/b/guix/gnu/packages/linux.scm
