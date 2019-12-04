@@ -1,0 +1,7 @@
+# (c) 2019 Gunter Liszewski -*- mode: org; -*-
+* Linux 5.4-rc8 for a x501u machine
+ Here is now a Linux kernel for one particular machine.
+An initial RAM disk, ~i/i54.cpio.gz~ brings up a command shell.
+(See the [[file:_/_/20191204_214409_sudo_xl_create][Guest kernel's boot messages.]])
+Another inital RAM disk ~i/i53a.cpio.gz~ boots this machine.
+(See the [[file:_/_/20191205_023354_dmesg__][Host's dmesg output.]])

@@ -118,9 +118,9 @@
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
 
-(define-public linux-firmware-x501u
+(define-public linux-firmware-for-x501u
   (package
-    (name "linux-firmware-x501u")
+    (name "linux-firmware-for-x501u")
     (version "20191022")
     (source (origin
               (method git-fetch)
@@ -136,13 +136,14 @@
        #:builder (begin
                    (use-modules (guix build utils))
                    (let* ((source (assoc-ref %build-inputs "source"))
-			  (fw-dir (string-append %output "/lib/firmware/"))
-			  (fw-dir-radeon (string-append fw-dir "radeon/")))
+			  (source-radeon (string-append source "/radeon"))
+			  (fw-dir (string-append %output "/lib/firmware"))
+			  (fw-dir-radeon (string-append fw-dir "/radeon")))
 		     (mkdir-p fw-dir-radeon)
 		     (for-each (lambda (file)
 				 (copy-file file
 					    (string-append fw-dir
-							   (basename file))))
+							   "/" (basename file))))
 			       (map (lambda (a) (string-append source a))
 				    '("/WHENCE"
 				      "/LICENCE.ralink-firmware.txt" "/rt2870.bin" "/rt2860.bin"
@@ -150,12 +151,10 @@
 				      "/LICENSE.radeon")))
 		     (for-each (lambda (file)
                                  (copy-file file
-                                            (string-append fw-dir "/radeon"
-                                                           (basename file))))
-                               (find-files source
-                                           (lambda (file stat)
-                                             (string-contains file "radeon"))))
-                     #t))))
+                                            (string-append fw-dir-radeon
+                                                           "/" (basename file))))
+			       (find-files source-radeon))
+		     #t))))
     (home-page "rt2800: http://www.mediatek.com/en/downloads1/downloads/
 dib0700: tbc, radeon: tbc")
     (synopsis "Non-free firmware")
