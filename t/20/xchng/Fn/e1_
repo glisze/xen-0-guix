@@ -1,5 +1,0 @@
-e1_ () 
-{ 
-    local D="qemu-img create -f raw ...";
-    qemu-img create -f raw i/disk.raw ${1:-200M}
-}

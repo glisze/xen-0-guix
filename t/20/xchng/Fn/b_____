@@ -1,5 +1,0 @@
-b_____ () 
-{ 
-    local D="guix environment --ad-hoc xen-0-tools perl";
-    guix environment --load-path=./here --ad-hoc xen-0-tools perl
-}

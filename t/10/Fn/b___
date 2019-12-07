@@ -1,5 +1,0 @@
-b___ () 
-{ 
-    local D="guix environment for ocaml";
-    guix environment hello --ad-hoc ocaml-stdio ocaml-findlib ocaml ocaml-base emacs-tuareg ocaml-utop tmux
-}

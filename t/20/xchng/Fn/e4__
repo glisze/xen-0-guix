@@ -1,6 +1,0 @@
-e4__ () 
-{ 
-    local D="mkfs.ext4 /dev/loop${1:-0}p1";
-    sudo mkfs.ext4 /dev/loop${1:-0}p1;
-    sudo mkfs.ext2 /dev/loop${1:-0}p2
-}

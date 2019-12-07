@@ -1,5 +1,0 @@
-e5____ () 
-{ 
-    local D="boot/i/gnu-store-initrd --> boot/initrd.cpio.gz";
-    cat boot/i/gnu-store-initrd | cpio -o -H newc | gzip -9 -c > boot/initrd.cpio.gz
-}

@@ -1,5 +1,0 @@
-e2___ () 
-{ 
-    local D="fdisk i/disk.raw";
-    echo -e "n\np\n1\n\n+150M\nn\np\n\n\n\nw\n" | sudo fdisk i/disk.raw
-}

@@ -1,5 +1,0 @@
-chroot_here () 
-{ 
-    local D="chroot . gnu/store/.../bin/busybox env -i sh";
-    sudo chroot . gnu/store/si0g38pqnqaawpmwr008qc9rhqnzkalv-xen-0-busybox-2f57b5139/bin/busybox env -i sh
-}

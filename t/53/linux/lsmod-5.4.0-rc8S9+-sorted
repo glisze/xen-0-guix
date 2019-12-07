@@ -1,6 +1,0 @@
-fb_ddc                 16384  1 radeonfb
-Module                  Size  Used by
-radeon               1474560  2
-radeonfb               77824  0
-ttm                   102400  1 radeon
-xen_blkfront           45056  0

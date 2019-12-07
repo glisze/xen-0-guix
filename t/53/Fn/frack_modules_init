@@ -1,6 +1,0 @@
-frack_modules_init () 
-{ 
-    local D="find some and make them a part in it";
-    test -z "$LINUX_MODULE_DIRECTORY" && LINUX_MODULE_DIRECTORY=/lib/modules;
-    sed ${1:-gnu/store/h96v04liw11yqvl9g4h1ilairrvlxqcx-init} -e s,'"xen-blkfront" "radeonfb"',"$( find $LINUX_MODULE_DIRECTORY/$( uname -r )/ -name \*xen\*ko | xargs -i basename {} .ko | xargs -i{a} echo \\\"{a}\\\" | tr "\n" " " )", "$@"
-}

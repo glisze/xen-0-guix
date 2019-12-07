@@ -1,5 +1,0 @@
-e2__ () 
-{ 
-    local D="fdisk i/disk.raw";
-    fdisk i/disk.raw
-}

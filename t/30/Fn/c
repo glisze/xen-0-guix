@@ -1,5 +1,0 @@
-c () 
-{ 
-    local D="git commit: git commit -s -m '$sprint_topic: $*'";
-    git commit -s -m "$sprint_topic: $*"
-}

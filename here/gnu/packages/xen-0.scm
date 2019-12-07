@@ -148,7 +148,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                           environment-variable-names)
                (for-each
                 (lambda (env-name)
-                  (let* ((env-value (getenv env-name))
+                  (let* ((env-value (or (getenv env-name) ""))
                          (search-path (search-path-as-string->list env-value))
                          (new-search-path (filter filter-predicate
                                                   search-path))
@@ -345,7 +345,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                           environment-variable-names)
                (for-each
                 (lambda (env-name)
-                  (let* ((env-value (getenv env-name))
+                  (let* ((env-value (or (getenv env-name) ""))
                          (search-path (search-path-as-string->list env-value))
                          (new-search-path (filter filter-predicate
                                                   search-path))
@@ -713,7 +713,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                           environment-variable-names)
                (for-each
                 (lambda (env-name)
-                  (let* ((env-value (getenv env-name))
+                  (let* ((env-value (or (getenv env-name) ""))
                          (search-path (search-path-as-string->list env-value))
                          (new-search-path (filter filter-predicate
                                                   search-path))
@@ -930,7 +930,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                           environment-variable-names)
                (for-each
                 (lambda (env-name)
-                  (let* ((env-value (getenv env-name))
+                  (let* ((env-value (or (getenv env-name) ""))
                          (search-path (search-path-as-string->list env-value))
                          (new-search-path (filter filter-predicate
                                                   search-path))

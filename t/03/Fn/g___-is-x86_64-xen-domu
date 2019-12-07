@@ -1,5 +1,0 @@
-g___-is-x86_64-xen-domu () 
-{ 
-    local D="grub-file --is-x86_64-xen";
-    grub-file --is-x86_64-xen-domu ${1:-grub-x86_64-xen.bin} && echo yes || echo no
-}
