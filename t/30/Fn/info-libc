@@ -1,0 +1,5 @@
+info-libc () 
+{ 
+    local D="info libc (guix environment hello)";
+    info $( readlink -f $CPLUS_INCLUDE_PATH/.. )/share/info/libc.info
+}
