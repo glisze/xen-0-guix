@@ -1,0 +1,11 @@
+ .../aux-files/linux-0/x501u.5.4-rc8.config         | 6221 ++++++++++++++++++++
+ gnu/packages/aux-files/xen-0/4.12.1-x86_64.config  |   94 +
+ gnu/packages/aux-files/xen-0/4.13.-x86_64.config   |   94 +
+ gnu/packages/aux-files/xen-0/xen.config            |   94 +
+ gnu/packages/grub-hybrid-xen.scm                   |  981 +++
+ gnu/packages/linux.scm                             |   75 +
+ gnu/packages/xen-0-busybox.scm                     |  144 +
+ gnu/packages/xen-0-hello.scm                       |  176 +
+ gnu/packages/xen-0-linux.scm                       |  128 +
+ gnu/packages/xen-0.scm                             | 1039 ++++
+ 10 files changed, 9046 insertions(+)

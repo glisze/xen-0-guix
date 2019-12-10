@@ -1,0 +1,24 @@
+git-bisect-run () 
+{ 
+    local D="What builds? Ask git bisect ...";
+    cd /home/source-6/6/github/glisze/xen-0-guix/ || return 1
+    pushd /home/repo-6/5/gnu.org/guix/ || return 2
+    b=$( pwd );
+    cd source || return 3
+    popd || return 4
+    a=$( pwd );
+    cd here || return 5
+    find . | cpio -d -p $b/source || return 6
+    cd $b || return 7
+    . Fn/a2_ && a2_ || return 8
+    do_this_tee 00-configure || return 9
+    do_this_tee make clean || return 10
+    do_this_tee make || return 125
+    ./pre-inst-env guix build xen-0-libs  || return 20
+    ./pre-inst-env guix build xen-0-qemu  || return 21
+    ./pre-inst-env guix build xen-0-tools || return 22
+    ./pre-inst-env guix build xen-0-boot  || return 23
+    ./pre-inst-env guix build linux-firmware-for-x501u || return 24
+    ./pre-inst-env guix build linux-for-x501u || return 25
+    cd /home/repo-6/5/gnu.org/guix/source || return 99
+}
