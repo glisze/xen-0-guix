@@ -22,3 +22,5 @@ git-bisect-run ()
     ./pre-inst-env guix build linux-for-x501u || return 25;
     cd /home/repo-6/5/gnu.org/guix/source || return 99
 }
+
+git-bisect-run

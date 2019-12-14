@@ -1,0 +1,5 @@
+build-xen-0-libs () 
+{ 
+    local D="guix build --load-path=here xen-0-libs";
+    guix build --load-path=here --root=$( date +%Y%m%d%H%M%S )-${1:-xen-0-libs} ${1:-xen-0-libs}
+}

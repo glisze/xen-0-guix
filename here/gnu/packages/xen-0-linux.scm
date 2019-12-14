@@ -75,7 +75,7 @@
 			    ;; Mung our own include/ out of our environment
 			    (setenv a
 				    (string-join
-				     (cdr (string-split (getenv a) #\:))
+				     (cdr (string-split (or (getenv a) "") #\:))
 				     ":")))
 			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
 		(let ((build  (assoc-ref %standard-phases 'build))
