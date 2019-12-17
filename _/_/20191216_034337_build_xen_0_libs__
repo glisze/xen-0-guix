@@ -1,0 +1,20 @@
+build-xen-0-libs
+guile: warning: failed to install locale
+hint: Consider installing the `glibc-utf8-locales' or `glibc-locales' package and
+defining `GUIX_LOCPATH', along these lines:
+
+     guix package -i glibc-utf8-locales
+     export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+
+See the "Application Setup" section in the manual, for more info.
+
+;;; note: source file here/gnu/packages/grub-hybrid-xen.scm
+;;;       newer than compiled /gnu/store/jdpfr0nw8hm67fjca28czf0s7hndk6r1-guix-module-union/lib/guile/2.2/site-ccache/gnu/packages/grub-hybrid-xen.go
+;;; note: source file here/gnu/packages/xen-0-busybox.scm
+;;;       newer than compiled /gnu/store/jdpfr0nw8hm67fjca28czf0s7hndk6r1-guix-module-union/lib/guile/2.2/site-ccache/gnu/packages/xen-0-busybox.go
+;;; note: source file here/gnu/packages/xen-0-linux.scm
+;;;       newer than compiled /gnu/store/jdpfr0nw8hm67fjca28czf0s7hndk6r1-guix-module-union/lib/guile/2.2/site-ccache/gnu/packages/xen-0-linux.go
+;;; note: source file here/gnu/packages/xen-0.scm
+;;;       newer than compiled /gnu/store/jdpfr0nw8hm67fjca28czf0s7hndk6r1-guix-module-union/lib/guile/2.2/site-ccache/gnu/packages/xen-0.go
+;;; note: source file here/gnu/packages/xen-0.scm
+;;;       newer than compiled /home/gunter/.cache/guile/ccache/2.2-LE-8-3.A/home/source-6/6/github/glisze/xen-0-guix/here/gnu/packages/xen-0.scm.go

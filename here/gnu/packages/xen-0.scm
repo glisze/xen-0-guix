@@ -852,7 +852,15 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                             "/share/firmware/bios.bin")
              (string-append "--with-system-ovmf="
                             (assoc-ref %build-inputs "ovmf")
-                            "/share/firmware/ovmf_ia32.bin"))
+                            "/share/firmware/ovmf_ia32.bin")
+	     "ac_cv_header_Python_h=yes"
+	     "ac_cv_header_uuid_h=yes"
+	     "ac_cv_header_uuid_uuid_h=yes"
+	     "ax_cv_pthread_flags=-pthread"
+	     "ac_cv_header_argp_h=yes"
+	     (string-append "--with-python="
+			    (assoc-ref %build-inputs "python")
+			    "/bin/python"))
        #:make-flags (list "-j" "1"
                           "XEN_BUILD_DATE=Thu Jan  1 01:00:01 CET 1970"
                           "XEN_BUILD_TIME=01:00:01"
@@ -966,7 +974,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 		 (lambda* (#:key make-flags #:allow-other-keys)
 			  (invoke "mkdir" "-p" "tools/include/gnu/")
 			  (invoke "touch" "tools/include/gnu/stubs-32.h")
-			  (apply invoke "make" "clean" "world" make-flags)))
+			  #;(apply invoke "make" "clean" "world" make-flags)
+			  (apply invoke "make" "dist-tools" make-flags)))
 	(add-before 'install 'move-root-things
 	  (lambda* (#:key outputs #:allow-other-keys)
 		   (let* ((out (assoc-ref outputs "out"))
@@ -996,7 +1005,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("openssl" ,openssl)
        ("ovmf" ,ovmf)
        ("pixman" ,pixman)
-       ("qemu" ,qemu-minimal)
+       ("qemu" ,qemu-minimal-2.10)
        ("seabios" ,seabios)
        ("util-linux" ,util-linux)
        ("xz" ,xz)
@@ -1023,7 +1032,9 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("ocaml" ,ocaml)
        ("perl" ,perl)
        ("pkg-config" ,pkg-config)
-       ("python" ,python2)
+       ("python" ,python-2)
+#;       ,@(fold alist-delete (package-native-inputs qemu-minimal)
+	       '("python-wrapper")) ;XXX
        ("wget" ,wget)
        ("cross-gcc" ,(cross-gcc "i686-linux-gnu"
                                 #:xbinutils (cross-binutils "i686-linux-gnu")

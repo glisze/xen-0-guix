@@ -1,0 +1,5 @@
+forced_configure_tools () 
+{ 
+    local D="Ah, why not. Everyone else ...";
+    tools/configure ac_cv_header_Python_h=yes ac_cv_header_uuid_h=yes ac_cv_header_uuid_uuid_h=yes ax_cv_pthread_flags=-pthread ac_cv_header_argp_h=yes
+}
