@@ -1,0 +1,8 @@
+# (c) 2019 Gunter Liszewski -*- mode: org; -*-
+* xen-0-libs wants to be build
+  This is after copying these products into the development branch, and
+from there into the repository, of a local kind, that is pointed at by this
+machine's channel file. Then, after rebasing local changes, such as xen-0-tools
+(but also other changes; notably eudev; to work with this machine's btrfs)
+the ~xen-0-tools~ refuse their builder. This is here, now.
+

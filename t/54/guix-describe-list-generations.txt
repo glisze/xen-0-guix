@@ -1,0 +1,9 @@
+Generation 39	Dec 17 2019 00:44:52	(current)
+  here c850aff
+    repository URL: file:///home/gunter/source-5/guix/a/pub.git
+    branch: develop
+    commit: c850affacc5d9d0cb97a924f61e16ed10e987cae
+  guix e092b82
+    repository URL: file:///home/gunter/source-5/guix/a/guix.git
+    branch: channel/02/glisze
+    commit: e092b82d7a98b7837f918f7e5f52ff8fb61ae633
