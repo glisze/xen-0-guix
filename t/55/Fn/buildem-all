@@ -1,0 +1,8 @@
+buildem-all () 
+{ 
+    local D="guix build --load-path=here --root=...root ...";
+    for x in linux-firmware-for-x501u linux-for-x501u xen-0-initrd xen-0-busybox xen-0-qemu xen-0-tools xen-0-boot;
+    do
+        echo == $x && do_this_tee guix build --load-path=here --root=${x}.root ${x};
+    done
+}
