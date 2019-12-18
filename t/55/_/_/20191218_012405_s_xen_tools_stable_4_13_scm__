@@ -1,0 +1,3 @@
+s/xen-tools-stable-4.13.scm
+s/xen-tools-stable-4.13.scm: line 1: syntax error near unexpected token `;;'
+s/xen-tools-stable-4.13.scm: line 1: `;; xen-tools.scm 20191003,gl for an environment to build the xen-tools'

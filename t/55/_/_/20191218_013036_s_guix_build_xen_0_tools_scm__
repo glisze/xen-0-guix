@@ -1,0 +1,40 @@
+s/guix-build-xen-0-tools.scm
+building /gnu/store/0kyqhjv7mlj150dkvjli2d7l1rhvd3rc-xen-tools-4.13-checkout.drv...
+guile: warning: failed to install locale
+environment variable `PATH' set to `/gnu/store/i2cdl0hvrml8hjdqplqln8didnvxkgp5-gzip-1.10/bin:/gnu/store/jh17p4sns7dvbizwz58gdh953qpic144-tar-1.32/bin'
+Initialized empty Git repository in /gnu/store/5qnrr64rj823q6sx5c443v74xgannay6-xen-tools-4.13-checkout/.git/
+From git://xenbits.xenproject.org/xen
+ * branch            stable-4.13 -> FETCH_HEAD
+ * [new branch]      stable-4.13 -> origin/stable-4.13
+Note: switching to 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at ddccd9f build: fix tools/configure in case only python3 exists
+r:sha256 hash mismatch for /gnu/store/5qnrr64rj823q6sx5c443v74xgannay6-xen-tools-4.13-checkout:
+  expected hash: 1wv1hyfii14vi9lfjmnv07h2gpm3b7kvh2p55f4yy2b40simksgk
+  actual hash:   0xgrdzrzmc0ml471nabzd8xal3hiq3xzssyr9fhnp4qangm30ksp
+hash mismatch for store item '/gnu/store/5qnrr64rj823q6sx5c443v74xgannay6-xen-tools-4.13-checkout'
+build of /gnu/store/0kyqhjv7mlj150dkvjli2d7l1rhvd3rc-xen-tools-4.13-checkout.drv failed
+View build log at '/var/log/guix/drvs/0k/yqhjv7mlj150dkvjli2d7l1rhvd3rc-xen-tools-4.13-checkout.drv.bz2'.
+cannot build derivation `/gnu/store/fffaqgzcayi82pcp0kc9y1wfz5iw6ip7-xen-tools-4.13.drv': 1 dependencies couldn't be built
+guix build: error: build of `/gnu/store/fffaqgzcayi82pcp0kc9y1wfz5iw6ip7-xen-tools-4.13.drv' failed
+;;; note: source file /home/source-6/6/github/glisze/xen-0-guix/t/55/s/guix-build-xen-0-tools.scm
+;;;       newer than compiled /home/gunter/.cache/guile/ccache/2.2-LE-8-3.A/home/source-6/6/github/glisze/xen-0-guix/t/55/s/guix-build-xen-0-tools.scm.go
+;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
+;;;       or pass the --no-auto-compile argument to disable.
+;;; compiling /home/source-6/6/github/glisze/xen-0-guix/t/55/s/guix-build-xen-0-tools.scm
+;;; compiled /home/gunter/.cache/guile/ccache/2.2-LE-8-3.A/home/source-6/6/github/glisze/xen-0-guix/t/55/s/guix-build-xen-0-tools.scm.go

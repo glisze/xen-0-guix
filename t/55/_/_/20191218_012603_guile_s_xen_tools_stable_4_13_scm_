@@ -1,0 +1,5 @@
+guile s/xen-tools-stable-4.13.scm
+;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
+;;;       or pass the --no-auto-compile argument to disable.
+;;; compiling /home/source-6/6/github/glisze/xen-0-guix/t/55/s/xen-tools-stable-4.13.scm
+;;; compiled /home/gunter/.cache/guile/ccache/2.2-LE-8-3.A/home/source-6/6/github/glisze/xen-0-guix/t/55/s/xen-tools-stable-4.13.scm.go

@@ -1,0 +1,9 @@
+s/guix-build-xen-0-tools.scm
+substitute: substitute: [Kupdating substitutes from 'https://ci.guix.gnu.org'...   0.0%substitute: [Kupdating substitutes from 'https://ci.guix.gnu.org'... 100.0%
+substitute: substitute: [Kupdating substitutes from 'https://ci.guix.gnu.org'...   0.0%substitute: [Kupdating substitutes from 'https://ci.guix.gnu.org'... 100.0%
+building /gnu/store/3x8lk2411z1djw9bb05nwcwsaf3kp9zd-xen-tools-4.13-checkout.drv...
+guile: warning: failed to install locale
+environment variable `PATH' set to `/gnu/store/i2cdl0hvrml8hjdqplqln8didnvxkgp5-gzip-1.10/bin:/gnu/store/jh17p4sns7dvbizwz58gdh953qpic144-tar-1.32/bin'
+Initialized empty Git repository in /gnu/store/91y7fr5jdm50mx35zrp3h8p0mv0i62xf-xen-tools-4.13-checkout/.git/
+fatal: couldn't find remote ref ddccd9f
+Failed to do a shallow fetch; retrying a full fetch...
