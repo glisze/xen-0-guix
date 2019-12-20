@@ -1,9 +1,0 @@
-do_this_tee () 
-{ 
-    local a=$( date +%Y%m%d-%H%M%S )-${1}-${2}-${3};
-    a=$( echo $a | tr "/ -.:;<>|" "_" );
-    ( cd _/_ && ln -svf $a LAST_LOG_do_this_tee );
-    a=_/_/$a;
-    echo "$@" 2>&1 | tee -a $a;
-    "$@" 2>&1 | tee -a $a
-}

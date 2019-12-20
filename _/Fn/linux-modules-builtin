@@ -1,5 +1,0 @@
-linux-modules-builtin () 
-{ 
-    D="builtin linux modules";
-    cat $LINUX_MODULE_DIRECTORY/$( uname -r )/modules.builtin | rev | cut -d/ -f1 | rev | sort
-}
