@@ -1,6 +1,5 @@
-;;; xen-0.scm experiments of virtualisation (c) 2019 Gunter Liszewski
-;;; usage example:
-;;; guix environment --load-path=./here xen-0-tools
+;;; xen-0.scm (C) 2019 Gunter Liszewski
+;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
   #:use-module (gnu packages)
@@ -45,13 +44,14 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix utils)
+;  #:use-module (guix gexp) ; local-file
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1))
 
 (define-public xen-0-boot
   (package
     (name "xen-0-boot")
-    (version "4.12.1")
+     (version "4.13.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -60,7 +60,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-		"1lchpxmqsza6b720mlvglm8fc3j5c8kdhdhn6m7b6vk1cfd6zaz1"))))
+		"0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -141,47 +141,50 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              "/etc/xen/scripts")))
             #t))
         (add-before 'patch-xen-script-directory 'set-environment-up
-          (lambda* (#:key make-flags #:allow-other-keys)
-             (define (cross? x)
-               (string-contains x "cross-i686-linux"))
-             (define (filter-environment! filter-predicate
-                                          environment-variable-names)
-               (for-each
-                (lambda (env-name)
-                  (let* ((env-value (or (getenv env-name) ""))
-                         (search-path (search-path-as-string->list env-value))
-                         (new-search-path (filter filter-predicate
-                                                  search-path))
-                         (new-env-value (list->search-path-as-string
-                                         new-search-path ":")))
-                    (setenv env-name new-env-value)))
-                environment-variable-names))
-             (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
-             (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
-             (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
-             (filter-environment! cross?
-              '("CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
-                "CROSS_LIBRARY_PATH"))
-             (filter-environment! (lambda (e) (not (cross? e)))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-             (filter-environment! (lambda (e)
-                                    (not
-                                     (string-contains e
-                                      "mini-os-git-checkout")))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-            (setenv "EFI_VENDOR" "guix")
-	    #t))
-	(add-after 'configure 'make-xen-silentoldconfig
+		    (lambda* (#:key make-flags #:allow-other-keys)		    
+			     (define (cross? x)
+			       (or (string-contains x "cross-i686-linux")
+				   (string-contains x "gcc-cross-i686")))
+			     (define (filter-environment! filter-predicate
+							  environment-variable-names)
+			       (for-each
+				(lambda (env-name)
+				  (let* ((env-value (getenv env-name))
+					 (search-path (and env-value (search-path-as-string->list env-value)))
+					 (new-search-path (and env-value (filter filter-predicate
+										 search-path)))
+					 (new-env-value (and env-value (list->search-path-as-string
+									new-search-path ":"))))
+				    (setenv env-name new-env-value)))
+				environment-variable-names))
+			     (setenv "CROSS_CPATH" (getenv "CPATH"))
+			     (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
+			     (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
+			     (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
+			     (filter-environment! cross?
+						  '("CROSS_CPATH" "CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
+						    "CROSS_LIBRARY_PATH"))
+			     (filter-environment! (lambda (e) (not (cross? e)))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))
+			     (filter-environment! (lambda (e)
+						    (not
+						     (string-contains e
+								      "mini-os-git-checkout")))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))))
+	(add-after 'configure 'make-xen-oldconfig
 	   (lambda* (#:key make-flags inputs outputs #:allow-other-keys)
-	     (let ((config-file (assoc-ref inputs "xen-config")))
-	       (apply invoke "make" "clean" make-flags)
-	       (if config-file
-		   (begin
-		     (copy-file config-file "xen/.config")
-		     (apply invoke "make" "-C" "xen" "silentoldconfig" make-flags))))
-	       #t))
+		    (let ((config-file (assoc-ref inputs "xen-config"))
+			  (command-line "yes \"\" | make -C xen oldconfig || true")
+			  (shell "bash"))
+		      #;(apply invoke "make" "clean" make-flags) ; XXX: activate, just in case
+		      (if config-file
+			  (begin
+			    (copy-file config-file "xen/.config")
+			    #; (apply invoke "make" "-C" "xen" "silentoldconfig" make-flags)
+			    (apply invoke shell "-c" command-line make-flags))))
+		    #t))
 	(delete 'patch)
         (replace 'build
 		 (lambda* (#:key make-flags #:allow-other-keys)
@@ -195,7 +198,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 		 (command_line "test -f ./install.sh && chmod +x ./install.sh && ./install.sh /")
 		 (shell "bash"))
 	    (invoke shell "-c" command_line))
-	    #t)))))
+	  #t)))))
     (inputs
      `(("acpica" ,acpica)
        ("bridge-utils" ,bridge-utils)
@@ -211,7 +214,10 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("util-linux" ,util-linux)
        ("xz" ,xz)
        ("zlib" ,zlib)
-       ("xen-config" ,(search-auxiliary-file "xen-0/xen.config"))))
+       #;("xen-config" ,(local-file "aux-files/xen-0/4.13.0-x86_64.config")) ; XXX: for un-guix-pull'd
+       ("xen-config" ,(search-auxiliary-file
+		       (string-append "xen-0/" version "-" "x86_64" ; XXX: architecture
+				      "." "config")))))
     (native-inputs
      `(("autoconf" ,autoconf)
        ("dev86" ,dev86)
@@ -234,7 +240,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("ocaml" ,ocaml)
        ("perl" ,perl)
        ("pkg-config" ,pkg-config)
-       ("python" ,python2)
+       ("python" ,python-2)
        ("wget" ,wget)
        ("cross-gcc" ,(cross-gcc "i686-linux-gnu"
                                 #:xbinutils (cross-binutils "i686-linux-gnu")
@@ -242,24 +248,25 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")))
     (home-page "https://xenproject.org/")
-    (synopsis "Xen Virtual Machine Monitor Tools")
-    (description "This package provides tools for the Xen Virtual Machine Monitor.")
+    (synopsis "Xen hypervisor")
+    (description "This package provides Xen hypervisor. Use, say, with the
+grub bootloader: multiboot2 ...-xen-0-boot-.../boot/xen.gz.")
     (license license:gpl2)
     (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
 
 (define-public xen-0-docs
   (package
-    (name "xen-0-docs")
-    (version "4.12.1")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-		"1lchpxmqsza6b720mlvglm8fc3j5c8kdhdhn6m7b6vk1cfd6zaz1"))))
+   (name "xen-0-docs")
+   (version "4.13.0")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "git://xenbits.xenproject.org/xen.git")
+		  (commit (string-append "RELEASE-" version))))
+	    (file-name (git-file-name name version))
+	    (sha256
+	     (base32
+	      "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -338,38 +345,38 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              "/etc/xen/scripts")))
             #t))
         (add-before 'patch-xen-script-directory 'set-environment-up
-          (lambda* (#:key make-flags #:allow-other-keys)
-             (define (cross? x)
-               (string-contains x "cross-i686-linux"))
-             (define (filter-environment! filter-predicate
-                                          environment-variable-names)
-               (for-each
-                (lambda (env-name)
-                  (let* ((env-value (or (getenv env-name) ""))
-                         (search-path (search-path-as-string->list env-value))
-                         (new-search-path (filter filter-predicate
-                                                  search-path))
-                         (new-env-value (list->search-path-as-string
-                                         new-search-path ":")))
-                    (setenv env-name new-env-value)))
-                environment-variable-names))
-             (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
-             (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
-             (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
-             (filter-environment! cross?
-              '("CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
-                "CROSS_LIBRARY_PATH"))
-             (filter-environment! (lambda (e) (not (cross? e)))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-             (filter-environment! (lambda (e)
-                                    (not
-                                     (string-contains e
-                                      "mini-os-git-checkout")))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-            (setenv "EFI_VENDOR" "guix")
-	    #t))
+		    (lambda* (#:key make-flags #:allow-other-keys)
+			     (define (cross? x)
+			       (or (string-contains x "cross-i686-linux")
+				   (string-contains x "gcc-cross-i686")))
+			     (define (filter-environment! filter-predicate
+							  environment-variable-names)
+			       (for-each
+				(lambda (env-name)
+				  (let* ((env-value (getenv env-name))
+					 (search-path (and env-value (search-path-as-string->list env-value)))
+					 (new-search-path (and env-value (filter filter-predicate
+										 search-path)))
+					 (new-env-value (and env-value (list->search-path-as-string
+									new-search-path ":"))))
+				    (setenv env-name new-env-value)))
+				environment-variable-names))
+			     (setenv "CROSS_CPATH" (getenv "CPATH"))
+			     (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
+			     (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
+			     (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
+			     (filter-environment! cross?
+						  '("CROSS_CPATH" "CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
+						    "CROSS_LIBRARY_PATH"))
+			     (filter-environment! (lambda (e) (not (cross? e)))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))
+			     (filter-environment! (lambda (e)
+						    (not
+						     (string-contains e
+								      "mini-os-git-checkout")))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))))
 	(add-before 'set-environment-up 'our-own-xen-0-config
 	  (lambda* (#:key outputs inputs native-inputs #:allow-other-keys)
 	    (let ((xen-config (assoc-ref native-inputs "xen-config")))
@@ -436,7 +443,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("ocaml" ,ocaml)
        ("perl" ,perl)
        ("pkg-config" ,pkg-config)
-       ("python" ,python2)
+       ("python" ,python-2)
        ("wget" ,wget)
        ("cross-gcc" ,(cross-gcc "i686-linux-gnu"
                                 #:xbinutils (cross-binutils "i686-linux-gnu")
@@ -453,7 +460,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 (define-public xen-0-qemu
   (package
    (name "xen-0-qemu")
-    (version "4.1.0")
+    (version "4.1.0") ; TODO: update this
     (source (origin
              (method url-fetch)
              (uri (string-append "https://download.qemu.org/qemu-"
@@ -563,7 +570,7 @@ exec smbd $@")))
        ("usbredir" ,usbredir)
        ("util-linux" ,util-linux)
        ("virglrenderer" ,virglrenderer)
-       ("xen-0-libs" ,xen-0-libs) ;; XXX
+       ("xen-0-libs" ,xen-0-libs)
        ("zlib" ,zlib)))
     (native-inputs `(("gettext" ,gettext-minimal)
                      ("glib:bin" ,glib "bin")
@@ -571,7 +578,7 @@ exec smbd $@")))
                      ("flex" ,flex)
                      ("bison" ,bison)
                      ("pkg-config" ,pkg-config)
-                     ("python-wrapper" ,python-minimal-wrapper)
+                     ("python-wrapper" ,python-wrapper)
                      ("texinfo" ,texinfo)))
     (home-page "https://www.qemu.org")
     (synopsis "Machine emulator and virtualizer")
@@ -593,17 +600,17 @@ server and embedded PowerPC, and S390 guests.")
 
 (define-public xen-0-tools
   (package
-    (name "xen-0-tools")
-    (version "4.12.1")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-		"1lchpxmqsza6b720mlvglm8fc3j5c8kdhdhn6m7b6vk1cfd6zaz1"))))
+   (name "xen-0-tools")
+   (version "4.13.0")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "git://xenbits.xenproject.org/xen.git")
+		  (commit (string-append "RELEASE-" version))))
+	    (file-name (git-file-name name version))
+	    (sha256
+	     (base32
+	      "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -706,38 +713,45 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              "/etc/xen/scripts")))
             #t))
         (add-before 'patch-xen-script-directory 'set-environment-up
-          (lambda* (#:key make-flags #:allow-other-keys)
-             (define (cross? x)
-               (string-contains x "cross-i686-linux"))
-             (define (filter-environment! filter-predicate
-                                          environment-variable-names)
-               (for-each
-                (lambda (env-name)
-                  (let* ((env-value (or (getenv env-name) ""))
-                         (search-path (search-path-as-string->list env-value))
-                         (new-search-path (filter filter-predicate
-                                                  search-path))
-                         (new-env-value (list->search-path-as-string
-                                         new-search-path ":")))
-                    (setenv env-name new-env-value)))
-                environment-variable-names))
-             (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
-             (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
-             (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
-             (filter-environment! cross?
-              '("CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
-                "CROSS_LIBRARY_PATH"))
-             (filter-environment! (lambda (e) (not (cross? e)))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-             (filter-environment! (lambda (e)
-                                    (not
-                                     (string-contains e
-                                      "mini-os-git-checkout")))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
-                "LIBRARY_PATH"))
-            (setenv "EFI_VENDOR" "guix")
-	    #t))
+		    (lambda* (#:key make-flags #:allow-other-keys)
+			     (define (cross? x)
+			       (or (string-contains x "cross-i686-linux")
+				   (string-contains x "gcc-cross-i686")))
+			     (define (filter-environment! filter-predicate
+							  environment-variable-names)
+			       (for-each
+				(lambda (env-name)
+				  (let* ((env-value (getenv env-name))
+					 (search-path (and env-value (search-path-as-string->list env-value)))
+					 (new-search-path (and env-value (filter filter-predicate
+										 search-path)))
+					 (new-env-value (and env-value (list->search-path-as-string
+									new-search-path ":"))))
+				    (setenv env-name new-env-value)))
+				environment-variable-names))
+			     (setenv "CROSS_CPATH" (getenv "CPATH"))
+			     (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
+			     (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
+			     (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
+			     (filter-environment! cross?
+						  '("CROSS_CPATH" "CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
+						    "CROSS_LIBRARY_PATH"))
+			     (filter-environment! (lambda (e) (not (cross? e)))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))
+			     (filter-environment! (lambda (e)
+						    (not
+						     (string-contains e
+								      "mini-os-git-checkout")))
+						  '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+						    "LIBRARY_PATH"))
+			     (setenv "EFI_VENDOR" "guix")
+			     
+			     (display (environ)) (newline)           ; XXX: finding Python.h
+			     (display (getenv "CPPFLAGS")) (newline) ; XXX
+			     (display (getenv "CFLAGS")) (newline)   ; XXX
+			     
+			     #t))
 	(add-before 'set-environment-up 'our-own-xen-0-config
 	  (lambda* (#:key outputs inputs native-inputs #:allow-other-keys)
 	    (let ((xen-config (assoc-ref native-inputs "xen-config")))
@@ -804,7 +818,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("ocaml" ,ocaml)
        ("perl" ,perl)
        ("pkg-config" ,pkg-config)
-       ("python" ,python2)
+       ("python" ,python-2)
        ("wget" ,wget)
        ("cross-gcc" ,(cross-gcc "i686-linux-gnu"
                                 #:xbinutils (cross-binutils "i686-linux-gnu")
@@ -821,7 +835,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 (define-public xen-0-libs
   (package
     (name "xen-0-libs")
-    (version "4.12.1")
+    (version "4.13.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -830,7 +844,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
               (file-name (git-file-name name version))
               (sha256
                (base32
-		"1lchpxmqsza6b720mlvglm8fc3j5c8kdhdhn6m7b6vk1cfd6zaz1"))))
+		"0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -846,19 +860,19 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                             "/etc/init.d")
              (string-append "--with-system-qemu="
                             (assoc-ref %build-inputs "qemu")
-                            "/bin/qemu-system-i386")
+                            "/bin/qemu-system-x86_64")
              (string-append "--with-system-seabios="
                             (assoc-ref %build-inputs "seabios")
                             "/share/firmware/bios.bin")
              (string-append "--with-system-ovmf="
                             (assoc-ref %build-inputs "ovmf")
                             "/share/firmware/ovmf_ia32.bin")
-	     "ac_cv_header_Python_h=yes"
-	     "ac_cv_header_uuid_h=yes"
-	     "ac_cv_header_uuid_uuid_h=yes"
-	     "ax_cv_pthread_flags=-pthread"
-	     "ac_cv_header_argp_h=yes"
-	     (string-append "--with-python="
+;;;	     "ac_cv_header_Python_h=yes"
+;;;	     "ac_cv_header_uuid_h=yes"
+;;;	     "ac_cv_header_uuid_uuid_h=yes"
+;;;	     "ax_cv_pthread_flags=-pthread"
+;;;	     "ac_cv_header_argp_h=yes"
+	    #; (string-append "--with-python="
 			    (assoc-ref %build-inputs "python")
 			    "/bin/python"))
        #:make-flags (list "-j" "1"
@@ -891,14 +905,14 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
             #t))
         (add-after 'unpack-mini-os 'patch-minios-rules
           (lambda* (#:key inputs outputs #:allow-other-keys)
-            (substitute* "tools/firmware/Rules.mk"
+            #;(substitute* "tools/firmware/Rules.mk" ; XXX: how about that?
              (("override XEN_TARGET_ARCH = x86_32")
               (string-append "override XEN_TARGET_ARCH = x86_32
 override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
              (("^CFLAGS =$")
               (string-append "CFLAGS=-I" (assoc-ref inputs "cross-libc")
                              "/include\n")))
-            (substitute* "config/x86_32.mk"
+            #;(substitute* "config/x86_32.mk"
              (("CFLAGS += -m32 -march=i686")
               (string-append "CFLAGS += -march=i686 -I"
                              (assoc-ref inputs "cross-libc")
@@ -933,35 +947,37 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         (add-before 'patch-xen-script-directory 'set-environment-up
           (lambda* (#:key make-flags #:allow-other-keys)
              (define (cross? x)
-               (string-contains x "cross-i686-linux"))
+               (or (string-contains x "cross-i686-linux")
+		   (string-contains x "gcc-cross-i686")))
              (define (filter-environment! filter-predicate
                                           environment-variable-names)
                (for-each
                 (lambda (env-name)
-                  (let* ((env-value (or (getenv env-name) ""))
-                         (search-path (search-path-as-string->list env-value))
-                         (new-search-path (filter filter-predicate
-                                                  search-path))
-                         (new-env-value (list->search-path-as-string
-                                         new-search-path ":")))
+                  (let* ((env-value (getenv env-name))
+                         (search-path (and env-value (search-path-as-string->list env-value)))
+                         (new-search-path (and env-value (filter filter-predicate
+                                                  search-path)))
+                         (new-env-value (and env-value (list->search-path-as-string
+                                         new-search-path ":"))))
                     (setenv env-name new-env-value)))
                 environment-variable-names))
+	     (setenv "CROSS_CPATH" (getenv "CPATH"))
              (setenv "CROSS_C_INCLUDE_PATH" (getenv "C_INCLUDE_PATH"))
              (setenv "CROSS_CPLUS_INCLUDE_PATH" (getenv "CPLUS_INCLUDE_PATH"))
              (setenv "CROSS_LIBRARY_PATH" (getenv "LIBRARY_PATH"))
              (filter-environment! cross?
-              '("CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
+              '("CROSS_CPATH" "CROSS_C_INCLUDE_PATH" "CROSS_CPLUS_INCLUDE_PATH"
                 "CROSS_LIBRARY_PATH"))
              (filter-environment! (lambda (e) (not (cross? e)))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+              '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
                 "LIBRARY_PATH"))
              (filter-environment! (lambda (e)
                                     (not
                                      (string-contains e
                                       "mini-os-git-checkout")))
-              '("C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
+              '("CPATH" "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH"
                 "LIBRARY_PATH"))
-            (setenv "EFI_VENDOR" "guix")
+	     (setenv "EFI_VENDOR" "guix")
 	    #t))
 	(add-before 'set-environment-up 'our-own-xen-0-config
 	  (lambda* (#:key outputs inputs native-inputs #:allow-other-keys)
@@ -989,7 +1005,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         (replace 'install
 	 (lambda* (#:key make-flags outputs #:allow-other-keys)
 	  (let* ((out (assoc-ref outputs "out"))
-		 (command_line "cd dist && ./install.sh /")
+		 (command_line "chmod +x ./install.sh && ./install.sh /")
 		 (shell "bash"))
 		    (invoke shell "-c" command_line)))))))
     (inputs
@@ -1005,7 +1021,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("openssl" ,openssl)
        ("ovmf" ,ovmf)
        ("pixman" ,pixman)
-       ("qemu" ,qemu-minimal-2.10)
+       ("qemu" ,qemu-minimal)
        ("seabios" ,seabios)
        ("util-linux" ,util-linux)
        ("xz" ,xz)
@@ -1043,8 +1059,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
        ("xen-config" ,(search-auxiliary-file "xen-0/xen.config"))))
     (home-page "https://xenproject.org/")
-    (synopsis "Xen Virtual Machine Monitor Tools")
-    (description "This package provides tools for the Xen Virtual Machine Monitor.")
+    (synopsis "Xen base")
+    (description "This package provides a base to build the Xen Virtual Machine Monitor tools.  In particular, it resolves the circular dependency between xen-0-qemu
+and xen itself.")
     (license license:gpl2)
     (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
-
