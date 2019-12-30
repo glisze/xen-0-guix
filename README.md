@@ -30,7 +30,7 @@ disk images may also be used to create such a virtual machine.)
 Package ~xen-0-tools~ gives the tools to start the Xen daemons, and to work with the domains of 
 the virtual environment.
 
-Here is a shell function that may start the daemons necessary.
+Here is a shell function that may start the necessary daemons.
 : d___ () 
 : { 
 :    local D="xen-0-tools: init.d/xencommons [start|stop|...]";
