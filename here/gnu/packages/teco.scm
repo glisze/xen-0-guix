@@ -56,7 +56,7 @@
 
 This @code{teco} program has only the minimal changes for it to built.
 Please, use it with due care!")
-    (home-page "https://glisze.github.com/teco")
+    (home-page "https://glisze.github.io/teco")
     (license gpl3+)))
 
 (define-public teco-local
