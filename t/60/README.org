@@ -3,7 +3,11 @@
   We want to run a GNU Hurd system with GNU Guix under a Xen setting.  This builds on
 previous exercises.   The GNU Guix xen-0-boot, and xen-0-tools packages have been build.
 
-** The package definition 'xen-0-hurd'
+** The package definition
    We start with the given GNU Guix package: (gnu packages hurd).  From it we extract only
 the gnumach kernel public definition into xen-0-hurd.scm.  We will add '--enable-platform=xen'
 and add the '(gnu packages hurd)' as an imported module.
+** xen-0-gnumach
+  guix build --load-path=here xen-0-gnumach
+
+  Note: this does not build, here yet!

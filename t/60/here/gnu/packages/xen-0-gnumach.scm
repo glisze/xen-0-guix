@@ -66,7 +66,14 @@
 		      (replace 'install
 			       (lambda _
 				 (invoke "make" "install-data")))
-		      (delete 'build))
+		      (delete 'build)
+		      (add-after 'install 'produce-image
+				 (lambda* (#:key outputs #:allow-other-keys)
+				   (let* ((out  (assoc-ref outputs "out"))
+					  (boot (string-append out "/boot")))
+				     (invoke "make" "gnumach.gz")
+				     (install-file "gnumach.gz" boot)
+				     #t))))
 
        ;; GNU Mach supports only IA32 currently, so cheat so that we can at
        ;; least install its headers.
@@ -77,13 +84,6 @@
 	     '(#:configure-flags '("--build=i586-pc-gnu"
 				   "--host=i686-linux-gnu"
 				   "--enable-platform=xen")))
-       (add-after 'install 'produce-image
-		  (lambda* (#:key outputs #:allow-other-keys)
-		    (let* ((out  (assoc-ref outputs "out"))
-			   (boot (string-append out "/boot")))
-		      (invoke "make" "gnumach.gz")
-		      (install-file "gnumach.gz" boot)
-		      #t)))
        #:tests? #f))
     (native-inputs
      `(("mig" ,mig)
