@@ -1,0 +1,5 @@
+tab-title () 
+{ 
+    local D="set this title";
+    echo -ne '\e]2;'$*'\a'
+}
