@@ -1,0 +1,5 @@
+set-linux-for-x501u-firmware_class.path () 
+{ 
+    local D="Modules to look here for firmware";
+    echo $( cat /boot/i/d.firmware_class.path ) > /sys/module/firmware_class/parameters/path
+}
