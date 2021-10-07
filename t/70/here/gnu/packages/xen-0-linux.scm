@@ -38,7 +38,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.4-rc8"))
+  (let* ((version "v5.15-rc4"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -46,20 +46,20 @@
      (source (origin
 	      (method git-fetch)
 	      (uri (git-reference
-		    (url "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git")
+		    (url "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git")
 		    (commit version)))
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"15cpf0rzcsz4lk18jlnk8qsmcx2jpkr5lb2594wsfjg2a8sah4a3"))))
+		"0wpyj713x6xi5fhp4ma469llizycgrxv72mam609aph9x22kpx6l")))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
      (home-page "http://kernel.org/"))))
 
-(define-public linux-x501u
+(define-public linux-for-x501u
   (let* ((machine "x501u")
-	 (version "v5.4-rc8"))
+	 (version "v5.15-rc4"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-x501u")
@@ -113,9 +113,70 @@
 			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/x501u.5.4-rc8.config")
+	 ,(search-auxiliary-file "linux-0/x501u.5.15-rc4.config")
 	,@(package-inputs linux-libre))))
      (synopsis "Linux for a x501u machine")
+     (description "Linux with non-free things for one particular machine model."))))
+
+(define-public linux-for-ak3v
+  (let* ((machine "ak3v")
+	 (version "v5.15-rc4"))
+    (package
+     (inherit linux-machine-base)
+     (name "linux-for-ak3v")
+     (arguments
+      (substitute-keyword-arguments (package-arguments linux-libre)
+	((#:phases phases '%standard-phases)
+	 `(modify-phases ,phases
+	    (replace 'configure
+	      (lambda* (#:key inputs native-inputs target #:allow-other-keys)
+		(setenv "KCONFIG_NOTIMESTAMP" "1")
+		(setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+		(for-each (lambda (a)
+			    ;; Mung our own include/ out of our environment
+			    (setenv a
+				    (string-join
+				     (cdr (string-split (or (getenv a) "") #\:))
+				     ":")))
+			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
+		(let ((build  (assoc-ref %standard-phases 'build))
+		      (config (assoc-ref inputs "Kconfig")))
+		  (invoke "make" "mrproper")
+		  (if config
+		      (begin
+			(copy-file config ".config")
+			(chmod ".config" #o666)
+			(invoke "make" "olddefconfig")))
+		  #t)))
+	    (replace 'install
+	      (lambda* (#:key inputs native-inputs outputs #:allow-other-keys)
+		(let* ((out    (assoc-ref outputs "out"))
+		       (moddir (string-append out "/lib/modules"))
+		       (dtbdir (string-append out "/lib/dtbs"))
+		       (kmod   (assoc-ref (or native-inputs inputs) "kmod")))
+		  (for-each (lambda (a) (install-file a out))
+			    (find-files "." "^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
+		  (unless (null? (find-files "." "\\.dtb$"))
+		    (mkdir-p dtbdir)
+		    (invoke "make" (string-append "INSTALL_DTBS_PATH=" dtbdir)
+			    "dtbs_install"))
+		  (mkdir-p moddir)
+		  #;(invoke "make"
+			  (string-append "INSTALL_PATH=" out)
+			  (string-append "INSTALL_HDR_PATH=" out)
+			  "headers_install")
+		  (invoke "make"
+			  (string-append "DEPMOD=" kmod "/bin/depmod")
+			  (string-append "MODULE_DIR=" moddir)
+			  (string-append "INSTALL_PATH=" out)
+			  (string-append "INSTALL_MOD_PATH=" out)
+			  "INSTALL_MOD_STRIP=1"
+			  "modules_install"))))))))
+     (inputs
+      `(("Kconfig"
+	 ,(search-auxiliary-file "linux-0/ak3v.5.15-rc4.config")
+	,@(package-inputs linux-libre))))
+     (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
 
 (define-public linux-firmware-for-x501u
