@@ -1,5 +1,5 @@
-;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-x501u
+;;; xen-0-linux (C) 2019, 2021 Gunter Liszewski
+;;;  guix build --load-path=here linux-ak3v
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -223,6 +223,55 @@ dib0700: tbc, radeon: tbc")
 Licence: Redistributable. See LICENCE.ralink-firmware.txt for details.
 Licence: Redistributable. See LICENSE.dib0700 for details.
 Licence: Redistributable. See LICENSE.radeon for details.
+")
+    (license (license:non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=WHENCE;hb=HEAD"))))
+
+(define-public linux-firmware-for-ak3v
+  (package
+    (name "linux-firmware-for-ak3v")
+    (version "20210919")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
+                    (commit version)))
+              (sha256
+               (base32
+                "1ix43qqpl5kvs6xpqrs3l5aj6vmwcaxcnv8l04mqqkyi9wamjydn"))))
+    (build-system trivial-build-system)
+    (arguments
+     `(#:modules ((guix build utils))
+       #:builder (begin
+                   (use-modules (guix build utils))
+                   (let* ((source (assoc-ref %build-inputs "source"))
+			  (source-i915 (string-append source "/i915"))
+			  (source-rtl-nic (string-append source "/rtl_nic"))
+			  (fw-dir (string-append %output "/lib/firmware"))
+			  (fw-dir-i915 (string-append fw-dir "/i915"))
+			  (fw-dir-rtl-nic (string-append fw-dir "/rtl_nic")))
+		     (mkdir-p fw-dir-i915)
+		     (mkdir-p fw-dir-rtl-nic)
+		     (for-each (lambda (file)
+				 (copy-file file
+					    (string-append fw-dir
+							   "/" (basename file))))
+			       (map (lambda (a) (string-append source a))
+				    '("/WHENCE" "/iwlwifi-7265D-29.ucode")))
+		     (for-each (lambda (file)
+                                 (copy-file file
+                                            (string-append fw-dir-i915
+                                                           "/" (basename file))))
+			       (find-files source-i915))
+		     (for-each (lambda (file)
+                                 (copy-file file
+                                            (string-append fw-dir-rtl-nic
+                                                           "/" (basename file))))
+			       (find-files source-rtl-nic))
+		     #t))))
+    (home-page "i915: tbc, iwlwifi: tbc, rtl-nic: tbc")
+    (synopsis "Non-free firmware")
+    (description "Non-free firmware: i915, iwlwifi, and r8169.
+Licence: Redistributable. See WHENCE for details.
 ")
     (license (license:non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=WHENCE;hb=HEAD"))))
 
