@@ -1,0 +1,5 @@
+set-firmware-path () 
+{ 
+    local D="set the linux firmware path";
+    sudo echo "${1:-$( linux-firmware-in-store )}" > /sys/module/firmware_class/parameters/path
+}
