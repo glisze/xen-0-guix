@@ -1,4 +1,4 @@
-local-module-list () 
+modules-loaded () 
 { 
     local D="modules used here, now";
     for a in $( find /sys/ -name modalias -exec cat {} \;);

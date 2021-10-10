@@ -1,5 +1,5 @@
-;;; xen-0-linux (C) 2019, 2021 Gunter Liszewski
-;;;  guix build --load-path=here linux-ak3v
+;;; xen-0-linux (C) 2019 Gunter Liszewski
+;;;  guix build --load-path=here linux-x501u
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -27,11 +27,12 @@
 
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages)  
+  #:use-module (gnu packages)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages tls)
   #:use-module (guix build-system trivial)
-;  #:use-module (guix build-system gnu)  
+  ;; #:use-module (guix build-system gnu)  
+  #:use-module (guix gexp)
   #:use-module (guix git-download)
   #:use-module (guix packages)
   #:use-module (guix utils)  
@@ -51,7 +52,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0wpyj713x6xi5fhp4ma469llizycgrxv72mam609aph9x22kpx6l")))
+		"0wpyj713x6xi5fhp4ma469llizycgrxv72mam609aph9x22kpx6l"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -172,10 +173,13 @@
 			  (string-append "INSTALL_MOD_PATH=" out)
 			  "INSTALL_MOD_STRIP=1"
 			  "modules_install"))))))))
+     (native-inputs
+      `(("kmod" ,kmod)
+	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/ak3v.5.15-rc4.config")
-	,@(package-inputs linux-libre))))
+      `(("Kconfig" ,(local-file "ak3v.5.15-rc4.config"))
+	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc4.config")
+	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
 
