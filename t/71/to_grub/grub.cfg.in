@@ -32,7 +32,7 @@ set default=0
 set timeout=3
 menuentry "Gnu Guix: S2: linuc-for-ak3v@5.15-rc4 and i2-initrd.img (experimental)" {
   search --file --set /@/0/@LINUX@
-  linux /@/0/@LINUX@ rdinit=/bin/sh --root=/dev/mapper/HyperVG11-S2 --system=@SYSTEM@ --load=/gnu/store/@BOOT@ iommu_intel=on vfio.ids=8086:095a,10ec:8168 quiet
+  linux /@/0/@LINUX@ rdinit=@RDINIT@ --root=/dev/mapper/HyperVG11-S2 --system=@SYSTEM@ --load=/gnu/store/@BOOT@ iommu_intel=on vfio.ids=8086:095a,10ec:8168 quiet
   initrd /@/0/@INITRD@
 }
 
