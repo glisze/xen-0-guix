@@ -1,0 +1,4 @@
+make_just () 
+{ 
+    make "$@" O=/home/repo-6/5/kernel.org/xen-0-linux/t/50/
+}
