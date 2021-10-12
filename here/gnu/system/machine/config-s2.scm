@@ -35,7 +35,8 @@
 	  "hid-apple"
 	  "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 	  "pata_acpi" "pata_atiixp" "isci"
-	  "i915" "r8169" ;; "iwlwifi"
+	  "i915" ;; "r8169"
+	  "iwlwifi"
 	  ))
   (initrd (lambda (a . b)
 	    (apply
@@ -47,12 +48,14 @@
 		   "hid-apple"
 		   "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 		   "pata_acpi" "pata_atiixp" "isci"
-		   "i915" "r8169" ;;"iwlwifi"
+		   "i915" ;;"r8169"
+		   "iwlwifi"
 		   )
 	     ;; virtio_pci virtio_balloon virtio_blk virtio_net
 	     ;; virtio_console virtio-rng
 	     #:helper-packages (list
 				busybox
+				linux-firmware-for-ak3v
 				lvm2-static
 				btrfs-progs/static
 				loadkeys-static)
