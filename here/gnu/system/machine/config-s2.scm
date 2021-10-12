@@ -29,24 +29,26 @@
   #;(initrd-modules (append (list "mmc_block" "sdhci_pci")
   %base-initrd-modules))
   (initrd-modules
-    (list "mmc_block" "sdhci_pci"
+    (list ;; "mmc_block" "sdhci_pci"
 	  "ahci" "usb-storage" "uas" ;; "usbhid"
 	  ;; "hid-generic"
 	  "hid-apple"
 	  "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 	  "pata_acpi" "pata_atiixp" "isci"
-	  "i915" "r8169" "iwlwifi"))
+	  "i915" "r8169" ;; "iwlwifi"
+	  ))
   (initrd (lambda (a . b)
 	    (apply
 	     raw-initrd a
 	     #:linux-modules
-	     (list "mmc_block" "sdhci_pci"
+	     (list ;; "mmc_block" "sdhci_pci"
 		   "ahci" "usb-storage" "uas" ;; "usbhid"
 		   ;; "hid-generic"
 		   "hid-apple"
 		   "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 		   "pata_acpi" "pata_atiixp" "isci"
-		   "i915" "r8169" "iwlwifi")
+		   "i915" "r8169" ;;"iwlwifi"
+		   )
 	     ;; virtio_pci virtio_balloon virtio_blk virtio_net
 	     ;; virtio_console virtio-rng
 	     #:helper-packages (list
