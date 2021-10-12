@@ -28,6 +28,7 @@
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
+  #:use-module (gnu packages cpio)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages tls)
   #:use-module (guix build-system trivial)
@@ -175,6 +176,7 @@
 			  "modules_install"))))))))
      (native-inputs
       `(("kmod" ,kmod)
+        ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
       `(("Kconfig" ,(local-file "ak3v.5.15-rc5.config"))
