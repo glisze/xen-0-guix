@@ -175,7 +175,10 @@
 192.168.43.10 ipad-03
 192.168.43.6  ipad
 192.168.43.3  pixi-4
-185.157.233.143 m2"))
+185.157.233.143 m2")
+#;	      
+	      
+	      )
 		
   ;; System-wide packages
   (packages (append (list
