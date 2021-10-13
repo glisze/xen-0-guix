@@ -36,7 +36,7 @@
 	  "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 	  "pata_acpi" "pata_atiixp" "isci"
 	  "i915" ;; "r8169"
-	  ;; "iwlwifi"
+	  "iwlwifi"
 	  ))
   (initrd (lambda (a . b)
 	    (apply
@@ -49,7 +49,7 @@
 		   "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
 		   "pata_acpi" "pata_atiixp" "isci"
 		   "i915" ;;"r8169"
-		   ;; "iwlwifi"
+		   "iwlwifi"
 		   )
 	     ;; virtio_pci virtio_balloon virtio_blk virtio_net
 	     ;; virtio_console virtio-rng
@@ -177,7 +177,7 @@
 192.168.43.3  pixi-4
 185.157.233.143 m2"))
 #;(use-modules (guix gexp)(gnu packages xen-0-linux)(gnu packages busybox))
-#;(let ((this-system-tbc "to-be-confirmed/"))
+(let ((this-system-tbc "to-be-confirmed/"))
    (mixed-text-file
         "grub-test-t72.cfg"
         "linux "   linux-for-ak3v "bzImage "
