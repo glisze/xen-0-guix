@@ -1,7 +1,7 @@
 ;; 20211009 (c) Gunter Liszewski -*- mode: schem; -*-
 ;; (S2: linux-for-ak3v, linux-firmware-for-ak3v) 
 
-(use-modules (gnu) (guix) (gnu system nss)
+(use-modules (gnu) (guix) (guix gexp) (gnu system nss)
 	     (gnu system keyboard)(srfi srfi-1))
 (use-service-modules desktop xorg virtualization ssh)
 (use-package-modules certs gnome
@@ -175,11 +175,17 @@
 192.168.43.10 ipad-03
 192.168.43.6  ipad
 192.168.43.3  pixi-4
-185.157.233.143 m2")
-#;	      
-	      
-	      )
-		
+185.157.233.143 m2"))
+#;(use-modules (guix gexp)(gnu packages xen-0-linux)(gnu packages busybox))
+(let ((this-system-tbc "to-be-confirmed/"))
+   (mixed-text-file
+        "grub-test-t72.cfg"
+        "linux "   linux-for-ak3v "bzImage "
+        "rdinit="  busybox "bin/sh "
+        "--root=" (this-system-tbc root) " "
+        "--system=" (this-system-tbc) " "
+        "--load=" (this-system-tbc) "boot "
+        "quiet" "\n"))
   ;; System-wide packages
   (packages (append (list
                      ratpoison i3-wm i3status dmenu
