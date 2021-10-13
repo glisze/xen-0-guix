@@ -1,7 +1,7 @@
 grub-for () 
 { 
     local D="given a GNU Guix system, apply this grub template";
-    ( d=${1:-$( readlink -f linux-for-ak3v.in )};
+    ( d=${1:-$( d-is )};
     a=${2:-$( readlink -f $d/kernel/bzImage )};
     b=${3:-$( readlink -f $d/initrd )};
     c=${4:-$( readlink -f $d/boot )};
