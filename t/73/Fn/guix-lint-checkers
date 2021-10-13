@@ -1,0 +1,5 @@
+guix-lint-checkers () 
+{ 
+    local D="the list of guix lint checkers";
+    guix lint -l | sed - -e s,'^- \([^: ]\+\):.*$,\1',p -n
+}

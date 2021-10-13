@@ -1,0 +1,293 @@
+;; 2020 (c) Gunter Liszewski -- config-7.scm, config-xen-0.scm (xen-0,linux-for-x501u with cifs, nfs, netatalk)
+
+(use-modules (gnu)
+	     (gnu system nss)
+	     (gnu system keyboard)
+	     (srfi srfi-1))
+(use-service-modules
+ desktop ; spice
+ xorg
+ ssh)
+(use-package-modules bootloaders
+                     xen-0-busybox
+		     xen-0-linux
+		     xen-0 ;virtualization
+		     certs
+		     ratpoison
+		     suckless
+		     wm
+		     xorg
+		     guile-wm       ;;; XXX:check
+                     linux)
+
+(operating-system
+ (host-name "S8")
+ (timezone "Europe/Belfast")
+ (locale "en_GB.utf8")
+ (keyboard-layout (keyboard-layout "gb"))
+  ;;  (keyboard-layout (keyboard-layout "uk")) ;; de-latin1, neo
+
+ (kernel linux-x501u)
+ (firmware `(,linux-firmware-for-x501u))
+ ;; (initrd-modules %base-initrd-modules)
+ (initrd-modules '(;; "xen-blkfront"            ;; maybe for to be a good guest
+		   ;; "xen-blkback"             ;; to be a host ;; done by d___
+		   ;; "ttm" "xen-kbdfront" "xen-netback"
+		   ;; "xen-netfront" "xen-pcifront" "xen-scsifront"
+		   ;; "radeonfb"   ;; "radeon"
+		   ;; "fb_ddc" "xen-fbfront"
+		   ;; "xen_wdt" "xen-acpi-processor" "xen-evtchn"
+		   ;; "xen-gntalloc" "xen-gntdev" "xen-pciback"
+		   ;; "xen-privcmd" "xen-scsiback" "xenfs"
+		   ;; "configs"
+		   ))
+;;; (initrd (lambda (a . b) (apply base-initrd '() #:qemu-networking? #f b))) ; needs file-systems to boot
+ (initrd (lambda (a . b) (apply raw-initrd a
+				#:linux-modules '()
+				#:helper-packages (list xen-0-busybox lvm2-static btrfs-progs/static loadkeys-static)
+				#:qemu-networking? #f b)))
+ (kernel-arguments '("quiet"))
+ ;; (initrd base-initrd)
+ 
+ ;; Use the UEFI variant of GRUB with the EFI System
+ ;; Partition mounted on /boot/efi.
+ (bootloader (bootloader-configuration
+;;; XXX: 20190212 -- no /sys/firmware/efi -- try the following instead
+;;;                (bootloader grub-bootloader)
+;;;                (target "/dev/sda")))
+              (bootloader grub-efi-bootloader)
+	      (keyboard-layout keyboard-layout)
+	      (timeout 3)
+;;; XXX: 20190218 -- choosing between these -- now with the Fujits (the other) inside
+;;;               (bootloader grub-mkrescue-bootloader)
+              (target "/boot/efi")
+	      (theme #f)
+	      (menu-entries
+	       (list ;; the last one with this desktop
+		(menu-entry
+		 (label "The other thing...")
+		 (device "sblive")
+		 ;; (device (file-system-label "sblive"))		 
+		 (linux "/live/vmlinuz")
+		 (linux-arguments '("boot=live" "quiet" "splash" "threadings"
+				    "transparent_hugepags=never" "noresume"))
+		 (initrd "/live/initrd.gz"))
+		(menu-entry
+		 (label "Xen 4.12.1 with linux-for-x501u")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")
+		 (linux "/gnu/store/there/Xen-4.12.1")
+		 (linux-arguments '("boot=this"))
+		 (initrd "/gnu/store/there/initrd.cpio.gz2")
+		 ;; multiboot2 xen-4.12.1
+		 ;; module linux-for-x501u
+		 ;; module initrd
+		 )
+		(menu-entry
+		 (label "GNU with Linux-Libre 5.1.3 and GNOME or i3 desktop")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")		 
+		 (linux "/@/0/gnu/store/1dfy8y8c9rsj8fnnqqdax46h7bh8cjdw-linux-libre-5.1.3/bzImage")
+		 (linux-arguments '("--root=B8"
+				    "--system=/gnu/store/yx9fi5ghzkvxg79066xbd7aigprcv6a6-system"
+				    "--load=/gnu/store/yx9fi5ghzkvxg79066xbd7aigprcv6a6-system/boot"
+				    ;; "rootflags=\"nologreplay\""
+				    "quiet"
+				    ))
+		 (initrd "/@/0//gnu/store/j0531c2kxpk5x0r300yca0lxdzk1d17h-raw-initrd/initrd.cpio.gz"))
+
+		(menu-entry
+		 (label "The other thing...")
+		 (device "sblive")
+		 ;; (device (file-system-label "sblive"))		 
+		 (linux "/live/vmlinuz")
+		 (linux-arguments '("boot=live" "quiet" "splash" "threadings"
+				    "transparent_hugepags=never" "noresume"))
+		 (initrd "/live/initrd.gz"))
+		(menu-entry
+		 (label "GNU gnome desktop 5.0.5 (beta)")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")		 
+		 (linux "/@/0//gnu/store/nd9ck8rjyg8lifp0wrhpyd7za1zz6n1g-linux-libre-5.0.5/bzImage")
+		 (linux-arguments '("--root=B8"
+				    "--system=/var/guix/profiles/system-31-link"
+				    "--load=/var/guix/profiles/system-31-link/boot"
+				    ;; "rootflags=\"nologreplay\""
+				    ))
+		 (initrd "/@/0//gnu/store/d98758xn2x5abfjs79g82db5bd1yrcd4-raw-initrd/initrd.cpio.gz"))
+
+
+		(menu-entry
+		 (label "GNU 5.0.5 (no desktop-services)")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")		 
+		 (linux "/@/0//gnu/store/nd9ck8rjyg8lifp0wrhpyd7za1zz6n1g-linux-libre-5.0.5/bzImage")
+		 (linux-arguments '("--root=B8"
+				    "--system=/var/guix/profiles/system-32-link"
+				    "--load=/var/guix/profiles/system-32-link/boot"
+				    ;; "rootflags=\"nologreplay\""
+				    ))
+		 (initrd "/@/0//gnu/store/d98758xn2x5abfjs79g82db5bd1yrcd4-raw-initrd/initrd.cpio.gz"))
+		
+		(menu-entry
+		 (label "GNU 5.0.3 slim - (no udevadm for btrfs)")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")		 
+		 (linux "/@/0//gnu/store/01gsld6gand2v2nmhscfki5vz3dqp57s-linux-libre-5.0.3/bzImage")
+		 (linux-arguments '("--root=B8"
+				    "--system=/var/guix/profiles/system-26-link"
+				    "--load=/var/guix/profiles/system-26-link/boot"
+				    ;; "rootflags=\"nologreplay\""
+				    ))
+		 (initrd "/@/0//gnu/store/3r46nx3abi39jc7ri3nhqkg4w97ywibm-raw-initrd/initrd.cpio.gz"))
+
+		(menu-entry
+		 (label "GNU (empty configuration)")
+		 ;; (device (file-system-label "B8"))
+		 (device "B8")
+		 (linux "/@/0/")
+		 (linux-arguments '("--root=B8"
+				    "--system="
+				    "--load="
+				    ;; "rootflags=\"nologreplay\""
+				    ))
+		 (initrd "/@/0/"))
+		
+		;; XXX:todo    (menu-entry
+		;;		(label "System rescue")
+		;;		(device (file-system-label "")))
+		))))
+
+
+ (file-systems (cons* 	(file-system
+			 (device (file-system-label "B8"))
+                         (mount-point "/")
+			 (type "btrfs"))
+;;; a very bad idea -- don't trash the root thing
+;;;		        (file-system
+;;;                      (device (file-system-label "A8"))
+;;;                      (mount-point "/root")
+;;;                      (type "btrfs"))
+			(file-system
+                         (device (file-system-label "EFI2"))
+                         (mount-point "/boot/efi")
+                         (type "vfat"))
+
+			(file-system
+			 (mount-point "/home/repo-6")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "E6")))
+			(file-system
+			 (mount-point "/home/source-6")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "F6")))
+
+			(file-system
+			 (mount-point "/home/repo-7")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "E7")))
+			(file-system
+			 (mount-point "/home/source-7")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "F7")))
+
+			(file-system
+			 (mount-point "/home/share")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "C9")))
+			(file-system
+			 (mount-point "/home/S70/A0")
+			 (create-mount-point? #t)
+			 (mount? #f)
+			 (type "btrfs")
+			 (device (file-system-label "A0")))
+
+			%base-file-systems))
+
+ (swap-devices '("/dev/sda8"))
+
+ (users (cons* (user-account
+                (name "gunter")
+                (comment "The operating manual reader's assistant cleaner")
+                (group "users")
+                (supplementary-groups '("wheel" "netdev"
+                                        "audio" "video" "cdrom"
+					"tty" "kvm"))
+                (home-directory "/home/gunter"))
+               (user-account
+                (name "glisze")
+                (comment "projecting a brand new, but rounder thing")
+                (group "users")
+                (supplementary-groups '("wheel" "netdev"
+                                        "audio" "video" "cdrom"
+					"tty" "kvm"))
+                (home-directory "/home/glisze"))
+               (user-account
+                (name "glistk")
+                (comment "Tcl things")
+;;; XXX:todo	(shell "tclsh")
+                (group "users")
+                (supplementary-groups '("wheel" "netdev"
+                                        "audio" "video" "cdrom"
+					"tty" "kvm"))
+                (home-directory "/home/glistk"))
+               %base-user-accounts))
+
+ ;; Add a bunch of window managers; we can choose one at
+ ;; the log-in screen with F1.
+ (packages (cons*
+	    ;; xen-0-tools ; keep as a user package, for now
+	    xen-0-boot
+	    guile-wm
+	    ratpoison
+	    i3-wm i3status dmenu ;window managers
+	    nss-certs                      ;for HTTPS access
+	    kbd-neo                        ;loadkeys neo
+	    ;; ungoogled-chromium  ;a browser, a user package, for now
+	    %base-packages))
+
+ ;; Use the "desktop" services, which include the X11
+ ;; log-in service, networking with NetworkManager, and more.
+ (services
+  (cons*
+   (service gnome-desktop-service-type)
+   (service xfce-desktop-service-type)
+   ;;	    (spice-vdagent-service))
+   (service openssh-service-type
+	    (openssh-configuration
+	     (port-number 2223)
+	     (x11-forwarding? #t)
+	     (authorized-keys
+	      `(("gunter" ,(local-file "gunter.pub"))))
+	     (log-level 'debug)
+	     (%auto-start? #f)))
+   (service slim-service-type
+	    (slim-configuration
+	     (xorg-configuration
+	      (xorg-configuration
+	       (keyboard-layout keyboard-layout)))))
+   (remove (lambda (a)
+	     (eq? gdm-service-type (service-kind a)))
+;;	   (modify-services %desktop-services
+;;			    (login-service-type config =>
+;;						(login-configuration
+;;						 (inherit config)
+;;						 (motd vm-image-motd)))))
+	   %desktop-services
+   ;; %base-services
+   )))
+ 
+      ;;; XXX:todo (console-keymap-services "uk" "de-latin1"))))
+ 
+ ;; Allow resolution of '.local' host names with mDNS.
+ (name-service-switch %mdns-host-lookup-nss))
