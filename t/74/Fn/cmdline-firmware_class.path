@@ -1,0 +1,5 @@
+cmdline-firmware_class.path () 
+{ 
+    local D="PATH for the firmware_class.path parameter";
+    echo "firmware_class.path=$( linux-firmware-in-store )"
+}

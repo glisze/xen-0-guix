@@ -1,11 +1,11 @@
 ;; 20211009 (c) Gunter Liszewski -*- mode: schem; -*-
 ;; (S2: linux-for-ak3v, linux-firmware-for-ak3v) 
 
-(use-modules (gnu) (guix) (guix gexp) (gnu system nss)
+(use-modules (gnu) (guix) (gnu system nss)
 	     (gnu system keyboard)(srfi srfi-1))
 (use-service-modules desktop xorg virtualization ssh)
 (use-package-modules certs gnome
-		     xen-0-linux busybox
+		     xen-0-linux xen-0-busybox
 		     version-control ssh ed
                      gnupg
 		     emacs emacs-xyz ratpoison suckless wm
@@ -21,46 +21,23 @@
 	   (package-name (operating-system-kernel this-operating-system)) " "
 	   (package-version (operating-system-kernel this-operating-system)))))
   (kernel linux-for-ak3v)
-  ;; "modprobe.blacklist=iwlwifi"
-  (kernel-arguments (append (list "iommu_intel=on"
+  (kernel-arguments (append (list "modprobe.blacklist=iwlwifi"
+				  "iommu_intel=on"
 				  "vfio.ids=8086:095a,10ec:8168")
 			    %default-kernel-arguments))
-  (firmware `(,linux-firmware-for-ak3v))
   #;(initrd-modules (append (list "mmc_block" "sdhci_pci")
-  %base-initrd-modules))
-  (initrd-modules
-    (list ;; "mmc_block" "sdhci_pci"
-	  "ahci" "usb-storage" "uas" ;; "usbhid"
-	  ;; "hid-generic"
-	  "hid-apple"
-	  "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
-	  "pata_acpi" "pata_atiixp" "isci"
-	  "i915" ;; "r8169"
-	  "iwlwifi"
-	  ))
-  (initrd (lambda (a . b)
-	    (apply
-	     raw-initrd a
-	     #:linux-modules
-	     (list ;; "mmc_block" "sdhci_pci"
-		   "ahci" "usb-storage" "uas" ;; "usbhid"
-		   ;; "hid-generic"
-		   "hid-apple"
-		   "dm-crypt" "xts" "serpent_generic" "wp512" "nls_iso8859-1"
-		   "pata_acpi" "pata_atiixp" "isci"
-		   "i915" ;;"r8169"
-		   "iwlwifi"
-		   )
-	     ;; virtio_pci virtio_balloon virtio_blk virtio_net
-	     ;; virtio_console virtio-rng
-	     #:helper-packages (list
-				busybox
-				linux-firmware-for-ak3v
-				lvm2-static
-				btrfs-progs/static
-				loadkeys-static)
-	     #:qemu-networking? #f
-	     b)))
+			  %base-initrd-modules))
+  (initrd (lambda (a . b) (apply
+			   raw-initrd a
+			   #:linux-modules (append (list "mmc_block" "sdhci_pci")
+						   %base-initrd-modules)
+			   #:helper-packages (list
+					      xen-0-busybox
+					      lvm2-static
+					      btrfs-progs/static
+					      loadkeys-static)
+			   #:qemu-networking? #f
+			   b)))
 ;;;  (bootloader (bootloader-configuration
 ;;;                (bootloader grub-efi-bootloader)
 ;;;                (target "/boot/efi")
@@ -176,16 +153,7 @@
 192.168.43.6  ipad
 192.168.43.3  pixi-4
 185.157.233.143 m2"))
-#;(use-modules (guix gexp)(gnu packages xen-0-linux)(gnu packages busybox))
-(let ((this-system-tbc "to-be-confirmed/"))
-   (mixed-text-file
-        "grub-test-t72.cfg"
-        "linux "   linux-for-ak3v "bzImage "
-        "rdinit="  busybox "bin/sh "
-        "--root=" (this-system-tbc root) " "
-        "--system=" (this-system-tbc) " "
-        "--load=" (this-system-tbc) "boot "
-        "quiet" "\n"))
+		
   ;; System-wide packages
   (packages (append (list
                      ratpoison i3-wm i3status dmenu
