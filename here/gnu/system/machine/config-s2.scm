@@ -1,10 +1,10 @@
-;; 20211009 (c) Gunter Liszewski -*- mode: schem; -*-
+;; 20211014 (c) Gunter Liszewski -*- mode: schem; -*-
 ;; (S2: linux-for-ak3v, linux-firmware-for-ak3v) 
 
 (use-modules (gnu) (guix) (guix gexp) (gnu system nss)
 	     (gnu system keyboard)(srfi srfi-1))
 (use-service-modules desktop xorg virtualization ssh)
-(use-package-modules certs gnome
+(use-package-modules certs gnome audio
 		     xen-0-linux busybox
 		     version-control ssh ed
                      gnupg
@@ -162,7 +162,7 @@
                 (password (crypt "password" "$6$abc"))
                 (group "users")
                 (supplementary-groups '("wheel" "netdev"
-                                        "audio" "video")))
+                                        "audio" "video" "lp")))
                %base-user-accounts))
 
   (hosts-file (plain-file "hosts" "
@@ -178,16 +178,17 @@
 192.168.43.6  ipad
 192.168.43.3  pixi-4
 185.157.233.143 m2"))
-#;(use-modules (guix gexp)(gnu packages xen-0-linux)(gnu packages busybox))
-#;(let ((this-system-tbc "to-be-confirmed/"))
-   (mixed-text-file
-        "grub-test-t72.cfg"
-        "linux "   linux-for-ak3v "bzImage "
-        "rdinit="  busybox "bin/sh "
-        "--root=" (this-system-tbc root) " "
-        "--system=" (this-system-tbc) " "
-        "--load=" (this-system-tbc) "boot "
-        "quiet" "\n"))
+  #;(use-modules (guix gexp)(gnu packages xen-0-linux)(gnu packages busybox))
+  ;; this does not belong here, but is kept as a note for to be done elsewhere
+  #;(let ((this-system-tbc "to-be-confirmed/"))
+    (mixed-text-file
+     "grub-test-t72.cfg"
+     "linux "   linux-for-ak3v "bzImage "
+     "rdinit="  busybox "bin/sh "
+     "--root=" (this-system-tbc root) " "
+     "--system=" (this-system-tbc) " "
+     "--load=" (this-system-tbc) "boot "
+     "quiet" "\n"))
   ;; System-wide packages
   (packages (append (list
                      ratpoison i3-wm i3status dmenu
@@ -198,6 +199,9 @@
                      ;; for user mounts
                      ;; gvfs
 		     alsa-utils
+		     ;; Bluetooth things
+		     gnome-bluetooth bluez-alsa bluez
+		     ;; connectivity and such like
 		     git openssh-sans-x ed
                      gnupg pinentry-tty
 		     qemu)
@@ -210,6 +214,7 @@
   (services (append
 	     (list (service gnome-desktop-service-type)
                    (service xfce-desktop-service-type)
+		   (service bluetooth-service-type)
 		   (set-xorg-configuration
 		    (xorg-configuration
 		     (keyboard-layout keyboard-layout)))
