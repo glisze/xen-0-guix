@@ -1,0 +1,4 @@
+d-is () 
+{ 
+   echo /gnu/store/lw3701xbpm4fam5nydw68a8l0yx5f4ix-system
+}
