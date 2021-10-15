@@ -1,6 +1,6 @@
 ;; 20211015 (c) Gunter Liszewski -*- mode: scheme; -*-
 ;; (S2: linux-for-ak3v, linux-firmware-for-ak3v) 
-;; (linux-for-ak3v-defconfig)
+;; (linux-for-ak3v-config)
 
 (use-modules (gnu) (guix) (guix gexp) (gnu system nss)
 	     (gnu system keyboard)(srfi srfi-1))
@@ -21,7 +21,7 @@
 	   "GNU Guix: S2 ak3v: with "
 	   (package-name (operating-system-kernel this-operating-system)) " "
 	   (package-version (operating-system-kernel this-operating-system)))))
-  (kernel linux-for-ak3v-defconfig)
+  (kernel linux-for-ak3v)
   ;; "modprobe.blacklist=iwlwifi"
   (kernel-arguments (append (list "iommu_intel=on"
 				  "vfio.ids=8086:095a,10ec:8168")
