@@ -1,4 +1,4 @@
 d-is () 
 { 
-    echo /gnu/store/8p0psfqvp3np20yjfsc1qssacxhkfmx8-system
+   echo /gnu/store/lw3701xbpm4fam5nydw68a8l0yx5f4ix-system
 }
