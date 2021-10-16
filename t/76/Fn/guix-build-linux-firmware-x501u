@@ -1,0 +1,5 @@
+guix-build-linux-firmware-x501u () 
+{ 
+    local D="Build to keep";
+    guix build --root=${1:-i/linux-firmware-x501u.root} --load-path=here linux-firmware-x501u
+}

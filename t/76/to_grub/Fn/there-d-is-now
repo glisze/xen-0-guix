@@ -1,0 +1,5 @@
+there-d-is-now () 
+{ 
+    local D="d-is > Fn/d-is";
+    sed d-is -e s,@D@,"${1:-$d}",
+}

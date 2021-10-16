@@ -1,0 +1,10 @@
+grub-for () 
+{ 
+    local D="given a GNU Guix system, apply this grub template";
+    ( d=${1:-$( d-is )};
+    a=${2:-$( readlink -f $d/kernel/bzImage )};
+    b=${3:-$( readlink -f $d/initrd )};
+    c=${4:-$( readlink -f $d/boot )};
+    e=${5:-$( gunzip -c $b | cpio -t | grep 'busybox.*bin\/sh$' | sed - -e 's,^.,,' )};
+    sed ${GRUB_IN:-grub.cfg.in} -e s,@LINUX@,"$a",g -e s,@INITRD@,"$b", -e s,@BOOT@,"$c", -e s,@SYSTEM@,"$d", -e s,@RDINIT@,"$e", )
+}
