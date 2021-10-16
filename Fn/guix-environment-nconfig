@@ -1,0 +1,5 @@
+guix-environment-nconfig () 
+{ 
+    local D="For 'make nconfig', set a GNU Guix environment";
+    guix environment linux-libre --ad-hoc cpio python ncurses pkg-config $@
+}
