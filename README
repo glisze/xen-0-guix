@@ -4,7 +4,7 @@
  
  This is for x86_64.  It requires familiarity with GNU Guix, and virtualisation.
 
-* What have we here
+** What have we here
  Here, this is the list of packages for GNU Guix that are at an early stage and
 that could be looked at like this:
 : guix environment --load-path=./here --ad-hoc xen-0-tools
@@ -38,3 +38,6 @@ Here is a shell function that may start the necessary daemons.
 :    sudo $a/etc/init.d/xencommons ${1:-start}
 : }
 
+
+** A new kernel for a specific machine
+   [[t/76/README]]
