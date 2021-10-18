@@ -40,7 +40,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.15-rc5"))
+  (let* ((version "v5.15-rc6"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -53,7 +53,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0b7ym072s318r70006c7z052y9jiqv5m1mf4ksljiqqw0xgxl3r0"))))
+		"1nkizf1yzc7g8iv2fy285qgq0lmbn5sfxx96ll9nw64nk89dd6c5"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
