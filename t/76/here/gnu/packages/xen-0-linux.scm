@@ -150,10 +150,10 @@
 		      (begin
 			(copy-file config ".config")
 			(chmod ".config" #o666)
-			(invoke "make" "olddefconfig")
 			(substitute* ".config"
 				     (("/lib/firmware")
-				      firmware))))
+				      firmware))
+			(invoke "make" "olddefconfig")))
 		  #t)))
 
 	    (replace 'install
