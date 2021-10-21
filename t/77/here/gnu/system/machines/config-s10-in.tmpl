@@ -1,4 +1,4 @@
-;; 20210820 (c) Gunter Liszewski -- (details for a new machine: this-04, or S10)
+;; 20210820 (c) Gunter Liszewski -- (details for a new machine: this-04, or S10) -*- mode: scheme; -*-
 
 ;; "desktop" setup with GNOME and Xfce 
 
@@ -28,7 +28,7 @@
 			  %base-initrd-modules))
   
   (file-systems (append
-                 (list (file-system
+                 (list o(file-system
                          (device (file-system-label "S10"))
                          (mount-point "/")
                          (type "btrfs"))

@@ -1,0 +1,5 @@
+guix-environment-git-grub-hybrid-efibootmgr () 
+{ 
+    local D="to work with them boots, here";
+    guix environment --ad-hoc git openssh-sans-x emacs info-reader man-db grub-hybrid efibootmgr
+}

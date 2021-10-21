@@ -1,0 +1,5 @@
+guix-system-build-S10 () 
+{ 
+    local D="guix system build (S10)";
+    d=$( guix system build --load-path=here --save-provenance here/gnu/system/machines/config-s10.tmpl )
+}

@@ -1,0 +1,5 @@
+install_bootx64.efi () 
+{ 
+    local D="install BOOTX64.EFi";
+    cp ${1:-BOOTX64.EFI} /boot/efi/EFI/GNU/${2:-bootx64.efi}
+}
