@@ -1,0 +1,5 @@
+adjust-env-paths () 
+{ 
+    local D="adjust PATHs for kbuild";
+    sed environment-variables -e s,'"/gnu/store/.*-checkout/include:,",'${1:-p -n}
+}

@@ -1,0 +1,49 @@
+# 20211013 (c) Gunter Liszewski -- grub-xxx.cfg with linux-for-ak3v
+# made into a template
+
+# Set 'root' to the partition that contains /gnu/store.
+search --file --set /@/0/gnu/store/7j7cr4gc3yizigpbihljjkjpxyj0zwl8-grub-image.png
+
+if loadfont unicode; then
+  set gfxmode=auto
+  insmod all_video
+  insmod gfxterm
+fi
+
+terminal_output gfxterm
+
+
+insmod png
+if background_image /@/0/gnu/store/7j7cr4gc3yizigpbihljjkjpxyj0zwl8-grub-image.png; then
+  set color_normal=light-gray/black
+  set color_highlight=yellow/black
+else
+  set menu_color_normal=cyan/blue
+  set menu_color_highlight=white/blue
+fi
+# Localization configuration.
+# search --file --set /@/0/gnu/store/28cx8rhl2b87z37iy3xlbdcyi65nb2dp-grub-locales/en@quot.mo
+set locale_dir=/@/0/gnu/store/28cx8rhl2b87z37iy3xlbdcyi65nb2dp-grub-locales
+set lang=en_GB
+insmod keylayouts
+keymap /@/0/gnu/store/vy8j47w984f204kylaag31vqasxbf4kj-grub-keymap.gb
+
+set default=1
+set timeout=3
+menuentry "Gnu Guix: S2: linuc-for-ak3v@5.15-rc5 (rdinit,experimental)" {
+  search --file --set /@/0@LINUX@
+  linux /@/0@LINUX@ rdinit=@RDINIT@ --root=/dev/mapper/HyperVG11-S2 --system=@SYSTEM@ --load=@BOOT@ iommu_intel=on vfio.ids=8086:095a,10ec:8168 quiet
+  initrd /@/0@INITRD@
+}
+
+menuentry "Gnu Guix: S2: linuc-for-ak3v@5.15-rc5 (experimental)" {
+  search --file --set /@/0@LINUX@
+  linux /@/0@LINUX@ --root=/dev/mapper/HyperVG11-S2 --system=@SYSTEM@ --load=@BOOT@ iommu_intel=on vfio.ids=8086:095a,10ec:8168 quiet
+  initrd /@/0@INITRD@
+}
+
+if [ "${grub_platform}" == efi ]; then
+  menuentry "Firmware setup" {
+    fwsetup
+  }
+fi
