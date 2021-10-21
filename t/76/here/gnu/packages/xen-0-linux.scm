@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v-defconfig (20211015)
+;;;  guix build --load-path=here linux-for-ak3v (20211021)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -122,7 +122,7 @@
 
 (define-public linux-for-ak3v
   (let* ((machine "ak3v")
-	 (version "v5.15-rc5"))
+	 (version "v5.15-rc6"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-ak3v")
@@ -142,14 +142,20 @@
 				     ":")))
 			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
 		(let ((build  (assoc-ref %standard-phases 'build))
-		      (config (assoc-ref inputs "Kconfig")))
+		      (config (assoc-ref inputs "Kconfig"))
+		      (firmware (assoc-ref inputs "firmware-for-ak3v")))
 		  (invoke "make" "mrproper")
+		  ;; s,/lib/frmware,firmware,, (or so) XXX:20211021,gl
 		  (if config
 		      (begin
 			(copy-file config ".config")
 			(chmod ".config" #o666)
-			(invoke "make" "olddefconfig")))
+			(invoke "make" "olddefconfig")
+			(substitute* ".config"
+				     (("/lib/firmware")
+				      firmware))))
 		  #t)))
+
 	    (replace 'install
 	      (lambda* (#:key inputs native-inputs outputs #:allow-other-keys)
 		(let* ((out    (assoc-ref outputs "out"))
@@ -180,7 +186,8 @@
 	,@(package-native-inputs linux-libre)))
      (inputs
       `(("Kconfig" ,(local-file "ak3v.5.15-rc5.config"))
-	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc5.config")
+	#;,(search-auxiliary-file "linux-0/ak3v.5.15-rc5.config")
+	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
