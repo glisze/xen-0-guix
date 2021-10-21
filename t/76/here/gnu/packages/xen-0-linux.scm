@@ -185,8 +185,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15-rc5.config"))
-	#;,(search-auxiliary-file "linux-0/ak3v.5.15-rc5.config")
+      `(("Kconfig" ,(local-file "ak3v.5.15-rc6.config"))
+	#;,(search-auxiliary-file "linux-0/ak3v.5.15-rc6.config")
 	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
