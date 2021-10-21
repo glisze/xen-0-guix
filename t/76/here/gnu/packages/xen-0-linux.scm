@@ -152,7 +152,7 @@
 			(chmod ".config" #o666)
 			(substitute* ".config"
 				     (("/lib/firmware")
-				      firmware))
+				      (string-append firmware "/lib/firmware")))
 			(invoke "make" "olddefconfig")))
 		  #t)))
 
