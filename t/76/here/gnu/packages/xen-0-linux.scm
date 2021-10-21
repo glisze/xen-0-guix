@@ -143,7 +143,7 @@
 			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
 		(let ((build  (assoc-ref %standard-phases 'build))
 		      (config (assoc-ref inputs "Kconfig"))
-		      (firmware (assoc-ref inputs "firmware-for-ak3v")))
+		      (firmware (assoc-ref inputs "linux-firmware-for-ak3v")))
 		  (invoke "make" "mrproper")
 		  ;; s,/lib/frmware,firmware,, (or so) XXX:20211021,gl
 		  (if config
