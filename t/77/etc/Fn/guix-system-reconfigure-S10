@@ -1,5 +1,5 @@
 guix-system-reconfigure-S10 () 
 { 
     local D="Reconfigure this S10 machine, according to /etc/config.scm";
-    guix system reconfigure --save-provenance --no-bootloader /etc/config.scm
+    d=$( sudo -i guix system reconfigure --save-provenance --no-bootloader /etc/config.scm )
 }
