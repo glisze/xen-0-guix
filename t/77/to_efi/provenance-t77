@@ -1,0 +1,1 @@
+(provenance (version 0) (channels (channel (name guix) (url "file:///home/source-1/GNU/guix") (branch "channel-S2-root") (commit "740cbbc401459f1d1ebdaee69d1d444b94ec7484"))) (configuration-file "/gnu/store/8zki9xpf0mb2in0v6mn0lgkkyw0x919g-configuration.scm"))
