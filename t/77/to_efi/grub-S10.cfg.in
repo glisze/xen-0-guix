@@ -1,7 +1,7 @@
+# 20211022 (c)gl -- new system: S10, t/77
 # This file was generated from your Guix configuration.  Any changes
 # will be lost upon reconfiguration.
 
-# 20211022 (c)gl -- new system: S10
 set b=/@/0
 
 # Set 'root' to the partition that contains /gnu/store.
@@ -14,7 +14,7 @@ if loadfont unicode; then
 fi
 terminal_output gfxterm
 insmod png
-if background_image $b/gnu/store/05cwibw4fp22cdn9ha13q5syancw7p87-grub-image.png; then
+if background_image /@/0/gnu/store/7j7cr4gc3yizigpbihljjkjpxyj0zwl8-grub-image.png; then
   set color_normal=light-gray/black
   set color_highlight=yellow/black
 else
@@ -23,23 +23,21 @@ else
 fi
 # Localization configuration.
 # search --file --set /gnu/store/rrgn72h64a213g9zgjnmyimnm19zakbs-grub-locales/en@quot.mo
-set locale_dir=$b/gnu/store/rrgn72h64a213g9zgjnmyimnm19zakbs-grub-locales
+set locale_dir=/@/0/gnu/store/28cx8rhl2b87z37iy3xlbdcyi65nb2dp-grub-locales
 set lang=en_GB
 insmod keylayouts
-keymap $b/gnu/store/32ci6qnlb2ihg1m2nbjkdb2rjrvyxxdv-grub-keymap.gb
+keymap /@/0/gnu/store/vy8j47w984f204kylaag31vqasxbf4kj-grub-keymap.gb
 
-set default=0
-set timeout=5
-
-menuentry "S2: linux-for-ak3v 5.15.0-rc6 (configfile)" {
+set default=1
+set timeout=3
+menuentry "S2: linux-for-ak3v (configfile)" {
   insmod lvm
   configfile (lvm/HyperVG11-S2)$b/boot/grub/grub.cfg
 }
-
-menuentry "S10: linux-for-ak3v 5.15.0-rc6 (t77,configfile)" {
-  configfile $b/boot/grub/efi/grub-t77.cfg
+menuentry "S10: linux-for-ak3v (t77,configfile)" {
+  search --fs-uuid --set E4F1-45BB
+  configfile /grub/grub-t77.cfg
 }
-
 menuentry "GNU with Linux-Libre 5.13.12 (IOMMU)" {
   search --label --set S10
   linux $b/gnu/store/hvmyb8maz32dy6ra5g68gr4wd08pzq3r-linux-libre-5.13.12/bzImage --root=S10 --system=/gnu/store/ij04p065cwc9yngr4lps3iqdx76bz5fi-system --load=/gnu/store/ij04p065cwc9yngr4lps3iqdx76bz5fi-system/boot modprobe.blacklist=usbmouse,usbkbd,rt2800usb,rt2x00usb intel_iommu=on vfio_pci.ids=8086:095a,10ec:8168 quiet
