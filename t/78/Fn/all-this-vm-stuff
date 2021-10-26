@@ -1,0 +1,15 @@
+all-this-vm-stuff () 
+{ 
+    openvt -f -c23 -- dmesg -w;
+    chmod g+r /dev/tty2{0,1,2} /dev/tty{8,9,10} /dev/tty1{3,4,5};
+    vgchange -ay HyperVG07 3> /dev/null 2> /dev/null;
+    mount /home/source-6;
+    mount /home/repo-6;
+    test -d $LINUX_MODULE_DIRECTORY/$( uname -r )/ || export LINUX_MODULE_DIRECTORY=/lib/modules;
+    find $LINUX_MODULE_DIRECTORY/$( uname -r )/ -name dm-snapshot && modprobe dm-snapshot;
+    vgchange -ay;
+    modprobe radeon;
+    seq 1 6 | xargs -i herd restart console-font-tty{};
+    herd stop xorg-server;
+    herd start xorg-server
+}
