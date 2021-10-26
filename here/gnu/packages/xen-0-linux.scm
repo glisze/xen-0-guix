@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v-defconfig (20211015)
+;;;  guix build --load-path=here linux-for-ak3v (20211021)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -40,7 +40,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.15-rc5"))
+  (let* ((version "v5.15-rc7"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -53,7 +53,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0b7ym072s318r70006c7z052y9jiqv5m1mf4ksljiqqw0xgxl3r0"))))
+		"03k667drhmvzf7a7cp653ml7l3d2sbgmslyr7qdzr7v480jgyank"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -61,7 +61,7 @@
 
 (define-public linux-for-x501u
   (let* ((machine "x501u")
-	 (version "v5.15-rc5"))
+	 (version "v5.15-rc7"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-x501u")
@@ -122,7 +122,7 @@
 
 (define-public linux-for-ak3v
   (let* ((machine "ak3v")
-	 (version "v5.15-rc5"))
+	 (version "v5.15-rc7"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-ak3v")
@@ -142,14 +142,20 @@
 				     ":")))
 			  '("CPATH" "CPLUS_INCLUDE_PATH" "C_INCLUDE_PATH"))
 		(let ((build  (assoc-ref %standard-phases 'build))
-		      (config (assoc-ref inputs "Kconfig")))
+		      (config (assoc-ref inputs "Kconfig"))
+		      (firmware (assoc-ref inputs "linux-firmware-for-ak3v")))
 		  (invoke "make" "mrproper")
+		  ;; s,/lib/frmware,firmware,, (or so) XXX:20211021,gl
 		  (if config
 		      (begin
 			(copy-file config ".config")
 			(chmod ".config" #o666)
+			(substitute* ".config"
+				     (("/lib/firmware")
+				      (string-append firmware "/lib/firmware")))
 			(invoke "make" "olddefconfig")))
 		  #t)))
+
 	    (replace 'install
 	      (lambda* (#:key inputs native-inputs outputs #:allow-other-keys)
 		(let* ((out    (assoc-ref outputs "out"))
@@ -179,15 +185,16 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15-rc5.config"))
-	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc5.config")
+      `(("Kconfig" ,(local-file "ak3v.5.15-rc7.config"))
+	#;,(search-auxiliary-file "linux-0/ak3v.5.15-rc7.config")
+	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
 
 (define-public linux-for-ak3v-defconfig
   (let* ((machine "ak3v")
-	 (version "v5.15-rc5"))
+	 (version "v5.15-rc7"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-ak3v-defconfig")
@@ -244,8 +251,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15-rc5.defconfig"))
-	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc5.defconfig")
+      `(("Kconfig" ,(local-file "ak3v.5.15-rc7.defconfig"))
+	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc7.defconfig")
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
