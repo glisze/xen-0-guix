@@ -111,16 +111,19 @@ _ ()
     function c () 
     { 
         local DD="git commit: git commit -s -S -m '$sprint_topic: $*'";
+        set-tty;
         git commit -s -S -m "$sprint_topic: $*"
     };
     function c_ () 
     { 
         local DD="git: amend this commit, with this here";
+        set-tty;
         git commit -s -S --amend -m "$sprint_topic: $*"
     };
     function c__ () 
     { 
         local DD="git: amend this commit, without a new message";
+        set-tty;
         EDITOR=echo git commit -s -S --amend
     };
     local a="echo Usage: [ export DO=' '\; ] _ [ <n> | <command> ] ($D)";
