@@ -1,0 +1,5 @@
+merge-this () 
+{ 
+    local D="merge a commit (to add our signature)";
+    git merge -S --log --commit --allow-unrelated-histories -X subtree=here ${1:-b82cce} -m "merge this: $( git log --oneline -1 ${1:-b82cce})"
+}

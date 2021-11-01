@@ -1,0 +1,13 @@
+reverse-list () 
+{ 
+    local D="reverse the order of the given list";
+    ( ai=0;
+    declare -a a;
+    for b in ${@:-one two three};
+    do
+        a[$((ai++))]="$b";
+    done;
+    while test $ai -gt 0; do
+        echo ${a[$((--ai))]};
+    done )
+}

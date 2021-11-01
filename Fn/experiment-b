@@ -1,0 +1,5 @@
+experiment-b () 
+{ 
+    local D="B: apply experiment-a to a list of commits, here";
+    experiment-a $( git rev-list b82cce..master )
+}

@@ -1,0 +1,5 @@
+this-branch () 
+{ 
+    local D="git branch <*>";
+    git branch | sed - -e 's,* *,,p' -n
+}
