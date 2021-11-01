@@ -1,0 +1,4 @@
+mount-boot-efi () 
+{ 
+    mount UUID=E4F1-45BB /boot/efi
+}

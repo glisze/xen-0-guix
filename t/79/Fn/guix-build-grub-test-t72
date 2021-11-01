@@ -1,0 +1,5 @@
+guix-build-grub-test-t72 () 
+{ 
+    local D="grub-test-t72.scm to be in store";
+    guix build --load-path=here --file=there/gexpressions/grub-test-t72.scm
+}

@@ -1,0 +1,99 @@
+# This file was generated from your Guix configuration.  Any changes
+# will be lost upon reconfiguration.
+
+# 20210927 (c)gl -- new system: S2
+set b=/@/0
+
+# Set 'root' to the partition that contains /gnu/store.
+search --label --set S10
+
+if loadfont unicode; then
+  set gfxmode=auto
+  insmod all_video
+  insmod gfxterm
+fi
+terminal_output gfxterm
+insmod png
+if background_image $b/gnu/store/05cwibw4fp22cdn9ha13q5syancw7p87-grub-image.png; then
+  set color_normal=light-gray/black
+  set color_highlight=yellow/black
+else
+  set menu_color_normal=cyan/blue
+  set menu_color_highlight=white/blue
+fi
+# Localization configuration.
+# search --file --set /gnu/store/rrgn72h64a213g9zgjnmyimnm19zakbs-grub-locales/en@quot.mo
+set locale_dir=$b/gnu/store/rrgn72h64a213g9zgjnmyimnm19zakbs-grub-locales
+set lang=en_GB
+insmod keylayouts
+keymap $b/gnu/store/32ci6qnlb2ihg1m2nbjkdb2rjrvyxxdv-grub-keymap.gb
+
+set default=0
+set timeout=5
+
+menuentry "S2 Configuration Linux 5.13.19" {
+  insmod lvm
+  configfile (lvm/HyperVG11-S2)$b/boot/grub/grub.cfg
+}
+
+menuentry "GNU with Linux-Libre 5.13.12 (IOMMU)" {
+  search --label --set S10
+  linux $b/gnu/store/hvmyb8maz32dy6ra5g68gr4wd08pzq3r-linux-libre-5.13.12/bzImage --root=S10 --system=/gnu/store/ij04p065cwc9yngr4lps3iqdx76bz5fi-system --load=/gnu/store/ij04p065cwc9yngr4lps3iqdx76bz5fi-system/boot modprobe.blacklist=usbmouse,usbkbd,rt2800usb,rt2x00usb intel_iommu=on vfio_pci.ids=8086:095a,10ec:8168 quiet
+  initrd $b/gnu/store/7cbd08czqa7z9hwpi4zvrbii5dm7sa2k-raw-initrd/initrd.cpio.gz
+}
+
+# paste: from /boot/efi/grub/grub.cfg
+menuentry "Windows 10" {
+  search --fs-uuid --set E4F1-45BB
+  insmod part_gpt
+  insmod chain
+  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+}
+
+menuentry "UEFI shell" {
+  search --fs-uuid --set E4F1-45BB
+  insmod part_gpt
+  insmod chain
+  chainloader /EFI/Tools/shellx64.efi
+}
+
+menuentry "GNU with Linux-Libre 5.9.2 (Native or Hyper-V)" {
+  search --fs-uuid --set 7062-7665
+  insmod part_gpt
+  insmod chain
+  chainloader /EFI/Guix/S11x64.efi
+}
+
+menuentry "Nixos with GNU/Linux 5.4.74" {
+  search --fs-uuid --set 7062-7665
+  insmod part_gpt
+  insmod chain
+  chainloader /EFI/Boot/BOOTX64.EFI
+}
+# end of the paste
+
+# Something different, now
+menuentry "Tiny Core 64 (202108)" {
+  search --fs-uuid --set 7062-7665
+  configfile /boot/grub.cfg
+}
+# That is Tiny
+
+submenu "GNU system, old configurations..." {
+menuentry "GNU with Linux-Libre 5.11.6 (#8, 2021-03-14 20:08)" {
+  search --label --set S10
+  linux /gnu/store/dqcq8sph0754dknlj1swlqr9n04pzmiy-linux-libre-5.11.6/bzImage --root=S10 --system=/var/guix/profiles/system-8-link --load=/var/guix/profiles/system-8-link/boot modprobe.blacklist=usbmouse,usbkbd quiet
+  initrd /gnu/store/j92mfpjafmbnn6dbhjr76x9h4d2xx0an-raw-initrd/initrd.cpio.gz
+}
+menuentry "GNU with Linux-Libre 5.9.14 (#7, 2020-12-20 22:29)" {
+  search --label --set S10
+  linux /gnu/store/zchqann3y3fbzhsg7x5y3ii19i651r07-linux-libre-5.9.14/bzImage --root=S10 --system=/var/guix/profiles/system-7-link --load=/var/guix/profiles/system-7-link/boot modprobe.blacklist=usbmouse,usbkbd quiet
+  initrd /gnu/store/v9bpd8c58zm4qcqyjwyf4y20nyxaq31r-raw-initrd/initrd.cpio.gz
+}
+}
+
+if [ "${grub_platform}" == efi ]; then
+  menuentry "Firmware setup" {
+    fwsetup
+  }
+fi

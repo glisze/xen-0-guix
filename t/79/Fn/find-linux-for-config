@@ -1,0 +1,5 @@
+find-linux-for-config () 
+{ 
+    local D="sed for the config path";
+    sed t/78/here/gnu/packages/xen-0-linux.scm -e '/\(search-auxiliary\|local-file\)/'p -n
+}

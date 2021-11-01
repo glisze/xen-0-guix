@@ -1,0 +1,5 @@
+guix-environment-boot-config () 
+{ 
+    local D="Boot configuration work environment";
+    guix environment --ad-hoc info-reader man-db grub-hybrid cpio efibootmgr $@
+}
