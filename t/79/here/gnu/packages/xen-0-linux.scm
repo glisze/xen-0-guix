@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v (20211021)
+;;;  guix build --load-path=here linux-for-ak3v (20211104)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -40,7 +40,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.15-rc7"))
+  (let* ((version "v5.15"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -60,8 +60,7 @@
      (home-page "http://kernel.org/"))))
 
 (define-public linux-for-x501u
-  (let* ((machine "x501u")
-	 (version "v5.15-rc7"))
+  (let* ((machine "x501u"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-x501u")
@@ -115,14 +114,13 @@
 			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/x501u.5.15-rc5.config")
+	 ,(search-auxiliary-file "linux-0/x501u.5.15.config") ; XXX:todo
 	,@(package-inputs linux-libre))))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
 
 (define-public linux-for-ak3v
-  (let* ((machine "ak3v")
-	 (version "v5.15-rc7"))
+  (let* ((machine "ak3v")) 
     (package
      (inherit linux-machine-base)
      (name "linux-for-ak3v")
@@ -185,16 +183,15 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15-rc7.config"))
-	#;,(search-auxiliary-file "linux-0/ak3v.5.15-rc7.config")
+      `(("Kconfig" ,(local-file "ak3v.5.15.config"))
+	#;,(search-auxiliary-file "linux-0/ak3v.5.15.config")
 	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
 
 (define-public linux-for-ak3v-defconfig
-  (let* ((machine "ak3v")
-	 (version "v5.15-rc7"))
+  (let* ((machine "ak3v"))
     (package
      (inherit linux-machine-base)
      (name "linux-for-ak3v-defconfig")
@@ -251,8 +248,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15-rc7.defconfig"))
-	 #;,(search-auxiliary-file "linux-0/ak3v.5.15-rc7.defconfig")
+      `(("Kconfig" ,(local-file "ak3v.5.15.defconfig"))
+	 #;,(search-auxiliary-file "linux-0/ak3v.5.15.defconfig")
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
