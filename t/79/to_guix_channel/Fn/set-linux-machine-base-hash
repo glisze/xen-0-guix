@@ -1,0 +1,5 @@
+set-linux-machine-base-hash () 
+{ 
+    local D="update the source sha256 in xen-0-linux";
+    sed here/gnu/packages/xen-0-linux.scm -e '/define-public linux-machine-base/,+15{/base32/,+1s,".*","'"$( this-linux-hash )"'",'"${2}"'}' ${1:--n}
+}
