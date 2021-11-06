@@ -1,0 +1,13 @@
+experiment-a () 
+{ 
+    local D="A: using Bash variable arrays";
+    ( ai=0;
+    declare -a a;
+    for b in ${@:-one two three};
+    do
+        echo -n "ai=$ai, b=$b, ";
+        a[$((ai))]="$b";
+        echo -n "\${a[\$((ai++))]}=\"\$b\",";
+        echo "is now:${a[$((ai++))]}";
+    done )
+}

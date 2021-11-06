@@ -1,0 +1,5 @@
+guix-build-grub-test-cfg () 
+{ 
+    local D="mixted-text-file example (maybe to construct a grub.cfg file";
+    local a=$( guix build --load-path=here --file=there/gexpressions/grub-test.cfg )
+}

@@ -1,0 +1,5 @@
+merge-master () 
+{ 
+    local D="merge a commit (to add our signature)";
+    git merge -S --squash --log --no-commit --allow-unrelated-histories -X subtree=here ${1:-b82cce} -m "First merge"
+}

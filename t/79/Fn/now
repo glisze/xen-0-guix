@@ -1,0 +1,5 @@
+now () 
+{ 
+    local D="whatever is, just, now, here";
+    do_this_tee ${1:-guix build --keep-failed --keep-going --load-path=here linux-for-x501u}
+}

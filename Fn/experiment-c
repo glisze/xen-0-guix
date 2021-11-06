@@ -1,0 +1,16 @@
+experiment-c () 
+{ 
+    local D="C: apply to the given list in reverse order";
+    ( ai=0;
+    declare -a a;
+    for b in ${@:-one two three};
+    do
+        a[$((ai++))]="$b";
+    done;
+    while test $ai -gt 0; do
+        c=${a[$((--ai))]};
+        echo -n "ai=$ai,";
+        echo -n "\${a[((ai))]} =$c=";
+        echo "echo =$c=|xargs -ithis example-C =this=";
+    done )
+}

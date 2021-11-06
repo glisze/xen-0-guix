@@ -1,1 +1,4 @@
-t/76/to_grub/d-is
+d-is () 
+{ 
+   echo @D@
+}

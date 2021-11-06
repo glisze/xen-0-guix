@@ -1,0 +1,5 @@
+git-log-here () 
+{ 
+    local D="git log <hash><signature><date><subject><description>";
+    git log --pretty="%h|%G?,%GS|%>(13)%ar|%<(44)%s|%d" ${*:-$( this-branch )}
+}

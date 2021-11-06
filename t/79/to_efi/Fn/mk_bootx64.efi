@@ -1,0 +1,7 @@
+mk_bootx64.efi () 
+{ 
+    ( D="Make a BOOTX64.EFI with a standalone GRUB2 program";
+    m="part_gpt part_msdos efi_gop efi_uga";
+    l="en@quot";
+    grub-mkstandalone --directory=$d --output=BOOTX64.EFI --modules="$m" --format=x86_64-efi --fonts=unicode --themes="" --locales="$l" "boot/grub/grub.cfg=/boot/efi/grub/grub.cfg" )
+}

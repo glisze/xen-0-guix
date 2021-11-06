@@ -1,0 +1,5 @@
+get-firmware-path () 
+{ 
+    local D="Get the current firmware search path";
+    cat /sys/module/firmware_class/parameters/path
+}

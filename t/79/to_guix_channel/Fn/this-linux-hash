@@ -1,0 +1,5 @@
+this-linux-hash () 
+{ 
+    local D="this lunux' hash";
+    sed this-linux -e '/hash/s,^.* \([^ ]*\)$,\1,'p -n
+}
