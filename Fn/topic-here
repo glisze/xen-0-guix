@@ -1,5 +1,5 @@
 topic-here () 
 { 
-    local D="S10: Linux: release 5.15";
+    local D="S10: Linux: release 5.15.1";
     set_sprint_topic $D
 }
