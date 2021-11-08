@@ -53,7 +53,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"0vj8xw86lw6lc7gasal7bwllnqdkvchngj5kvwj1svb33h88lp9i"))))
+		"1q6870szbnfyh91m1qx6gda53qkhm0w3rs7kbis4wifmfdyqq089"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -114,7 +114,7 @@
 			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/x501u.5.15.config") ; XXX:todo
+	 ,(search-auxiliary-file "linux-0/x501u.5.15.1.config") ; XXX:todo
 	,@(package-inputs linux-libre))))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -183,8 +183,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ; ,(local-file "ak3v.5.15.config"))
-	,(search-auxiliary-file "linux-0/ak3v.5.15.config"))
+      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.config"))
+	,(search-auxiliary-file "linux-0/ak3v.5.15.1.config"))
 	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -248,8 +248,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ; ,(local-file "ak3v.5.15.defconfig"))
-	 ,(search-auxiliary-file "linux-0/ak3v.5.15.defconfig"))
+      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.defconfig"))
+	 ,(search-auxiliary-file "linux-0/ak3v.5.15.1.defconfig"))
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
