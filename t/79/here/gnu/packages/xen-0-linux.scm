@@ -40,7 +40,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.15"))
+  (let* ((version "v5.15.1"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -53,7 +53,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"16srr1igpvv6zmx23ly6wl459sc0hh51rqkjscrizc9m88wqgv9s"))))
+		"1vhi5xg5pf32agk1dh5xq30zwhf5r327ywx817kzl1ns64n7hdaa"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -114,7 +114,7 @@
 			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/x501u.5.15.config") ; XXX:todo
+	 ,(search-auxiliary-file "linux-0/x501u.5.15.1.config") ; XXX:todo
 	,@(package-inputs linux-libre))))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -183,8 +183,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15.config"))
-	#;,(search-auxiliary-file "linux-0/ak3v.5.15.config")
+      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.config"))
+	,(search-auxiliary-file "linux-0/ak3v.5.15.1.config"))
 	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -248,8 +248,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "ak3v.5.15.defconfig"))
-	 #;,(search-auxiliary-file "linux-0/ak3v.5.15.defconfig")
+      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.defconfig"))
+	 ,(search-auxiliary-file "linux-0/ak3v.5.15.1.defconfig"))
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
