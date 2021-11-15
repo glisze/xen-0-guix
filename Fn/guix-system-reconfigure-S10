@@ -1,0 +1,5 @@
+guix-system-reconfigure-S10 () 
+{ 
+    local D="Reconfigure this S10 machine, according to /etc/config.scm";
+    d=$( guix system reconfigure --save-provenance /etc/config.scm )
+}
