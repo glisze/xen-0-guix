@@ -1,4 +1,4 @@
-;; 20211107 (c) Gunter Liszewski -*- mode: scheme; -*-
+;; 20211108 (c) Gunter Liszewski -*- mode: scheme; -*-
 ;; (S10: linux-for-ak3v, linux-firmware-for-ak3v) 
 
 (use-modules (gnu) (guix) (guix gexp) (gnu system nss)
@@ -323,9 +323,9 @@
 (service hurd-vm-service-type
 			  (hurd-vm-configuration
 			   (id 1)
-			   ;; (image "/srv/Ha-1/store/Ha-1.img")
-			   ;; (options '())
-			   (disk-size (* 5000 (expt 2 20)))
+			   (image "/srv/Ha-1/disk-image")
+			   (options '())
+			   #;(disk-size (* 5000 (expt 2 20)))
 			   (memory-size 1024))))
                  %desktop-services))
 ;; Allow resolution of '.local' host names with mDNS.
