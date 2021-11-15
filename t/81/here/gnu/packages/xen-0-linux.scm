@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v (20211104)
+;;;  guix build --load-path=here linux-for-ak3v (20211115)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -40,7 +40,7 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.15.1"))
+  (let* ((version "v5.16-rc1"))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -53,7 +53,7 @@
 	      (file-name (git-file-name name version))
 	      (sha256
 	       (base32
-		"1vhi5xg5pf32agk1dh5xq30zwhf5r327ywx817kzl1ns64n7hdaa"))))
+		"04hdijvs5xgi0kwcipzyd5ig87pa4aq6lxf9kbhfq80yhp62a3fc"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -114,7 +114,7 @@
 			  "modules_install"))))))))
      (inputs
       `(("Kconfig"
-	 ,(search-auxiliary-file "linux-0/x501u.5.15.1.config") ; XXX:todo
+	 ,(search-auxiliary-file "linux-0/x501u.5.16-rc1.config")
 	,@(package-inputs linux-libre))))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -183,8 +183,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.config"))
-	,(search-auxiliary-file "linux-0/ak3v.5.15.1.config"))
+      `(("Kconfig" ; ,(local-file "ak3v.5.16-rc1.config"))
+	,(search-auxiliary-file "linux-0/ak3v.5.16-rc1.config"))
 	("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -248,8 +248,8 @@
         ("cpio" ,cpio)
 	,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ; ,(local-file "ak3v.5.15.1.defconfig"))
-	 ,(search-auxiliary-file "linux-0/ak3v.5.15.1.defconfig"))
+      `(("Kconfig" ; ,(local-file "ak3v.5.16-rc1.defconfig"))
+	 ,(search-auxiliary-file "linux-0/ak3v.5.16-rc1.defconfig"))
 	,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
