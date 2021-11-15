@@ -1,5 +1,5 @@
-;; 20211108 (c) Gunter Liszewski -*- mode: scheme; -*-
-;; (S10: linux-for-ak3v, linux-firmware-for-ak3v) 
+;; 20211115 (c) Gunter Liszewski -*- mode: scheme; -*-
+;; (here: linux-for-ak3v, linux-firmware-for-ak3v)
 
 (use-modules (gnu) (guix) (guix gexp) (gnu system nss)
 	     (gnu system keyboard)(srfi srfi-1))
@@ -256,6 +256,7 @@
 10.128.192.50 airnine
 192.168.43.49 gw
 192.168.43.51 pi02.wireless pi02
+192.168.43.9  pi64.wireless pi64
 192.168.43.11 pixma
 192.168.43.10 ipad-03
 192.168.43.6  ipad
