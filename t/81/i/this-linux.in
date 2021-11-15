@@ -1,0 +1,3 @@
+hash:       @HASH@
+tag/branch: @TAG@
+commit:     @COMMIT@

@@ -1,0 +1,5 @@
+guix-shell-here () 
+{ 
+    local D="guix shell <linux-for-ak3v>";
+    guix shell -D linux-for-ak3v cpio python ncurses pkg-config $@
+}

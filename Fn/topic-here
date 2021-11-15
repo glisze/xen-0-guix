@@ -1,5 +1,7 @@
 topic-here () 
 { 
-    local D="S10: Linux: release 5.15.1";
+    local D0="being self-modifying, here; mind your step!";
+    test -n "$*" && sed Fn/topic-here -e '/ D[=]/s/".*"/"'"$*"'"/' -i && . Fn/topic-here && declare -f topic-here > Fn/topic-here && topic-here;
+    local D="here: Linux 5.16-rc1";
     set_sprint_topic $D
 }
