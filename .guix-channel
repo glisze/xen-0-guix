@@ -12,10 +12,10 @@
    (url "file:///home/source-b/here/guix-0-here")
    (branch "guix-master")
    (introduction
-    (make-channel-introduction
-     "188e3e2e6878346b0bdc8b46084f458abe86826c"
-     (openpgp-fingerprint
-      "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199"))))))
+    (channel-introduction
+     (version 0)
+     (commit "188e3e2e6878346b0bdc8b46084f458abe86826c")
+     (signer "1EFB09091F17D28CCBF9B13A53D457B2D636EE82"))))))
 
 
 
