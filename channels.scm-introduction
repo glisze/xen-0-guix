@@ -17,6 +17,6 @@
   (branch "channel-0-here")
   (introduction				       
    (make-channel-introduction
-    "bf7f8137d3febd62da8d7fffd217485f48ed7593"
+    "3ccdfed9f6524868391446703a61e35117f9a8b5"
     (openpgp-fingerprint
      "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199")))))
