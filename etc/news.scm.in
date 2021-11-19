@@ -3,7 +3,6 @@
 
 (channel-news
  (version 0)
-
  (entry (commit "@COMMIT@")
         (title
          (en "Introducing a new @command{channel}: @command{channel-0-here}"))
