@@ -1,8 +1,9 @@
 ;; 20211119 (c) Gunter Liszewski -*- mode: scheme; -*-
 
 (channel
-  (version 0)
-  (keyring-reference "keyring-here")
-  (branch "channel-0-here")
-  (url "file:///home/source-b/here/channel-0-here"))
+ (version 0)
+ (news-file "etc/news.here")
+ (keyring-reference "keyring-here")
+ (branch "channel-0-here")
+ (url "file:///home/source-b/here/channel-0-here"))
 
