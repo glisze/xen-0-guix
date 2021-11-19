@@ -113,8 +113,9 @@
 			  "INSTALL_MOD_STRIP=1"
 			  "modules_install"))))))))
      (inputs
-      `(("Kconfig" ,(local-file "/tmp/aux-files/linux-0/x501u.5.16-rc1.config"))
-	,@(package-inputs linux-libre))))
+      `(("Kconfig"
+	 ,(search-auxiliary-file "linux-0/x501u.5.16-rc1.config"))
+	,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
 
