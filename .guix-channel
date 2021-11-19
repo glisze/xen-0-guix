@@ -2,7 +2,6 @@
 
 (channel
   (version 0)
-  (news-file "etc/news.scm")
   (keyring-reference "keyring-here")
   (branch "channel-0-here")
   (url "file:///home/source-b/here/channel-0-here"))
