@@ -5,38 +5,26 @@
   the commit hash.  This will allow our news to appear after a 'guix pull'
 
 ** About the Git Repository
-  We start with two Git branches.  First on this list is the official
-  GNU guix distribution channel.  The second branch on this list has
+  We start with two Git repositoris.  First on this list is a clone oof
+  the official GNU guix repositoory.  The second reposiitory on this list has
   our package definitions and configuration files.
 #+begin_src text
-  acquire-guix-master
+  guix-0-here
   channel-0-here
 #+end_src
-  We have to Git branches that deal with channel authentications.  They
-  have public keys that have been used to sign commits
+  We have two Git branches that deal with channel authentications.  They
+  hold the public keys for the commit signatures.
 #+begin_src text
-  keyring
-  keyring-here
-#+end_src
-  We have renamed the following five branches to make it clear that they
-  are no longer 'active.'  However, as they are experiments they now serve
-  as notes.  They should eventually disappear, once lessons have been
-  digested.
-#+begin_src text
-  z-acquire-xen-0-guix-master
-  z-main
-  z-main-subtree-experiment
-  z-next-subtree-here-push-to-next
-  z-xen-0-guix-master
+  guix-0-here/keyring
+  channel-0-here/keyring-here
 #+end_src
 
-
-** These channels
+** Channels
    Here it is.  The file '~/.config/guix/channels.scm' tells the GNU Guix
-   application where to find its package defnition and its program code.
+   application where to find things like package defnitions.
 
-   Again, the shell function 'set-commit' may be used to substituted the
-   actual commit.
+   This is the template that can be filled out by the 'set-commit' shell
+   function.
 #+begin_src 
 ;; 20211119 (c) gl GNU Guix Channel -*- mode: scheme; -*-
 ;; .config/guix/channels.scm
@@ -45,10 +33,10 @@
   (channel
   (name 'guix)
   (url "file:///home/source-b/here/guix-0-here")
-  (branch "acquire-guix-master"))
+  (branch "guix-master"))
  (channel
   (name 'channel-0-here)
-  (url "file:///home/source-b/here/guix-0-here")
+  (url "file:///home/source-b/here/channel-0-here")
   (branch "channel-0-here")
   (introduction				       
    (make-channel-introduction
