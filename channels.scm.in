@@ -5,10 +5,10 @@
   (channel
   (name 'guix)
   (url "file:///home/source-b/here/guix-0-here")
-  (branch "acquire-guix-master"))
+  (branch "guix-master"))
  (channel
   (name 'channel-0-here)
-  (url "file:///home/source-b/here/guix-0-here")
+  (url "file:///home/source-b/here/channel-0-here")
   (branch "channel-0-here")
   (introduction				       
    (make-channel-introduction
