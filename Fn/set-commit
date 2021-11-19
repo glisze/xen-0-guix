@@ -1,0 +1,5 @@
+set-commit () 
+{ 
+    local D="set the commit <channels.scm.in|etc/news.scm.in>";
+    sed ${1:-channels.scm.in} -e s/@COMMIT@/"$( git log -1 --pretty=%H )"/
+}

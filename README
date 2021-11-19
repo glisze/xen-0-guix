@@ -1,0 +1,58 @@
+# 20211119 (c) Gunter Liszewski -*- mode: org; -*-
+* GNU Guix Channels
+  Announcements about the packages on this channel should be made in
+  [[etc/news.scm.in]]. The shell function 'set-commit' can assist in editing
+  the commit hash.  This will allow our news to appear after a 'guix pull'
+
+** About the Git Repository
+  We start with two Git branches.  First on this list is the official
+  GNU guix distribution channel.  The second branch on this list has
+  our package definitions and configuration files.
+#+begin_src text
+  acquire-guix-master
+  channel-0-here
+#+end_src
+  We have to Git branches that deal with channel authentications.  They
+  have public keys that have been used to sign commits
+#+begin_src text
+  keyring
+  keyring-here
+#+end_src
+  We have renamed the following five branches to make it clear that they
+  are no longer 'active.'  However, as they are experiments they now serve
+  as notes.  They should eventually disappear, once lessons have been
+  digested.
+#+begin_src text
+  z-acquire-xen-0-guix-master
+  z-main
+  z-main-subtree-experiment
+  z-next-subtree-here-push-to-next
+  z-xen-0-guix-master
+#+end_src
+
+
+** These channels
+   Here it is.  The file '~/.config/guix/channels.scm' tells the GNU Guix
+   application where to find its package defnition and its program code.
+
+   Again, the shell function 'set-commit' may be used to substituted the
+   actual commit.
+#+begin_src 
+;; 20211119 (c) gl GNU Guix Channel -*- mode: scheme; -*-
+;; .config/guix/channels.scm
+
+(list
+  (channel
+  (name 'guix)
+  (url "file:///home/source-b/here/guix-0-here")
+  (branch "acquire-guix-master"))
+ (channel
+  (name 'channel-0-here)
+  (url "file:///home/source-b/here/guix-0-here")
+  (branch "channel-0-here")
+  (introduction				       
+   (make-channel-introduction
+    "@COMMIT@"
+    (openpgp-fingerprint
+     "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199")))))
+#+end_src

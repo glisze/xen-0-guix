@@ -1,0 +1,17 @@
+;; 20211119 (c) gl GNU Guix Channel -*- mode: scheme; -*-
+;; .config/guix/channels.scm
+
+(list
+  (channel
+  (name 'guix)
+  (url "file:///home/source-b/here/guix-0-here")
+  (branch "acquire-guix-master"))
+ (channel
+  (name 'channel-0-here)
+  (url "file:///home/source-b/here/guix-0-here")
+  (branch "channel-0-here")
+  (introduction				       
+   (make-channel-introduction
+    "@COMMIT@"
+    (openpgp-fingerprint
+     "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199")))))

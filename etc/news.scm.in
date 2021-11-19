@@ -1,0 +1,12 @@
+;; 20211119 (c) Gunter Liszewski -*- mode: scheme; -*-
+;; News: channel-0-here
+
+(channel-news
+ (version 0)
+
+ (entry (commit "@COMMIT@")
+        (title
+         (en "Introducing a new @command{channel}: @command{channel-0-here}"))
+        (body
+         (en "A separate channel with the packages from
+@command{xen-0-guix}."))))
