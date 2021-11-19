@@ -1,0 +1,12 @@
+;; 20211026 (c) gl GNU Guix Channel -*- mode: scheme; -*-
+;; .config/guix/channels.scm
+
+(list (channel
+       (name 'guix)
+       (url "file:///home/source-1/GNU/guix")
+       (branch "channel-S2-root")
+       (introduction				       
+	(make-channel-introduction
+	 "c4136c0e4f9d34db33ad436682a0283c449e2744"
+	 (openpgp-fingerprint
+	  "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199")))))
