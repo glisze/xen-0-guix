@@ -8,7 +8,7 @@
  (url "file:///home/source-b/here/channel-0-here")
  (dependencies
   (channel
-   (name 'guix)
+   (name guix)
    (url "file:///home/source-b/here/guix-0-here")
    (branch "guix-master")
    (introduction
