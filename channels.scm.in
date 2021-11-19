@@ -2,10 +2,15 @@
 ;; .config/guix/channels.scm
 
 (list
-  (channel
+ (channel
   (name 'guix)
   (url "file:///home/source-b/here/guix-0-here")
-  (branch "guix-master"))
+  (branch "guix-master")
+  (introduction				       
+   (make-channel-introduction
+    "@GUIX-COMMIT@"
+    (openpgp-fingerprint
+     "0F7A C0E7 D0E6 B29A 1872  C796 795D 6362 440F 6199"))))
  (channel
   (name 'channel-0-here)
   (url "file:///home/source-b/here/channel-0-here")
