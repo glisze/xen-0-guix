@@ -4,7 +4,7 @@
 (channel-news
  (version 0)
 
- (entry (commit "a2afa28f2310ca18f449f98b7cb0b22543bfad76")
+ (entry (commit "d2895d921efbaf99a34005abc5c6bc1b1b6ab8d4")
         (title
          (en "Introducing a new @command{channel}: @command{channel-0-here}"))
         (body
