@@ -40,7 +40,9 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.16-rc1"))
+  (let* ((version "v5.16-rc2")
+         (path    "aux-files/linux-0/")
+         (suffix  (string-append "." version ".config")))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -132,7 +134,8 @@
         ,@(package-native-inputs linux-libre)))
      (inputs
       `(("Kconfig"
-         ,(local-file "/tmp/aux-files/linux-0/x501u.5.16-rc1.config"))
+         ,(local-file
+           (string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -213,7 +216,9 @@
         ("cpio" ,cpio)
         ,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "/tmp/aux-files/linux-0/ak3v.5.16-rc1.config"))
+      `(("Kconfig"
+         ,(local-file 
+           (string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -265,8 +270,8 @@
               (for-each
                (lambda (a) (install-file a out))
                (find-files
-		"."
-		"^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
+                "."
+                "^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
               (unless (null? (find-files "." "\\.dtb$"))
                 (mkdir-p dtbdir)
                 (invoke "make" (string-append "INSTALL_DTBS_PATH=" dtbdir)
@@ -288,7 +293,9 @@
         ("cpio" ,cpio)
         ,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "/tmp/aux-files/linux-0/ak3v.5.16-rc1.defconfig"))
+      `(("Kconfig"
+         ,(local-file
+           (string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
