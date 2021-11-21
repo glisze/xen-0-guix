@@ -2,6 +2,6 @@ topic-here ()
 { 
     local D0="being self-modifying, here; mind your step!";
     test -n "$*" && sed Fn/topic-here -e '/ D[=]/s/".*"/"'"$*"'"/' -i && . Fn/topic-here && declare -f topic-here > Fn/topic-here && topic-here;
-    local D="channel-0-here: introduction";
+    local D="channel-0-here: update";
     set_sprint_topic $D
 }
