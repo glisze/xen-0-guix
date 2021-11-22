@@ -41,7 +41,7 @@
 
 (define linux-version "v5.16-rc2")
 (define commit  "b6abb62daa5511c4a3eaa30cbdb02544d1f10fa2")
-(define path "aux-files/linux-0/")
+(define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
 (define-public linux-machine-base
