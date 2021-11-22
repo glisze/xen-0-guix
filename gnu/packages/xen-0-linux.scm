@@ -41,7 +41,7 @@
 
 (define-public linux-machine-base
   (let* ((version "v5.16-rc2")
-	 (commit  "@COMMIT@")
+         (commit  "b6abb62daa5511c4a3eaa30cbdb02544d1f10fa2")
          (path    "aux-files/linux-0/")
          (suffix  (string-append "." version ".config")))
     (package
@@ -59,7 +59,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "@HASH@"))))
+         "1asn6rrfka1730vr3vi1r72xdsar5chwnvh31bx8dyn5ark3sj72"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
