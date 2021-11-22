@@ -39,11 +39,13 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
+(define linux-version "v5.16-rc2")
+(define commit  "b6abb62daa5511c4a3eaa30cbdb02544d1f10fa2")
+(define path "aux-files/linux-0/")
+(define suffix (string-append "." linux-version ".config"))
+
 (define-public linux-machine-base
-  (let* ((version "v5.16-rc2")
-         (commit  "b6abb62daa5511c4a3eaa30cbdb02544d1f10fa2")
-         (path    "aux-files/linux-0/")
-         (suffix  (string-append "." version ".config")))
+  (let* ((version linux-version))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
