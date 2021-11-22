@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v (20211119)
+;;;  guix build --load-path=here linux-for-ak3v (20211122)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -40,7 +40,10 @@
   #:use-module (guix download))
 
 (define-public linux-machine-base
-  (let* ((version "v5.16-rc1"))
+  (let* ((version "v5.16-rc2")
+         (commit  "b6abb62daa5511c4a3eaa30cbdb02544d1f10fa2")
+         (path    "aux-files/linux-0/")
+         (suffix  (string-append "." version ".config")))
     (package
      (inherit linux-libre)
      (name "linux-machine-base")
@@ -56,7 +59,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "04hdijvs5xgi0kwcipzyd5ig87pa4aq6lxf9kbhfq80yhp62a3fc"))))
+         "1asn6rrfka1730vr3vi1r72xdsar5chwnvh31bx8dyn5ark3sj72"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -132,7 +135,8 @@
         ,@(package-native-inputs linux-libre)))
      (inputs
       `(("Kconfig"
-         ,(local-file "/tmp/aux-files/linux-0/x501u.5.16-rc1.config"))
+         ,(local-file
+           (string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -213,7 +217,9 @@
         ("cpio" ,cpio)
         ,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "/tmp/aux-files/linux-0/ak3v.5.16-rc1.config"))
+      `(("Kconfig"
+         ,(local-file 
+           (string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -265,8 +271,8 @@
               (for-each
                (lambda (a) (install-file a out))
                (find-files
-		"."
-		"^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
+                "."
+                "^(\\.config|bzImage|zImage|Image|vmlinuz|System\\.map|Module\\.symvers)$"))
               (unless (null? (find-files "." "\\.dtb$"))
                 (mkdir-p dtbdir)
                 (invoke "make" (string-append "INSTALL_DTBS_PATH=" dtbdir)
@@ -288,7 +294,9 @@
         ("cpio" ,cpio)
         ,@(package-native-inputs linux-libre)))
      (inputs
-      `(("Kconfig" ,(local-file "/tmp/aux-files/linux-0/ak3v.5.16-rc1.defconfig"))
+      `(("Kconfig"
+         ,(local-file
+           (string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
