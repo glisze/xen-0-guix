@@ -2,17 +2,17 @@
 * GNU Guix Channels
   Announcements about the packages on this channel should be made in
   [[etc/news.scm.in]]. The shell function 'set-commit' can assist in editing
-  the commit hash.  This will allow our news to appear after a 'guix pull'
+  the commit hash.  This will allow our news to appear after a 'guix pull.'
 
 ** About the Git Repository
-  We start with two Git repositoris.  First on this list is a clone oof
-  the official GNU guix repositoory.  The second reposiitory on this list has
-  our package definitions and configuration files.
+  We start with two Git repositories.  First on this list is a clone of
+  the official GNU Guix repositoory.  The second reposiitory on this list has
+  *our* package definitions and configuration files.
 #+begin_src text
   guix-0-here
   channel-0-here
 #+end_src
-  We have two Git branches that deal with channel authentications.  They
+  We have two Git branches that deal with channel authentication.  They
   hold the public keys for the commit signatures.
 #+begin_src text
   guix-0-here/keyring
@@ -20,10 +20,10 @@
 #+end_src
 
 ** Channels
-   Here it is.  The file '~/.config/guix/channels.scm' tells the GNU Guix
-   application where to find things like package defnitions.
+   Here it is.  The file '~/.config/guix/channels.scm' tells GNU Guix
+   where to find things like package definitions.
 
-   This is the template that can be filled out by the 'set-commit' shell
+   Below is the template that can be filled out by the 'set-commit' shell
    function.
 #+begin_src 
 ;; 20211119 (c) gl GNU Guix Channel -*- mode: scheme; -*-
