@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v (20211122)
+;;;  guix build --load-path=here linux-for-ak3v (20211129)
 
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
@@ -39,8 +39,8 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
-(define linux-version "v5.16-rc2")
-(define commit  "136057256686de39cc3a07c2e39ef6bc43003ff6")
+(define linux-version "v5.16-rc3")
+(define commit  "d58071a8a76d779eedab38033ae4c821c30295a5")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
@@ -61,7 +61,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "0npb4lyvjfjpcfr48zafxlbjy1wibk08mi9v43q8wa99w2axp0r6"))))
+         "14kyz56m94nrg7hi7dk8agzgpbq6zsjyjmjgvgm9kyqd77xf80lb"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
