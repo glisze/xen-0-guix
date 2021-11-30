@@ -1,0 +1,5 @@
+20211130 (c) Gunter Liszewski -*- mode: org; -*-
+* xen-0-linux with linux-for-ak3v@5.16-rc3
+  This package module and related config files have been updated on
+  branch 'channel-0-here'.  The resulting files have been checked out
+  into this branch
