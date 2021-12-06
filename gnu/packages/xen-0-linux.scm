@@ -1,29 +1,5 @@
-;;; xen-0-linux (C) 2019 Gunter Liszewski
-;;;  guix build --load-path=here linux-for-ak3v (20211129)
-
-;;; GNU Guix --- Functional package management for GNU
-;;; Copyright © 2012, 2013, 2014, 2015, 2017, 2018 Ludovic Courtès <ludo@gnu.org>
-;;; Copyright © 2013, 2014 Andreas Enge <andreas@enge.fr>
-;;; Copyright © 2012 Nikita Karetnikov <nikita@karetnikov.org>
-;;; Copyright © 2014, 2015 Mark H Weaver <mhw@netris.org>
-;;; Copyright © 2015 Federico Beffa <beffa@fbengineering.ch>
-;;; Copyright © 2015 Taylan Ulrich Bayırlı/Kammer <taylanbayirli@gmail.com>
-;;; Copyright © 2015, 2017 Andy Wingo <wingo@igalia.com>
-;;;
-;;; This file is part of GNU Guix.
-;;;
-;;; GNU Guix is free software; you can redistribute it and/or modify it
-;;; under the terms of the GNU General Public License as published by
-;;; the Free Software Foundation; either version 3 of the License, or (at
-;;; your option) any later version.
-;;;
-;;; GNU Guix is distributed in the hope that it will be useful, but
-;;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU General Public License for more details.
-;;;
-;;; You should have received a copy of the GNU General Public License
-;;; along with GNU Guix.  If not, see <http://www.gnu.org/licenses/>.
+;;; xen-0-linux (C) 2021 Gunter Liszewski -*- mode: scheme; -*- for GNU Guix, but non-free
+;;;  guix build --load-path=here linux-for-ak3v (20211206)
 
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
@@ -39,8 +15,8 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
-(define linux-version "v5.16-rc3")
-(define commit  "d58071a8a76d779eedab38033ae4c821c30295a5")
+(define linux-version "v5.16-rc4")
+(define commit  "0fcfb00b28c0b7884635dacf38e46d60bf3d4eb1")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
@@ -61,7 +37,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "14kyz56m94nrg7hi7dk8agzgpbq6zsjyjmjgvgm9kyqd77xf80lb"))))
+         "16pzk5j9sw8jx58c9myi54k45wwdnkwh5alvdzfw8vpg298akh98"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
