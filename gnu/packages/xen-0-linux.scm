@@ -37,7 +37,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "16pzk5j9sw8jx58c9myi54k45wwdnkwh5alvdzfw8vpg298akh98"))))
+         "0grnq4610fdc8kgxzk6xkwbdnlqb3a0v2lnwk8jrg34hfllbvssy"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
