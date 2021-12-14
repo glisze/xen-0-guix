@@ -114,7 +114,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "gnu/packages/aux-files/linux-0/x501u.v5.16-rc5.config"
+	   "aux-files/linux-0/x501u.v5.16-rc5.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -198,7 +198,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "gnu/packages/aux-files/linux-0/ak3v.v5.16-rc5.config"
+	   "aux-files/linux-0/ak3v.v5.16-rc5.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
@@ -276,7 +276,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "gnu/packages/aux-files/linux-0/x86_64.defconfig"
+	   "aux-files/linux-0/x86_64.defconfig"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
