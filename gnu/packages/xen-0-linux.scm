@@ -15,8 +15,8 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
-(define linux-version "v5.16-rc4")
-(define commit  "0fcfb00b28c0b7884635dacf38e46d60bf3d4eb1")
+(define linux-version "v5.16-rc5")
+(define commit  "2585cf9dfaaddf00b069673f27bb3f8530e2039c")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
@@ -37,7 +37,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "0grnq4610fdc8kgxzk6xkwbdnlqb3a0v2lnwk8jrg34hfllbvssy"))))
+         "1s085rh7ds64w1jigy7rw6qvqks9jfj0qijkl8d8b669ivdpkxrw"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
