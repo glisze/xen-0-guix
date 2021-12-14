@@ -1,5 +1,5 @@
 ;;; xen-0-linux (C) 2021 Gunter Liszewski -*- mode: scheme; -*- for GNU Guix, but non-free
-;;;  guix build --load-path=here linux-for-ak3v (20211206)
+;;;  guix build --load-path=here linux-for-ak3v (20211214)
 
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
@@ -114,7 +114,8 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           (string-append path machine suffix)))
+	   "gnu/packages/aux-files/linux-0/x501u.v5.16-rc5.config"
+           #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
      (description "Linux with non-free things for one particular machine model."))))
@@ -196,8 +197,9 @@
         ,@(package-native-inputs linux-libre)))
      (inputs
       `(("Kconfig"
-         ,(local-file 
-           (string-append path machine suffix)))
+         ,(local-file
+	   "gnu/packages/aux-files/linux-0/ak3v.v5.16-rc5.config"
+           #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -274,7 +276,8 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           (string-append path machine suffix)))
+	   "gnu/packages/aux-files/linux-0/x86_64.defconfig"
+           #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
      (description "Linux with non-free things for one particular machine model."))))
