@@ -15,8 +15,8 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
-(define linux-version "v5.16-rc5")
-(define commit  "2585cf9dfaaddf00b069673f27bb3f8530e2039c")
+(define linux-version "v5.16-rc6")
+(define commit  "d58071a8a76d779eedab38033ae4c821c30295a5")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
@@ -37,7 +37,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "1s085rh7ds64w1jigy7rw6qvqks9jfj0qijkl8d8b669ivdpkxrw"))))
+         "1771zqg0m2h47zqwj1ldbhkb5myp15wa43yipncsbh7sdmri87jc"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -114,7 +114,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/x501u.v5.16-rc5.config"
+	   "aux-files/linux-0/x501u.v5.16-rc6.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -198,7 +198,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/ak3v.v5.16-rc5.config"
+	   "aux-files/linux-0/ak3v.v5.16-rc6.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
