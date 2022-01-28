@@ -23,7 +23,7 @@
 (define-public linux-machine-base
   (let* ((version linux-version))
     (package
-     (inherit linux-libre)
+     (inherit linux-libre-5.16)
      (name "linux-machine-base")
      (version version)
      (source
