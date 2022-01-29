@@ -15,6 +15,7 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
+(define linux-libre linux-libre-5.16)
 (define linux-version "v5.16.3")
 (define commit  "2104f927ad5e7450da588fef81f06dccbfed484e")
 (define path "gnu/packages/aux-files/linux-0/")
@@ -52,14 +53,15 @@
       (substitute-keyword-arguments
        (package-arguments linux-libre)
        ((#:phases phases '%standard-phases)
-        `(modify-phases
-          ,phases
+        #~(modify-phases
+          #$phases
           (replace
            'configure
            (lambda*
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
-            (setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+            (setenv "KBUILD_BUILD_TIMESTAMP"
+		    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
@@ -129,14 +131,15 @@
       (substitute-keyword-arguments
        (package-arguments linux-libre)
        ((#:phases phases '%standard-phases)
-        `(modify-phases
-          ,phases
+        #~(modify-phases
+          #$phases
           (replace
            'configure
            (lambda*
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
-            (setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+            (setenv "KBUILD_BUILD_TIMESTAMP"
+		    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
@@ -215,14 +218,15 @@
        (package-arguments linux-libre)
        ((#:phases
          phases '%standard-phases)
-        `(modify-phases
-          ,phases
+        #~(modify-phases
+          #$phases
           (replace
            'configure
            (lambda*
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
-            (setenv "KBUILD_BUILD_TIMESTAMP" (getenv "SOURCE_DATE_EPOCH"))
+            (setenv "KBUILD_BUILD_TIMESTAMP"
+		    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
