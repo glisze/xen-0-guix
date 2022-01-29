@@ -1,5 +1,5 @@
-;;; xen-0-linux (C) 2022 Gunter Liszewski -*- mode: scheme; -*- for GNU Guix, but non-free
-;;;  guix build --load-path=here linux-for-ak3v (20220128)
+;;; xen-0-linux (C) 20220129 Gunter Liszewski -*- mode: scheme; -*-
+;;; for GNU Guix, but non-free; linux-for-ak3v
 
 (define-module (gnu packages xen-0-linux)
   #:use-module ((guix licenses) #:prefix license:)
@@ -16,8 +16,8 @@
   #:use-module (guix download))
 
 (define linux-libre linux-libre-5.16)
-(define linux-version "v5.16.3")
-(define commit  "2104f927ad5e7450da588fef81f06dccbfed484e")
+(define linux-version "v5.17-rc1")
+(define commit  "e783362eb54cd99b2cac8b3a9aeac942e6f6ac07")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 
@@ -38,7 +38,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "0dc3h18raw8arw61y9s3p379xkj93xhf3hfjy9ak3lx6pbpgdf84"))))
+         "0zvm2pkqni3y8p89hipw9ymfhgrnnp3ipcdzkfxfn0imy0ky6dvz"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -116,7 +116,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/x501u.v5.16.3.config"
+	   "aux-files/linux-0/x501u.v5.17-rc1.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -201,7 +201,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/ak3v.v5.16.3.config"
+	   "aux-files/linux-0/ak3v.v5.17-rc1.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
