@@ -21,6 +21,7 @@
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 (define firmware-commit "eb8ea1b46893c42edbd516f971a93b4d097730ab") ;; 20220131
+(define firmware-hash "03pn3k6waf5sq51427nafxqw3vxfkcla88621mr2m4drr80ynw6n")
 
 (define-public linux-machine-base
   (let* ((version linux-version))
@@ -62,7 +63,7 @@
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
             (setenv "KBUILD_BUILD_TIMESTAMP"
-		    (getenv "SOURCE_DATE_EPOCH"))
+                    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
@@ -117,7 +118,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/x501u.v5.17-rc2.config"
+           "aux-files/linux-0/x501u.v5.17-rc2.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -140,7 +141,7 @@
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
             (setenv "KBUILD_BUILD_TIMESTAMP"
-		    (getenv "SOURCE_DATE_EPOCH"))
+                    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
@@ -202,7 +203,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/ak3v.v5.17-rc2.config"
+           "aux-files/linux-0/ak3v.v5.17-rc2.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
@@ -227,7 +228,7 @@
             (#:key inputs native-inputs target #:allow-other-keys)
             (setenv "KCONFIG_NOTIMESTAMP" "1")
             (setenv "KBUILD_BUILD_TIMESTAMP"
-		    (getenv "SOURCE_DATE_EPOCH"))
+                    (getenv "SOURCE_DATE_EPOCH"))
             (for-each
              (lambda (a)
                ;; Mung our own include/ out of our environment
@@ -281,7 +282,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-	   "aux-files/linux-0/x86_64.defconfig"
+           "aux-files/linux-0/x86_64.defconfig"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for an ak3v machine")
@@ -298,7 +299,7 @@
                   (commit version)))
             (sha256
              (base32
-              "03ycc55h7vgd4fmb7v7gl7lplf7pg7acs16aa2rramgldxqvyx7j"))))
+              firmware-hash))))
    (build-system trivial-build-system)
    (arguments
     `(#:modules
@@ -349,7 +350,7 @@ Licence: Redistributable. See LICENSE.radeon for details.
                   (commit version)))
             (sha256
              (base32
-              "1ix43qqpl5kvs6xpqrs3l5aj6vmwcaxcnv8l04mqqkyi9wamjydn"))))
+              firmware-hash))))
    (build-system trivial-build-system)
    (arguments
     `(#:modules

@@ -1,4 +1,5 @@
-hash:       1xzpz6h77wvilc16w8dpdhnxs0jkzmr4l3rqh4i6jlxicazz1dbi
-tag/branch: v5.17-rc2
-commit:     26291c54e111ff6ba87a164d85d4a4e134b7315c
-firmware:   eb8ea1b46893c42edbd516f971a93b4d097730ab
+hash:          1xzpz6h77wvilc16w8dpdhnxs0jkzmr4l3rqh4i6jlxicazz1dbi
+tag/branch:    v5.17-rc2
+commit:        26291c54e111ff6ba87a164d85d4a4e134b7315c
+firmware:      eb8ea1b46893c42edbd516f971a93b4d097730ab
+firmware-hash: 03pn3k6waf5sq51427nafxqw3vxfkcla88621mr2m4drr80ynw6n
