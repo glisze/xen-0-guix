@@ -1,4 +1,4 @@
-;;; xen-0-linux (C) 20220130 Gunter Liszewski -*- mode: scheme; -*-
+;;; xen-0-linux (C) 20220131 Gunter Liszewski -*- mode: scheme; -*-
 ;;; for GNU Guix, but non-free; linux-for-ak3v
 
 (define-module (gnu packages xen-0-linux)
@@ -20,6 +20,7 @@
 (define commit  "26291c54e111ff6ba87a164d85d4a4e134b7315c")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
+(define firmware-commit "eb8ea1b46893c42edbd516f971a93b4d097730ab") ;; 20220131
 
 (define-public linux-machine-base
   (let* ((version linux-version))
@@ -289,7 +290,7 @@
 (define-public linux-firmware-for-x501u
   (package
    (name "linux-firmware-for-x501u")
-   (version "20191022")
+   (version firmware-commit)
    (source (origin
             (method git-fetch)
             (uri (git-reference
@@ -340,7 +341,7 @@ Licence: Redistributable. See LICENSE.radeon for details.
 (define-public linux-firmware-for-ak3v
   (package
    (name "linux-firmware-for-ak3v")
-   (version "20210919")
+   (version firmware-commit)
    (source (origin
             (method git-fetch)
             (uri (git-reference
