@@ -1,4 +1,4 @@
-;;; 20191019 12:50 gl, grub-hybrid-xen.scm --- kernel = ".../pvgrub2.bin"
+;;; 20220206 gl, grub-hybrid-xen.scm --- kernel = ".../pvgrub2.bin"
 ;;;  this is a development package definition
 
 ;;; GNU Guix --- Functional package management for GNU
@@ -59,6 +59,7 @@
   #:use-module (gnu packages swig)
   #:use-module (gnu packages valgrind)
   #:use-module (gnu packages virtualization)
+  #:use-module (gnu packages serialization)  
   #:use-module (gnu packages xorg)
   #:use-module (gnu packages web)
   #:use-module (guix build-system gnu)
