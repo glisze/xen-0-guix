@@ -1,4 +1,4 @@
-;;; xen-0.scm (C) 2019 Guntoer Liszewski
+;;; 20220206 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -241,13 +241,13 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("util-linux" ,util-linux)
        ("xz" ,xz)
        ("zlib" ,zlib)
-       #;("xen-config"
-        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))
-       ("xen-config" ,(search-auxiliary-file
-                       (string-append "xen-0/"
-                                      version "-"
-                                      "x86_64" ; XXX: architecture
-                                      "." "config")))))
+       ("xen-config"
+        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
+       ;;("xen-config" ,(search-auxiliary-file
+       ;;              (string-append "xen-0/"
+       ;;                             version "-"
+       ;;                             "x86_64" ; XXX: architecture
+       ;;                             "." "config")))))
     (native-inputs
      `(("autoconf" ,autoconf)
        ("dev86" ,dev86)
@@ -506,7 +506,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                 #:libc (cross-libc "i686-linux-gnu")))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
-       ("xen-config" ,(search-auxiliary-file "xen-0/xen.config"))))
+       ("xen-config"
+        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen Virtual Machine Monitor Tools")
     (description "This package provides tools for the Xen Virtual Machine Monitor.")
@@ -897,7 +898,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                 #:libc (cross-libc "i686-linux-gnu")))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
-       ("xen-config" ,(search-auxiliary-file "xen-0/xen.config"))))
+       ("xen-config"
+        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen Virtual Machine Monitor Tools")
     (description "This package provides tools for the Xen Virtual Machine Monitor.")
@@ -1151,7 +1153,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                 #:libc (cross-libc "i686-linux-gnu")))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
-       ("xen-config" ,(search-auxiliary-file "xen-0/xen.config"))))
+       ("xen-config"
+        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen base")
     (description "This package is a base for the Xen Virtual Machine Monitor tools.
