@@ -44,7 +44,7 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix utils)
-;;; #:use-module (guix gexp) ; local-file
+  #:use-module (guix gexp) ; local-file
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1))
 
