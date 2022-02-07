@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="next-feature: 0006: packages";
+    local D="here: 5.17-rc3: t93";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1
