@@ -1,0 +1,6 @@
+git-commit-hash () 
+{ 
+    local D="git commit hash <commit>";
+    b=$( git log -1 --pretty=%H ${1:-next-xen-0-linux});
+    echo $b
+}

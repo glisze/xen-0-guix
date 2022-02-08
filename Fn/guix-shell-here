@@ -1,0 +1,5 @@
+guix-shell-here () 
+{ 
+    local D="guix shell <for linxu-for-ak3v>";
+    guix shell $@ -D xen-0-libs
+}

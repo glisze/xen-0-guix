@@ -1,0 +1,5 @@
+guix-hash-here () 
+{ 
+    local D="guix hash -xr <here>";
+    a=$( guix hash -xr . )
+}
