@@ -65,7 +65,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0bvm8q314bwwmchg0av6353c5lqr7fjvx6lf5q35k44mfpsnmbp0"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
