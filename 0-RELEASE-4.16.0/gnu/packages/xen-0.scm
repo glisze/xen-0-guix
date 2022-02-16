@@ -57,7 +57,7 @@
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "/home/source-b/xen.org/xen.git")
+		    (url "/home/source-b/xen.org/xen")
 		    (commit xen-commit)))
                     ;; (url "git://xenbits.xenproject.org/xen.git")
                     ;;(commit (string-append "RELEASE-" version))))
