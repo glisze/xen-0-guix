@@ -1,0 +1,47 @@
+guix build -K --load-path=./ xen-0-boot
+The following derivations will be built:
+   /gnu/store/g2sgcl3ic1wc06phh1n1h9ij5schhf2f-xen-0-boot-4.16.0.drv
+   /gnu/store/7682aphrxr40x917bq5fvjri36d92mry-xen-0-boot-4.16.0-checkout.drv
+building /gnu/store/7682aphrxr40x917bq5fvjri36d92mry-xen-0-boot-4.16.0-checkout.drv...
+guile: warning: failed to install locale
+environment variable `PATH' set to `/gnu/store/0c1yfbxyv877mlgychfgvmk5ha2jqh52-gzip-1.10/bin:/gnu/store/8z1q7vjxylm6l4ibsywd4h6m6jv6zqm4-tar-1.34/bin'
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /gnu/store/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout/.git/
+From git://xenbits.xenproject.org/xen
+ * branch            b0b4661fa3cba995e433b94ea569c90f65a3e5fc -> FETCH_HEAD
+Note: switching to 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at b0b4661 xen/Makefile: Set 4.16 version
+r:sha256 hash mismatch for /gnu/store/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout:
+  expected hash: 0bvm8q314bwwmchg0av6353c5lqr7fjvx6lf5q35k44mfpsnmbp0
+  actual hash:   1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c
+hash mismatch for store item '/gnu/store/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout'
+build of /gnu/store/7682aphrxr40x917bq5fvjri36d92mry-xen-0-boot-4.16.0-checkout.drv failed
+View build log at '/var/log/guix/drvs/76/82aphrxr40x917bq5fvjri36d92mry-xen-0-boot-4.16.0-checkout.drv.gz'.
+note: keeping build directory `/tmp/guix-build-xen-0-boot-4.16.0-checkout.drv-2'
+cannot build derivation `/gnu/store/g2sgcl3ic1wc06phh1n1h9ij5schhf2f-xen-0-boot-4.16.0.drv': 1 dependencies couldn't be built
+guix build: error: build of `/gnu/store/g2sgcl3ic1wc06phh1n1h9ij5schhf2f-xen-0-boot-4.16.0.drv' failed

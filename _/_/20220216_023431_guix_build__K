@@ -1,0 +1,40 @@
+guix build -K --load-path=./ xen-0-boot
+The following derivations will be built:
+   /gnu/store/64jj3fhripvd08kp0hbdivbdj532a1sq-xen-0-boot-4.16.0.drv
+   /gnu/store/fc1bbi1mg88n77gxihw707njlc31lb99-xen-0-boot-4.16.0-checkout.drv
+building /gnu/store/fc1bbi1mg88n77gxihw707njlc31lb99-xen-0-boot-4.16.0-checkout.drv...
+guile: warning: failed to install locale
+environment variable `PATH' set to `/gnu/store/0c1yfbxyv877mlgychfgvmk5ha2jqh52-gzip-1.10/bin:/gnu/store/8z1q7vjxylm6l4ibsywd4h6m6jv6zqm4-tar-1.34/bin'
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /gnu/store/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout/.git/
+/gnu/store/chfwin3a4qp1znnpsjbmydr2jbzk0d6y-bash-minimal-5.1.8/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.utf8)
+fatal: '/home/source-b/xen.org/xen' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+Failed to do a shallow fetch; retrying a full fetch...
+/gnu/store/chfwin3a4qp1znnpsjbmydr2jbzk0d6y-bash-minimal-5.1.8/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.utf8)
+fatal: '/home/source-b/xen.org/xen' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+git-fetch: '/gnu/store/4457v14ycv8cs7r2qwgr1w0n8004vfck-git-minimal-2.34.1/bin/git fetch origin' failed with exit code 128
+Trying content-addressed mirror at berlin.guix.gnu.org...
+following redirection to `https://berlin.guix.gnu.org/nar/gzip/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout'...
+Trying content-addressed mirror at berlin.guix.gnu.org...
+following redirection to `https://berlin.guix.gnu.org/nar/wsacwzwgqqz8k47sz03wjkbap33nrrn9-xen-0-boot-4.16.0-checkout'...
+Trying to download from Software Heritage...
+SWH: found revision b0b4661fa3cba995e433b94ea569c90f65a3e5fc with directory at 'https://archive.softwareheritage.org/api/1/directory/638dbb0e3dab08010c13b335aa43ae9f675e6935/'
+SWH vault: Processing...
+SWH vault: Processing...
