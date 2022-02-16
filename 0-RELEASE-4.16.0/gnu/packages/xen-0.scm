@@ -48,6 +48,8 @@
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1))
 
+(define xen-commit "b0b4661fa3cba995e433b94ea569c90f65a3e5fc")
+
 (define-public xen-0-boot
   (package
     (name "xen-0-boot")
@@ -55,9 +57,10 @@
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "file:///home/source-b/xen.org/xen")
+		    (url "/home/source-b/xen.org/xen.git")
+		    (commit xen-commit)
                     ;; (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
@@ -297,7 +300,7 @@ Use, say, with the grub bootloader:
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "file:///home/source-b/xen.org/xen")
+		    (url "/home/source-b/xen.org/xen.git")
                     ;;(url "git://xenbits.xenproject.org/xen.git")
                     (commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
@@ -664,7 +667,7 @@ server and embedded PowerPC, and S390 guests.")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "file:///home/source-b/xen.org/xen")		    
+		    (url "/home/source-b/xen.org/xen.git")		    
                     ;;(url "git://xenbits.xenproject.org/xen.git")
                     (commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
@@ -885,7 +888,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         ,(origin
            (method git-fetch)
            (uri (git-reference
-		 (url "file:///home/source-b/xen.org/mini-os")
+		 (url "/home/source-b/xen.org/mini-os.git")
                  ;;(url "http://xenbits.xen.org/git-http/mini-os.git")
                  (commit (string-append "xen-RELEASE-" version))))
            (sha256
@@ -917,7 +920,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "file:///home/source-b/xen.org/xen")		    
+		    (url "/home/source-b/xen.org/xen.git")		    
                     ;;(url "git://xenbits.xenproject.org/xen.git")
                     (commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
@@ -1140,7 +1143,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         ,(origin
            (method git-fetch)
            (uri (git-reference
-		 (url "file:///home/source-b/xen.org/mini-os")
+		 (url "/home/source-b/xen.org/mini-os.git")
                  ;;(url "http://xenbits.xen.org/git-http/mini-os.git")
                  (commit (string-append "xen-RELEASE-" version))))
            (sha256
