@@ -921,7 +921,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 (define-public xen-0-libs
   (package
     (name "xen-0-libs")
-    (version "4.13.0")
+    (version "4.16.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
