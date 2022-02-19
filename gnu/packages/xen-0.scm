@@ -1,4 +1,4 @@
-;;; 20220206 (c) Gunter Liszewski
+;;; 20220219 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -48,19 +48,24 @@
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1))
 
+(define xen-commit "b0b4661fa3cba995e433b94ea569c90f65a3e5fc")
+
 (define-public xen-0-boot
   (package
     (name "xen-0-boot")
-    (version "4.13.0")
+    (version "4.16.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -242,7 +247,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("xz" ,xz)
        ("zlib" ,zlib)
        ("xen-config"
-        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
+        ,(local-file "aux-files/xen-0/4.16.0-x86_64.config"))))
        ;;("xen-config" ,(search-auxiliary-file
        ;;              (string-append "xen-0/"
        ;;                             version "-"
@@ -287,21 +292,24 @@ Use, say, with the grub bootloader:
 @code{module2 ...-linux-libre-.../bzImage ...}
 @code{module2 ...-raw-initrd/initrd.cpio.gz}.")
     (license license:gpl2)
-    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
+    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux" "aarch64-linux"))))
 
 (define-public xen-0-docs
   (package
     (name "xen-0-docs")
-    (version "4.13.0")
+    (version "4.16.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -507,12 +515,12 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
        ("xen-config"
-        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
+        ,(local-file "aux-files/xen-0/4.16.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen Virtual Machine Monitor Tools")
     (description "This package provides tools for the Xen Virtual Machine Monitor.")
     (license license:gpl2)
-    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
+    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux" "aarch64-linux"))))
 
 (define-public xen-0-qemu
   (package
@@ -539,7 +547,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                "--enable-xen-pci-passthrough"
                                "--enable-libusb"
                                "--enable-vnc"
-                               "--enable-spice"
+                               "--disable-spice"
                                "--disable-tools")
        #:make-flags '("V=1")
        #:phases
@@ -658,16 +666,19 @@ server and embedded PowerPC, and S390 guests.")
 (define-public xen-0-tools
   (package
     (name "xen-0-tools")
-    (version "4.13.0")
+    (version "4.16.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -712,6 +723,7 @@ server and embedded PowerPC, and S390 guests.")
                                          "/lib/efi")
                           "MINIOS_UPSTREAM_URL=")
        #:test-target "test"
+       #:validate-runpath? #f
        #:phases
        (modify-phases %standard-phases
          (add-after 'unpack 'unpack-mini-os
@@ -882,7 +894,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         ,(origin
            (method git-fetch)
            (uri (git-reference
-                 (url "http://xenbits.xen.org/git-http/mini-os.git")
+		 (url "/home/source-b/xen.org/mini-os.git")
+                 ;;(url "http://xenbits.xen.org/git-http/mini-os.git")
                  (commit (string-append "xen-RELEASE-" version))))
            (sha256
             (base32
@@ -899,26 +912,29 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
        ("xen-config"
-        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
+        ,(local-file "aux-files/xen-0/4.16.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen Virtual Machine Monitor Tools")
     (description "This package provides tools for the Xen Virtual Machine Monitor.")
     (license license:gpl2)
-    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
+    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux" "aarch64-linux"))))
 
 (define-public xen-0-libs
   (package
     (name "xen-0-libs")
-    (version "4.13.0")
+    (version "4.16.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -971,6 +987,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                          "/lib/efi")
                           "MINIOS_UPSTREAM_URL=")
        #:test-target "test"
+       #:validate-runpath? #f
        #:phases
        (modify-phases %standard-phases
          (add-after 'unpack 'unpack-mini-os
@@ -1135,7 +1152,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
         ,(origin
            (method git-fetch)
            (uri (git-reference
-                 (url "http://xenbits.xen.org/git-http/mini-os.git")
+		 (url "/home/source-b/xen.org/mini-os.git")
+                 ;;(url "http://xenbits.xen.org/git-http/mini-os.git")
                  (commit (string-append "xen-RELEASE-" version))))
            (sha256
             (base32
@@ -1154,10 +1172,10 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        ("cross-libc" ,(cross-libc "i686-linux-gnu"))
        ("cross-libc-static" ,(cross-libc "i686-linux-gnu") "static")
        ("xen-config"
-        ,(local-file "aux-files/xen-0/4.13.0-x86_64.config"))))
+        ,(local-file "aux-files/xen-0/4.16.0-x86_64.config"))))
     (home-page "https://xenproject.org/")
     (synopsis "Xen base")
     (description "This package is a base for the Xen Virtual Machine Monitor tools.
 In particular, it resolves the circular dependency between @code{qemu} and @code{xen}.")
     (license license:gpl2)
-    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux"))))
+    (supported-systems '("i686-linux" "x86_64-linux" "armhf-linux" "aarch64-linux"))))
