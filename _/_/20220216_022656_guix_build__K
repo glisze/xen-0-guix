@@ -1,0 +1,4 @@
+guix build -K --load-path=./ xen-0-boot
+guix build: warning: failed to load '(gnu packages xen-0)':
+./gnu/packages/xen-0.scm:1173:1: unexpected end of input while searching for: )
+guix build: error: xen-0-boot: unknown package
