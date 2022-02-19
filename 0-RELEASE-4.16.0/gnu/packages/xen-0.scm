@@ -723,6 +723,7 @@ server and embedded PowerPC, and S390 guests.")
                                          "/lib/efi")
                           "MINIOS_UPSTREAM_URL=")
        #:test-target "test"
+       #:validate-runpath? #f
        #:phases
        (modify-phases %standard-phases
          (add-after 'unpack 'unpack-mini-os
