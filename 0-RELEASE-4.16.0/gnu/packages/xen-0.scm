@@ -547,7 +547,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                "--enable-xen-pci-passthrough"
                                "--enable-libusb"
                                "--enable-vnc"
-                               "--enable-spice"
+                               "--disable-spice"
                                "--disable-tools")
        #:make-flags '("V=1")
        #:phases
