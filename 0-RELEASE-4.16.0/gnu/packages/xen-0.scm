@@ -986,6 +986,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                          "/lib/efi")
                           "MINIOS_UPSTREAM_URL=")
        #:test-target "test"
+       #:validate-runpath? #f
        #:phases
        (modify-phases %standard-phases
          (add-after 'unpack 'unpack-mini-os
