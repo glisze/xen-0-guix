@@ -1,4 +1,4 @@
-;;; 20220216 (c) Gunter Liszewski
+;;; 20220219 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -301,13 +301,15 @@ Use, say, with the grub bootloader:
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "/home/source-b/xen.org/xen.git")
-                    ;;(url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0bvm8q314bwwmchg0av6353c5lqr7fjvx6lf5q35k44mfpsnmbp0"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -668,13 +670,15 @@ server and embedded PowerPC, and S390 guests.")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "/home/source-b/xen.org/xen.git")		    
-                    ;;(url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0bvm8q314bwwmchg0av6353c5lqr7fjvx6lf5q35k44mfpsnmbp0"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
@@ -921,13 +925,15 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
     (source (origin
               (method git-fetch)
               (uri (git-reference
-		    (url "/home/source-b/xen.org/xen.git")		    
-                    ;;(url "git://xenbits.xenproject.org/xen.git")
-                    (commit (string-append "RELEASE-" version))))
+		    (url "git://xenbits.xenproject.org/xen.git")
+		    ;; (url "/home/source-b/xen.org/xen")
+		    (commit xen-commit)))
+                    ;; (url "git://xenbits.xenproject.org/xen.git")
+                    ;;(commit (string-append "RELEASE-" version))))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0py50n995gv909i0d1lfdcj9wcp5g1d5z6m2291jqqlfyany138g"))))
+		"1ixikq2hzwnpbhri3z71fi34avfhnzxspbpj6p8dbjl24mbccr5c"))))
     (build-system gnu-build-system)
     (arguments
      `(#:configure-flags
