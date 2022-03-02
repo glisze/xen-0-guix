@@ -1,4 +1,4 @@
-;;; 20220219 (c) Gunter Liszewski
+;;; 20220302 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -525,14 +525,14 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
 (define-public xen-0-qemu
   (package
     (name "xen-0-qemu")
-    (version "4.1.0") ; TODO: update this
+    (version "6.2.0") ; XXX: to verify
     (source (origin
               (method url-fetch)
               (uri (string-append "https://download.qemu.org/qemu-"
                                   version ".tar.xz"))
               (sha256
                (base32
-                "1ih9v6gxgild3m4g80ld4dr3wp9db3bpy203k73fxgc9hqhn0vk5"))))
+                "0iavlsy9hin8k38230j8lfmyipx3965zljls1dp34mmc8n75vqb8"))))
     (build-system gnu-build-system)
     (arguments
      '(#:parallel-tests? #f
@@ -548,7 +548,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                                "--enable-libusb"
                                "--enable-vnc"
                                "--disable-spice"
-                               "--disable-tools")
+                               "--disable-tools"
+			       "--extra-ldflags=-lrt") ;; XXX: new
        #:make-flags '("V=1")
        #:phases
        (modify-phases %standard-phases
@@ -559,7 +560,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                (setenv "SHELL" (which "bash"))
                (substitute* "tests/libqtest.c"
                  (("/bin/sh") (which "sh")))
-               (setenv "LDFLAGS" "-lrt")
+               ;; (setenv "LDFLAGS" "-lrt") ;; XXX: see configure flags above
                (apply invoke
                       `("./configure"
                         ,(string-append "--cc=" (which "gcc"))
@@ -581,7 +582,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                (setenv "SHELL" (which "bash"))
                (substitute* "tests/libqtest.c"
                  (("/bin/sh") (which "sh")))
-               (setenv "LDFLAGS" "-lrt")
+               ;; (setenv "LDFLAGS" "-lrt") ;; XXX: see above
                (apply invoke
                       `("./configure"
                         ,(string-append "--cc=" (which "gcc"))
