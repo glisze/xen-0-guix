@@ -554,7 +554,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
        #:phases
        (modify-phases %standard-phases
          (replace 'configure
-           (lambda* (#:key inputs outputs (configure-flags '())
+           (lambda* (#:key inputs native-inputs outputs (configure-flags '())
                      #:allow-other-keys)
              (let ((out (assoc-ref outputs "out")))
                (setenv "SHELL" (which "bash"))
