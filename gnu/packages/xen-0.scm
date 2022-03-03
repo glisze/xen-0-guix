@@ -607,7 +607,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                         ,(string-append "--prefix=" out)
                         ,(string-append "--sysconfdir=/etc")
                         ,@configure-flags)))))
-         (add-after 'install 'install-info
+         #;(add-after 'install 'install-info
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (when (assoc-ref inputs "texinfo")
                (let* ((out  (assoc-ref outputs "out"))
