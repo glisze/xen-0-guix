@@ -1,4 +1,4 @@
-;;; 20220302 (c) Gunter Liszewski
+;; 20220302 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -216,8 +216,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
          (delete 'patch)
          (replace 'build
            (lambda* (#:key make-flags #:allow-other-keys)
-             (invoke "mkdir" "-p" "tools/include/gnu/")
-             (invoke "touch" "tools/include/gnu/stubs-32.h")
+             (invoke "mkdir" "-p" "include/gnu/") ;; XXX: s,tools,,
+             (invoke "touch" "include/gnu/stubs-32.h") ;; XXX: s,tools,,
              (apply invoke "make" "dist-xen" make-flags)))
          (delete 'check)
          (replace 'install
@@ -581,16 +581,22 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                         ,@configure-flags)))))
          (add-before 'build 'include-gnu-stub-32
            (lambda* (#:key make-flags #:allow-other-keys)
-             (invoke "mkdir" "-p" "linux-headers/gnu")
-             (invoke "touch" "linux-headers/gnu/stubs-32.h")
+             (invoke "mkdir" "-p" "include/gnu") ;; XXX
+             (invoke "touch" "include/gnu/stubs-32.h") ;; XXX
              #t))
          (delete 'check)
          (add-before 'install 'configure-for-install
            (lambda* (#:key inputs outputs (configure-flags '()) #:allow-other-keys)
              (let ((out (assoc-ref outputs "out")))
                (setenv "SHELL" (which "bash"))
-               (substitute* "tests/libqtest.c"
-                 (("/bin/sh") (which "sh")))
+               (substitute* '("block/cloop.c" "migration/exec.c"
+                              "net/tap.c" "tests/qtest/libqtest.c"
+                              "tests/qtest/vhost-user-blk-test.c")
+			    (("/bin/sh") (search-input-file inputs "/bin/sh")))
+	       (substitute* "tests/qemu-iotests/testenv.py"
+			    (("#!/usr/bin/env python3")
+			     (string-append "#!" (search-input-file (or native-inputs inputs)
+                                                       "/bin/python3"))))
                ;; (setenv "LDFLAGS" "-lrt") ;; XXX: see above
                (apply invoke
                       `("./configure"
@@ -601,7 +607,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                         ,(string-append "--prefix=" out)
                         ,(string-append "--sysconfdir=/etc")
                         ,@configure-flags)))))
-         (add-after 'install 'install-info
+         #;(add-after 'install 'install-info
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (when (assoc-ref inputs "texinfo")
                (let* ((out  (assoc-ref outputs "out"))
@@ -611,7 +617,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              (install-file info dir))
                            (find-files "." "\\.info"))))
              #t))
-         (add-after 'install-info 'create-samba-wrapper
+         (add-after 'install 'create-samba-wrapper            ;; XXX
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (let* ((out    (assoc-ref %outputs "out"))
                     (libexec (string-append out "/libexec")))
@@ -629,7 +635,7 @@ exec smbd $@")))
        ("gtk+" ,gtk+)
        ("libaio" ,libaio)
        ("libattr" ,attr)
-       ("libcap" ,libcap)
+       ("libcap" ,libcap-ng)
        ("libdrm" ,libdrm)
        ("libepoxy" ,libepoxy)
        ("libjpeg" ,libjpeg-turbo)
