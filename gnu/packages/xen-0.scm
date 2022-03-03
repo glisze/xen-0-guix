@@ -581,8 +581,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                         ,@configure-flags)))))
          (add-before 'build 'include-gnu-stub-32
            (lambda* (#:key make-flags #:allow-other-keys)
-             (invoke "mkdir" "-p" "linux-headers/gnu")
-             (invoke "touch" "linux-headers/gnu/stubs-32.h")
+             (invoke "mkdir" "-p" "include/gnu") ;; XXX
+             (invoke "touch" "include/gnu/stubs-32.h") ;; XXX
              #t))
          (delete 'check)
          (add-before 'install 'configure-for-install
