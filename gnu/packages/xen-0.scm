@@ -589,8 +589,14 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
            (lambda* (#:key inputs outputs (configure-flags '()) #:allow-other-keys)
              (let ((out (assoc-ref outputs "out")))
                (setenv "SHELL" (which "bash"))
-               (substitute* "tests/libqtest.c"
-                 (("/bin/sh") (which "sh")))
+               (substitute* '("block/cloop.c" "migration/exec.c"
+                              "net/tap.c" "tests/qtest/libqtest.c"
+                              "tests/qtest/vhost-user-blk-test.c")
+			    (("/bin/sh") (search-input-file inputs "/bin/sh")))
+	       (substitute* "tests/qemu-iotests/testenv.py"
+			    (("#!/usr/bin/env python3")
+			     (string-append "#!" (search-input-file (or native-inputs inputs)
+                                                       "/bin/python3"))))
                ;; (setenv "LDFLAGS" "-lrt") ;; XXX: see above
                (apply invoke
                       `("./configure"
