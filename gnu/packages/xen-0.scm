@@ -216,8 +216,8 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
          (delete 'patch)
          (replace 'build
            (lambda* (#:key make-flags #:allow-other-keys)
-             (invoke "mkdir" "-p" "tools/include/gnu/")
-             (invoke "touch" "tools/include/gnu/stubs-32.h")
+             (invoke "mkdir" "-p" "include/gnu/") ;; XXX: s,tools,,
+             (invoke "touch" "include/gnu/stubs-32.h") ;; XXX: s,tools,,
              (apply invoke "make" "dist-xen" make-flags)))
          (delete 'check)
          (replace 'install
