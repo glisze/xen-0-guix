@@ -1,4 +1,4 @@
-;;; 20220302 (c) Gunter Liszewski
+;; 20220302 (c) Gunter Liszewski
 ;;; A package module for use with GNU Guix. (See below for your license.)
 
 (define-module (gnu packages xen-0)
@@ -617,7 +617,7 @@ override CC = " (assoc-ref inputs "cross-gcc") "/bin/i686-linux-gnu-gcc"))
                              (install-file info dir))
                            (find-files "." "\\.info"))))
              #t))
-         (add-after 'install-info 'create-samba-wrapper
+         (add-after 'install 'create-samba-wrapper            ;; XXX
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (let* ((out    (assoc-ref %outputs "out"))
                     (libexec (string-append out "/libexec")))
