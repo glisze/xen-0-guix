@@ -1,0 +1,5 @@
+xl-list () 
+{ 
+    local D="xl <list|...>";
+    guix shell xen-0-tools -- sudo xl ${*:-list}
+}
