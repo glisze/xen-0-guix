@@ -1,0 +1,5 @@
+set-tty () 
+{ 
+    local D="Signature pin entry terminal";
+    export GPG_TTY=$( tty )
+}
