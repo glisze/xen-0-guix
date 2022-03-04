@@ -1,5 +1,5 @@
 start-xen () 
 { 
     local D="start-xen: /etc/init.d/xencommons";
-    /etc/init.d/xencommons
+    /etc/init.d/xencommons ${1:-start}
 }
