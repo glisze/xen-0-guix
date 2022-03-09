@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="qemu-xen: 4.16.0: t97";
+    local D="xen: dom0: 5.17-rc7: t97";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1
