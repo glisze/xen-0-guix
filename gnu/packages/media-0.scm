@@ -127,7 +127,7 @@
        ("libdvdcss" ,libdvdcss)
        ("libdvdread" ,libdvdread)       
        ("libdvdnav" ,libdvdnav)
-       ("libjpeg" ,libjpeg)
+       ("libjpeg" ,libjpeg-turbo)
        ("libmpeg2" ,libmpeg2)
        ("libmpg123" ,mpg123)                      ; audio codec for MP3
        ("libpng" ,libpng)
