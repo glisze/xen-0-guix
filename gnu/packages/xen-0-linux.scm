@@ -15,7 +15,7 @@
   #:use-module (guix utils)  
   #:use-module (guix download))
 
-(define linux-libre linux-libre-5.16)
+(define linux-libre linux-libre-5.17)
 (define linux-version "v5.17")
 (define commit  "f443e374ae131c168a065ea1748feac6b2e76613")
 (define path "gnu/packages/aux-files/linux-0/")
