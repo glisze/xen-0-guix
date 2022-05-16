@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="linux: dom0: 5.17: t98";
+    local D="linux: dom0: 5.18-rc7: t99";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1

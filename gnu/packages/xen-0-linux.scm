@@ -16,8 +16,8 @@
   #:use-module (guix download))
 
 (define linux-libre linux-libre-5.17)
-(define linux-version "v5.17")
-(define commit  "f443e374ae131c168a065ea1748feac6b2e76613")
+(define linux-version "v5.18-rc7")
+(define commit  "42226c989789d8da4af1de0c31070c96726d990c")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 (define firmware-commit "eb8ea1b46893c42edbd516f971a93b4d097730ab") ;; 20220131
@@ -40,7 +40,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "0j4mbiinjz6m7cysx7zgf29fkf82v19jx357vi6hc8d0927svqii"))))
+         "1x4ngip6rfml08cv7zk5yfwkfncmh2jgnw25dd899yqyhifc5xaa"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -118,7 +118,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/x501u.v5.17.config"
+           "aux-files/linux-0/x501u.v5.18-rc7.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -203,7 +203,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.17.config"
+           "aux-files/linux-0/ak3v.v5.18-rc7.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
@@ -289,7 +289,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.17.dom0.config"
+           "aux-files/linux-0/ak3v.v5.18-rc7.dom0.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
