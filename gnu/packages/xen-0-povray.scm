@@ -109,7 +109,7 @@
     (native-inputs
      (list autoconf automake pkg-config))
     (inputs
-     `(("boost" ,boost)
+     `(("boost" ,boost-for-irods)
        ("libjpeg" ,libjpeg-turbo)
        ("libpng" ,libpng)
        ("libtiff" ,libtiff)
@@ -119,6 +119,7 @@
     (arguments
      '(#:configure-flags
        (list "COMPILED_BY=Guix"
+	     ;;; "CPPFLAGS= -DBOOST_BIND_GLOBAL_PLACEHOLDERS -DBOOST_MATH_TOOLS_HEADER_DEPRECATED"
              (string-append "--with-boost-libdir="
                             (assoc-ref %build-inputs "boost") "/lib")
              "--disable-optimiz-arch")
@@ -127,6 +128,7 @@
          (add-after 'unpack 'run-prebuild
            (lambda _
              (setenv "HOME" (getcwd))
+	     ;;; (setenv "BOOST_BIND_GLOBAL_PLACEHOLDERS" "1")
              (with-directory-excursion "unix"
                (substitute* "prebuild.sh"
                  (("/bin/sh") (which "sh")))
@@ -134,7 +136,8 @@
              #t))
          ;; The bootstrap script is run by the prebuild script in the
          ;; "run-prebuild" phase.
-         (delete 'bootstrap))))
+         (delete 'bootstrap)
+	 (delete 'check))))
     (synopsis "Tool for creating three-dimensional graphics")
     (description
      "@code{POV-Ray} is short for the Persistence of Vision Raytracer, a tool
