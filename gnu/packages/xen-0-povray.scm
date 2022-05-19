@@ -1,4 +1,4 @@
-;;; 20220518 
+;;; 20220519 (C) Gunter Liszewski 
 
 (define-module (gnu packages xen-0-povray)
   #:use-module (gnu packages)
@@ -9,6 +9,7 @@
   #:use-module (gnu packages bash)
   #:use-module (gnu packages bison)
   #:use-module (gnu packages boost)
+  #:use-module (gnu packages xen-0-boost)
   #:use-module (gnu packages build-tools)
   #:use-module (gnu packages cdrom)
   #:use-module (gnu packages check)
@@ -109,7 +110,8 @@
     (native-inputs
      (list autoconf automake pkg-config))
     (inputs
-     `(("boost" ,boost-for-irods)
+     `(("boost" ,boost-here) ;; XXX: this is 1.79
+       ;;; ("boost" ,boost-for-irods) ;; XXX/TODO: use boost 1.79 to fix the _Pragma'tics
        ("libjpeg" ,libjpeg-turbo)
        ("libpng" ,libpng)
        ("libtiff" ,libtiff)
@@ -118,8 +120,11 @@
        ("zlib" ,zlib)))
     (arguments
      '(#:configure-flags
-       (list "COMPILED_BY=Guix"
+       (list "COMPILED_BY=Guix-S10"
 	     ;;; "CPPFLAGS= -DBOOST_BIND_GLOBAL_PLACEHOLDERS -DBOOST_MATH_TOOLS_HEADER_DEPRECATED"
+	     ;;; "CXXFLAGS=-std=c++11 -DBOOST_BIND_GLOBAL_PLACEHOLDERS -no-integrated-cpp"
+	     "CXXFLAGS=-std=c++11 -DBOOST_BIND_GLOBAL_PLACEHOLDERS"
+	     ;;; "--without-x"
              (string-append "--with-boost-libdir="
                             (assoc-ref %build-inputs "boost") "/lib")
              "--disable-optimiz-arch")
