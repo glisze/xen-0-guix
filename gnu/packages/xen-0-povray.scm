@@ -142,7 +142,7 @@
          ;; The bootstrap script is run by the prebuild script in the
          ;; "run-prebuild" phase.
          (delete 'bootstrap)
-	 (delete 'check))))
+	 #;(delete 'check))))
     (synopsis "Tool for creating three-dimensional graphics")
     (description
      "@code{POV-Ray} is short for the Persistence of Vision Raytracer, a tool
