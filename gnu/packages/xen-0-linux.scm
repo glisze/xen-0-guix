@@ -1,4 +1,4 @@
-;;; xen-0-linux (C) 20220321 Gunter Liszewski -*- mode: scheme; -*-
+;;; xen-0-linux (C) 20220524 Gunter Liszewski -*- mode: scheme; -*-
 ;;; for GNU Guix, but non-free; linux-for-ak3v-dom0
 
 (define-module (gnu packages xen-0-linux)
@@ -16,8 +16,8 @@
   #:use-module (guix download))
 
 (define linux-libre linux-libre-5.17)
-(define linux-version "v5.18-rc7")
-(define commit  "42226c989789d8da4af1de0c31070c96726d990c")
+(define linux-version "v5.18")
+(define commit  "4b0986a3613c92f4ec1bdc7f60ec66fea135991f")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 (define firmware-commit "eb8ea1b46893c42edbd516f971a93b4d097730ab") ;; 20220131
@@ -40,7 +40,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "1x4ngip6rfml08cv7zk5yfwkfncmh2jgnw25dd899yqyhifc5xaa"))))
+         "0hqkfia69mvsiwa92dqr96jxc7wjvis04mbndhv0cd47sxrjf7hh"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -118,7 +118,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/x501u.v5.18-rc7.config"
+           "aux-files/linux-0/x501u.v5.18.0.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -203,7 +203,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.18-rc7.config"
+           "aux-files/linux-0/ak3v.v5.18.0.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
@@ -289,7 +289,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.18-rc7.dom0.config"
+           "aux-files/linux-0/ak3v.v5.18.0.dom0.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
