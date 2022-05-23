@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="povray: 3.7.0.10";
+    local D="linux: dom0: 5.19-rc1: t101";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1
