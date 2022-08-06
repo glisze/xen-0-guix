@@ -1,4 +1,4 @@
-# 20211119 (c) Gunter Liszewski -*- mode: org; -*-
+# 20220806 (c) Gunter Liszewski -*- mode: org; -*-
 * GNU Guix Channels
   Announcements about the packages on this channel should be made in
   [[etc/news.scm.in]]. The shell function 'set-commit' can assist in editing
