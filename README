@@ -6,7 +6,7 @@
 
 ** About the Git Repository
   We start with two Git repositories.  First on this list is a clone of
-  the official GNU Guix repositoory.  The second reposiitory on this list has
+  the official GNU Guix repository.  The second repository on this list has
   *our* package definitions and configuration files.
 #+begin_src text
   guix-0-here
