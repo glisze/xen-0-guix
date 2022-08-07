@@ -10,7 +10,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages texinfo)
-  #:use-module (gnu packages povray-here)
+  #:use-module (gnu packages xen-0-povray)
   #:use-module (guix utils)
   #:use-module (srfi srfi-1)
   #:use-module (ice-9 match))
@@ -31,7 +31,7 @@
              (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0p5cwx0xwva4ajgj8hnrk8bx6n3hv1z7aqs4zivp81crnq4077yw"))))
+        (base32 "14silfng5rbdc8hnzswjmqk705pncjlk8iphjcxcm799h44pnlcr"))))
     (build-system emacs-build-system)
     (arguments
      '(#:phases
@@ -59,4 +59,4 @@
 ;; blocks, both {} and #if #end.  It also provides context-sensitive
 ;; keyword completion and font-lock highlighting, as well as the
 ;; ability to look up those keywords in the povray documentation.")
-    (license license:gpl-3)))
+    (license license:gpl3)))
