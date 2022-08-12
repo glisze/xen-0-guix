@@ -1,4 +1,4 @@
-;;; 20220810 (C) Gunter Liszewski, Emacs pov-mode package for Guix -*- mode: scheme; -*-
+;;; 20220811 (C) Gunter Liszewski, Emacs pov-mode package for Guix -*- mode: scheme; -*-
 
 (define-module (gnu packages xen-0-emacs-abc)
   #:use-module ((guix licenses) #:prefix license:)
@@ -55,12 +55,12 @@
                  (string-append (assoc-ref inputs "povray-here")
 				"/share/povray-3.7/include"))
 	       ("defcustom  pov-documentation-directory"
-	        (string-append (assoc-ref inputs "povray-here")
-	     		"/share/doc/povray-3.7/html"))
-	       ("defcustom pov-documentation-keyword-index"
-				"r3_3.html")
-	       ("defcustom pov-documentation-index"
-				"index.html")
+	        (string-append (assoc-ref inputs "povray-docs-here")
+	     		       "/share/povray-docs-3.6/doc/html"))
+	     ;;  ("defcustom pov-documentation-keyword-index"
+	     ;;		"r3_3.html")
+	     ;;("defcustom pov-documentation-index"
+	     ;;			"index.html")
 	       ("defcustom pov-insertmenu-location"
                  (string-append (assoc-ref inputs "povray-imenu-here")
 			       "/share/povray-imenu-3.6/InsertMenu")))))
@@ -72,7 +72,7 @@
     (native-inputs
      (list texinfo))
     (propagated-inputs
-     (list povray-here povray-imenu-here))
+     (list povray-here povray-imenu-here povray-docs-here))
     (home-page "https://github.com/emacsmirror/pov-mode")
     (synopsis "Major mode for editing POV-Ray scene files")
     (description
@@ -114,3 +114,31 @@ may be used by anyone eligible to use POV-Ray according to
 this license.")
     (home-page "http://www.imagico.de/imenu")
     (license license:agpl3+)))
+
+(define-public povray-docs-here
+  (package
+    (name "povray-docs-here")
+    (version "3.6")
+    (source
+     (origin
+      (method url-fetch)
+      (uri
+       (string-append
+	"http://www.povray.org/ftp/pub/povray/Old-Versions/"
+	"Official-3.62/Linux/povlinux-"	version ".tar.bz2"))
+      (sha256
+       (base32
+        "1jv1li9gfvazvyp46bhk53fh5g4xwb2i9a3z0zh1pdpfbl7kqdqp"))))
+    (build-system copy-build-system)
+    (arguments
+     '(#:install-plan
+       '(("doc" "share/povray-docs-3.6/doc" #:exclude ("COPYING"))
+	 ("scenes" "share/povray-docs-3.6/scenes" #:exclude ("COPYING"))
+	 ("include" "share/povray-docs-3.6/include" #:exclude ("COPYING")))))
+    (native-inputs (list unzip))
+    (synopsis "Old Version 3.62 of POV-ray doc, scenes, and include")
+    (description
+     "TODO")
+    (home-page "http://povray.org")
+    (license license:agpl3+)))
+
