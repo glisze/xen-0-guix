@@ -1,4 +1,4 @@
-;;; xen-0-linux (C) 20220806 Gunter Liszewski -*- mode: scheme; -*-
+;;; xen-0-linux (C) 20220829 Gunter Liszewski -*- mode: scheme; -*-
 ;;; for GNU Guix, but non-free; linux-for-ak3v-dom0
 
 (define-module (gnu packages xen-0-linux)
@@ -17,7 +17,7 @@
 
 (define linux-libre linux-libre-5.18)
 (define linux-version "v5.19")
-(define commit  "3d7cb6b04c3f3115719235cc6866b10326de34cd")
+(define commit  "b90cb1053190353cc30f0fef0ef1f378ccc063c5")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
 (define firmware-commit "eb8ea1b46893c42edbd516f971a93b4d097730ab") ;; 20220131
@@ -40,7 +40,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "1vjj9hlj9nbv3azdv1l647ylngh2s766svvdg7jv77h04x2hhnrr"))))
+         "1mlvsvxd5k85vsdfpyms645b34mdqqkfrayzaxmrszjyb4izbi53"))))
      (synopsis "Linux kernel that permits non-free things.")
      (description "A base for a machine specific kernel.")
      (license license:gpl2)
@@ -118,7 +118,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/x501u.v5.19.0.config"
+           "aux-files/linux-0/x501u.v6.0-rc3.config"
            #;(string-append path machine suffix)))
         ,@(package-inputs linux-libre)))
      (synopsis "Linux for a x501u machine")
@@ -203,7 +203,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.19.0.config"
+           "aux-files/linux-0/ak3v.v6.0-rc3.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
@@ -289,7 +289,7 @@
      (inputs
       `(("Kconfig"
          ,(local-file
-           "aux-files/linux-0/ak3v.v5.19.0.dom0.config"
+           "aux-files/linux-0/ak3v.v6.0-rc3.dom0.config"
            #;(string-append path machine suffix)))
         ("linux-firmware-for-ak3v" ,linux-firmware-for-ak3v)
         ,@(package-inputs linux-libre)))
