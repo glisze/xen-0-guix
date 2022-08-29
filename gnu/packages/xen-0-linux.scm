@@ -16,7 +16,7 @@
   #:use-module (guix download))
 
 (define linux-libre linux-libre-5.18)
-(define linux-version "v5.19")
+(define linux-version "v6.0-rc3")
 (define commit  "b90cb1053190353cc30f0fef0ef1f378ccc063c5")
 (define path "gnu/packages/aux-files/linux-0/")
 (define suffix (string-append "." linux-version ".config"))
