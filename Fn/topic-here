@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="package: emacs-pov-mode";
+    local D="linux: dom0: 6.0-rc3: t104";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1
