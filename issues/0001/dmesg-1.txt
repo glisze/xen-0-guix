@@ -1,0 +1,61 @@
+[11172.984649] iwlwifi 0000:04:00.0: Queue 11 is active on fifo 1 and stuck for 10000 ms. SW [253, 14] HW [253, 14] FH TRB=0x0c010b00d
+[11172.985714] iwlwifi 0000:04:00.0: Microcode SW error detected.  Restarting 0x2000000.
+[11172.985861] iwlwifi 0000:04:00.0: Start IWL Error Log Dump:
+[11172.985864] iwlwifi 0000:04:00.0: Transport status: 0x0000004A, valid: 6
+[11172.985868] iwlwifi 0000:04:00.0: Loaded firmware version: 29.4063824552.0 7265D-29.ucode
+[11172.985872] iwlwifi 0000:04:00.0: 0x00000084 | NMI_INTERRUPT_UNKNOWN
+[11172.985875] iwlwifi 0000:04:00.0: 0x008002B1 | trm_hw_status0
+[11172.985878] iwlwifi 0000:04:00.0: 0x00000000 | trm_hw_status1
+[11172.985881] iwlwifi 0000:04:00.0: 0x00043D6C | branchlink2
+[11172.985884] iwlwifi 0000:04:00.0: 0x0004B002 | interruptlink1
+[11172.985886] iwlwifi 0000:04:00.0: 0x00000180 | interruptlink2
+[11172.985889] iwlwifi 0000:04:00.0: 0x00000000 | data1
+[11172.985891] iwlwifi 0000:04:00.0: 0x00000080 | data2
+[11172.985894] iwlwifi 0000:04:00.0: 0x07030000 | data3
+[11172.985897] iwlwifi 0000:04:00.0: 0x4C810979 | beacon time
+[11172.985899] iwlwifi 0000:04:00.0: 0x931AC6D7 | tsf low
+[11172.985902] iwlwifi 0000:04:00.0: 0x00000012 | tsf hi
+[11172.985904] iwlwifi 0000:04:00.0: 0x00000000 | time gp1
+[11172.985907] iwlwifi 0000:04:00.0: 0x98EDE9F3 | time gp2
+[11172.985910] iwlwifi 0000:04:00.0: 0x00000001 | uCode revision type
+[11172.985913] iwlwifi 0000:04:00.0: 0x0000001D | uCode version major
+[11172.985915] iwlwifi 0000:04:00.0: 0xF2390AA8 | uCode version minor
+[11172.985918] iwlwifi 0000:04:00.0: 0x00000210 | hw version
+[11172.985920] iwlwifi 0000:04:00.0: 0x00489200 | board version
+[11172.985923] iwlwifi 0000:04:00.0: 0x0C19001C | hcmd
+[11172.985926] iwlwifi 0000:04:00.0: 0x00122006 | isr0
+[11172.985928] iwlwifi 0000:04:00.0: 0x00800000 | isr1
+[11172.985931] iwlwifi 0000:04:00.0: 0x0000000A | isr2
+[11172.985933] iwlwifi 0000:04:00.0: 0x004138C0 | isr3
+[11172.985935] iwlwifi 0000:04:00.0: 0x00000000 | isr4
+[11172.985938] iwlwifi 0000:04:00.0: 0x9D09009D | last cmd Id
+[11172.985940] iwlwifi 0000:04:00.0: 0x00000000 | wait_event
+[11172.985943] iwlwifi 0000:04:00.0: 0x00000080 | l2p_control
+[11172.985945] iwlwifi 0000:04:00.0: 0x00010820 | l2p_duration
+[11172.985948] iwlwifi 0000:04:00.0: 0x0000003F | l2p_mhvalid
+[11172.985951] iwlwifi 0000:04:00.0: 0x000000CE | l2p_addr_match
+[11172.985953] iwlwifi 0000:04:00.0: 0x00000005 | lmpm_pmg_sel
+[11172.985956] iwlwifi 0000:04:00.0: 0x03031934 | timestamp
+[11172.985958] iwlwifi 0000:04:00.0: 0x003498A8 | flow_handler
+[11172.985968] iwlwifi 0000:04:00.0: Fseq Registers:
+[11172.985975] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_ERROR_CODE
+[11172.985982] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_TOP_INIT_VERSION
+[11172.986016] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_CNVIO_INIT_VERSION
+[11172.986022] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_OTP_VERSION
+[11172.986028] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_TOP_CONTENT_VERSION
+[11172.986034] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_ALIVE_TOKEN
+[11172.986040] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_CNVI_ID
+[11172.986045] iwlwifi 0000:04:00.0: 0x00000000 | FSEQ_CNVR_ID
+[11172.986051] iwlwifi 0000:04:00.0: 0x00000000 | CNVI_AUX_MISC_CHIP
+[11172.986057] iwlwifi 0000:04:00.0: 0x00000000 | CNVR_AUX_MISC_CHIP
+[11172.986063] iwlwifi 0000:04:00.0: 0x00000000 | CNVR_SCU_SD_REGS_SD_REG_DIG_DCDC_VTRIM
+[11172.986069] iwlwifi 0000:04:00.0: 0x00000000 | CNVR_SCU_SD_REGS_SD_REG_ACTIVE_VDIG_MIRROR
+[11172.986077] iwlwifi 0000:04:00.0: Collecting data: trigger 2 fired.
+[11172.986084] ieee80211 phy0: Hardware restart was requested
+[11173.109612] iwlwifi 0000:04:00.0: Failing on timeout while stopping DMA channel 8 [0x07fd0001]
+[11173.135969] iwlwifi 0000:04:00.0: Applying debug destination EXTERNAL_DRAM
+[11173.214317] iwlwifi 0000:04:00.0: Applying debug destination EXTERNAL_DRAM
+[11173.215573] iwlwifi 0000:04:00.0: FW already configured (0) - re-configuring
+[11173.227555] wlp4s0: HW problem - can not stop rx aggregation for 10:e9:53:21:25:9c tid 0
+[11930.437631] perf: interrupt took too long (4973 > 4972), lowering kernel.perf_event_max_sample_rate to 40000
+
