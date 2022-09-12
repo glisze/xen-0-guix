@@ -1,0 +1,7 @@
+Parsing config from to_xen/13-direct-kernel-boot.cfg
+xc: error: panic: xg_dom_core.c:537: xc_dom_chk_alloc_pages: segment kernel too large (0x262c > 0x2000 - 0x1000 pages): Out of memory
+libxl: error: libxl_dom.c:594:libxl__build_dom: xc_dom_build_image failed: No such file or directory
+libxl: error: libxl_create.c:1611:domcreate_rebuild_done: Domain 1:cannot (re-)build domain: -3
+libxl: error: libxl_domain.c:1183:libxl__destroy_domid: Domain 1:Non-existant domain
+libxl: error: libxl_domain.c:1137:domain_destroy_callback: Domain 1:Unable to destroy guest
+libxl: error: libxl_domain.c:1064:domain_destroy_cb: Domain 1:Destruction of domain failed
