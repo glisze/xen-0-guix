@@ -1,0 +1,172 @@
+commit 1819f8aa2d927e20ed5a736c925a918cef555b6b
+Author: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+Date:   Mon Sep 12 12:05:51 2022 +0100
+
+    xen-0: 1-5, man xl
+    
+    less 6-man-xl.out
+    man xl
+    @
+    
+    Signed-off-by: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+
+commit fd37e6859d066e3d90ebc2f8fd86a0ce2536231b
+Author: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+Date:   Mon Sep 12 12:14:08 2022 +0100
+
+    start-xen
+    
+    /etc/init.d/xencommons start
+    ===========================================================
+    Setting domain 0 name, domid and JSON config...
+    Starting xenconsoled...
+    Starting QEMU as disk backend for dom0
+    ===========================================================
+    (on your mark)
+    
+    Signed-off-by: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+
+commit 7927b2a1a1a4979b8a7c54126593bd6ae57e046b
+Author: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+Date:   Mon Sep 12 12:25:02 2022 +0100
+
+    xen-0: xl create to_xen/empty.cfg
+    
+    however
+    ============================================================
+    Parsing config from to_xen/empty.cfg
+    Neither kernel nor bootloader specified
+    ============================================================
+    (ready)
+    
+    Signed-off-by: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+
+commit 46f9f41a64075551abd6dd5279cd86973af7e0a3
+Author: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+Date:   Mon Sep 12 12:43:21 2022 +0100
+
+    xen-0: 13: xl create
+    
+    out of memory
+    ==========================================================
+    Parsing config from to_xen/13-direct-kernel-boot.cfg
+    xc: error: panic: xg_dom_core.c:537: xc_dom_chk_alloc_pages: segment kernel too large (0x262c > 0x2000 - 0x1000 pages): Out of memory
+    libxl: error: libxl_dom.c:594:libxl__build_dom: xc_dom_build_image failed: No such file or directory
+    libxl: error: libxl_create.c:1611:domcreate_rebuild_done: Domain 1:cannot (re-)build domain: -3
+    libxl: error: libxl_domain.c:1183:libxl__destroy_domid: Domain 1:Non-existant domain
+    libxl: error: libxl_domain.c:1137:domain_destroy_callback: Domain 1:Unable to destroy guest
+    libxl: error: libxl_domain.c:1064:domain_destroy_cb: Domain 1:Destruction of domain failed
+    ==========================================================
+    
+    to_xen/13-direct-kernel-boot.cfg
+    ==========================================================
+    name="empty"
+    type="pv"
+    
+    # 13-direct-kernel-boot
+    kernel="./store/linux-for-ak3v-dom0/bzImage"
+    ==========================================================
+    (re-view)
+    
+    Signed-off-by: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+
+commit 9a6e2404f8975b007a2b2f90498eff0e3ac176dd
+Author: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>
+Date:   Mon Sep 12 13:01:20 2022 +0100
+
+    xen-0: 15: xl create
+    
+    no root
+    ==========================================================
+    
+    Parsing config from to_xen/15-memory-and-direct-kernel-boot.cfg
+    Waiting for domain empty (domid 2) to die [pid 5078]
+    [    0.000000] Linux version 6.0.0-rc4 (nixbld@localhost) (gcc (GCC) 10.3.0, GNU ld (GNU Binutils) 2.37) #1 SMP PREEMPT_DYNAMIC 1
+    [    0.000000] Command line:
+    [    0.000000] KERNEL supported cpus:
+    [    0.000000]   Intel GenuineIntel
+    [    0.000000]   AMD AuthenticAMD
+    [    0.000000]   Hygon HygonGenuine
+    [    0.000000]   Centaur CentaurHauls
+    [    0.000000]   zhaoxin   Shanghai
+    [    0.000000] ------------[ cut here ]------------
+    [    0.000000] XSAVE consistency problem, dumping leaves
+    [    0.000000] WARNING: CPU: 0 PID: 0 at arch/x86/kernel/fpu/xstate.c:606 fpu__init_system_xstate+0x7cf/0xa5b
+    [    0.000000] Modules linked in:
+    [    0.000000] CPU: 0 PID: 0 Comm: swapper Tainted: G                T  6.0.0-rc4 #1 841c5f4f62f952ba4f3984390f28eb6eacafc65e
+    [    0.000000] RIP: e030:fpu__init_system_xstate+0x7cf/0xa5b
+    ==========================================================
+    
+    to end this step
+    ==========================================================
+    [    1.201703] /dev/root: Can't open blockdev
+    [    1.201713] VFS: Cannot open root device "(null)" or unknown-block(0,0): error -6
+    [    1.201722] Please append a correct "root=" boot option; here are the available partitions:
+    [    1.201732] 0100           65536 ram0
+    [    1.201734]  (driver?)
+    [    1.201743] 0101           65536 ram1
+    [    1.201745]  (driver?)
+    [    1.201753] 0102           65536 ram2
+    [    1.201755]  (driver?)
+    [    1.201763] 0103           65536 ram3
+    [    1.201764]  (driver?)
+    [    1.201772] 0104           65536 ram4
+    [    1.201773]  (driver?)
+    [    1.201782] 0105           65536 ram5
+    [    1.201783]  (driver?)
+    [    1.201791] 0106           65536 ram6
+    [    1.201792]  (driver?)
+    [    1.201801] 0107           65536 ram7
+    [    1.201802]  (driver?)
+    [    1.201810] 0108           65536 ram8
+    [    1.201811]  (driver?)
+    [    1.201819] 0109           65536 ram9
+    [    1.201821]  (driver?)
+    [    1.201829] 010a           65536 ram10
+    [    1.201830]  (driver?)
+    [    1.201838] 010b           65536 ram11
+    [    1.201839]  (driver?)
+    [    1.201848] 010c           65536 ram12
+    [    1.201849]  (driver?)
+    [    1.201857] 010d           65536 ram13
+    [    1.201858]  (driver?)
+    [    1.201867] 010e           65536 ram14
+    [    1.201868]  (driver?)
+    [    1.201876] 010f           65536 ram15
+    [    1.201877]  (driver?)
+    [    1.201889] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+    [    1.261804] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W       T  6.0.0-rc4 #1 841c5f4f62f952ba4f3984390f28eb6eacafc65e
+    [    1.261820] Call Trace:
+    [    1.261828]  <TASK>
+    [    1.261835]  dump_stack_lvl+0x49/0x63
+    [    1.261850]  dump_stack+0x10/0x16
+    [    1.261857]  panic+0x10c/0x2a5
+    [    1.261865]  mount_block_root+0x144/0x1dd
+    [    1.261877]  mount_root+0x1c9/0x1f0
+    [    1.261884]  prepare_namespace+0x13f/0x174
+    [    1.261892]  kernel_init_freeable+0x222/0x238
+    [    1.261899]  ? rest_init+0xe0/0xe0
+    [    1.261907]  kernel_init+0x1a/0x140
+    [    1.261913]  ret_from_fork+0x22/0x30
+    [    1.261924]  </TASK>
+    [    1.261931] Kernel Offset: disabled
+    Domain 2 has shut down, reason code 3 0x3
+    Action for shutdown reason code 3 is destroy
+    Domain 2 needs to be cleaned up: destroying the domain
+    Done. Exiting now
+    ==========================================================
+    
+    to_xen/15-memory-and-direct-kernel-boot.cfg
+    ==========================================================
+    name="empty"
+    type="pv"
+    
+    # 13-direct-kernel-boot
+    kernel="./store/linux-for-ak3v-dom0/bzImage"
+    
+    # 15-memory-and-direct-kernel-boot
+    memory=1024
+    ==========================================================
+    (re-set)
+    
+    Signed-off-by: Gunter Liszewski (root@s10) <gunter.liszewski@gmail.com>

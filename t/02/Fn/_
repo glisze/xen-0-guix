@@ -3,13 +3,13 @@ _ ()
     local D="0 new Fn/, 1 new set, 2 recall, 3 describe, 4 definitions, 5 this repository, 9 store, _ reformat, m,n,v,c,n_,n__,c_,c__, set_sprint_topic=${sprint_topic}=";
     function set_sprint_topic () 
     { 
-        local DD="Set the topic of this, here";
+        local DD="Set our topic, here, now.";
         export sprint_topic;
         test -z "$1" && echo "$sprint_topic";
-        test -n "$1" && sprint_topic="$1" && shift && while test -n "$1"; do
-            sprint_topic="$sprint_topic $1";
-            shift;
-        done
+        if test -n "$1"; then
+            sprint_topic="$*";
+            sed Fn/topic-here -e '/ D[=]/s,=".*",="'"$sprint_topic"'",' -i;
+        fi
     };
     function a__ () 
     { 
