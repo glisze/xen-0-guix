@@ -1,0 +1,4 @@
+git push --set-upstream origin xen-admin/next/0001/xl-tools
+git pull --ff-only xen-admin next/0001/xl-tools
+git checkout --orphan xen-admin/next/0001/xl-tools
+git remote add -t next/0001/xl-tools xen-admin ../../xen.org/admin/
