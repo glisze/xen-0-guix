@@ -1,0 +1,399 @@
+Parsing config from to_xen/18-root-memory-and-direct-kernel-boot.cfg
+Waiting for domain empty (domid 3) to die [pid 6548]
+[    0.000000] Linux version 6.0.0-rc4 (nixbld@localhost) (gcc (GCC) 10.3.0, GNU ld (GNU Binutils) 2.37) #1 SMP PREEMPT_DYNAMIC 1
+[    0.000000] Command line: root=/dev/null
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] ------------[ cut here ]------------
+[    0.000000] XSAVE consistency problem, dumping leaves
+[    0.000000] WARNING: CPU: 0 PID: 0 at arch/x86/kernel/fpu/xstate.c:606 fpu__init_system_xstate+0x7cf/0xa5b
+[    0.000000] Modules linked in:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Tainted: G                T  6.0.0-rc4 #1 841c5f4f62f952ba4f3984390f28eb6eacafc65e
+[    0.000000] RIP: e030:fpu__init_system_xstate+0x7cf/0xa5b
+[    0.000000] Code: 41 02 9f ff e8 54 39 e6 fd 39 45 a0 74 23 80 3d 68 9b f1 ff 00 75 8a 48 c7 c7 80 f5 a7 82 c6 05 58 9b f1 ff 01 e8 00 4e e0 fe <0f> 0b e9 70 ff ff ff 8b 45 a0 48 8b 3d f2 01 9f ff 31 f6 89 05 fa
+[    0.000000] RSP: e02b:ffffffff82e03d00 EFLAGS: 00010086 ORIG_RAX: 0000000000000000
+[    0.000000] RAX: 0000000000000000 RBX: 0000000000000200 RCX: 0000000000000000
+[    0.000000] RDX: 0000000000000002 RSI: 0000000000000000 RDI: 00000000ffffffff
+[    0.000000] RBP: ffffffff82e03d70 R08: 0000000000000029 R09: 6e6f632045564153
+[    0.000000] R10: 6d656c626f727020 R11: 79636e6574736973 R12: 0000000000000040
+[    0.000000] R13: ffffffff82e03e01 R14: 0000000000000003 R15: 0000000000000240
+[    0.000000] FS:  0000000000000000(0000) GS:ffffffff8319e000(0000) knlGS:0000000000000000
+[    0.000000] CS:  10000e030 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    0.000000] CR2: 0000000000000000 CR3: 0000000002e10000 CR4: 0000000000040660
+[    0.000000] Call Trace:
+[    0.000000]  <TASK>
+[    0.000000]  fpu__init_system+0x157/0x19c
+[    0.000000]  early_cpu_init+0x42c/0x454
+[    0.000000]  setup_arch+0x4c/0xd7b
+[    0.000000]  ? _printk+0x58/0x73
+[    0.000000]  start_kernel+0x76/0x987
+[    0.000000]  ? __add_preferred_console.constprop.0+0x83/0x160
+[    0.000000]  x86_64_start_reservations+0x24/0x2a
+[    0.000000]  xen_start_kernel+0x5f6/0x60d
+[    0.000000]  startup_xen+0x1f/0x1f
+[    0.000000]  </TASK>
+[    0.000000] ---[ end trace 0000000000000000 ]---
+[    0.000000] CPUID[0d, 00]: eax=00000003 ebx=00000240 ecx=00000240 edx=00000000
+[    0.000000] CPUID[0d, 01]: eax=00000007 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 02]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 03]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 04]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 05]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 06]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 07]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 08]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 09]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0a]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0b]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0c]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0d]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0e]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 0f]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 10]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 11]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 12]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 13]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 14]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 15]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 16]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 17]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 18]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 19]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 1a]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 1b]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] CPUID[0d, 1c]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.000000] signal: max sigframe size: 1440
+[    0.000000] ACPI in unprivileged domain disabled
+[    0.000000] Released 0 page(s)
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] Xen: [mem 0x0000000000000000-0x000000000009ffff] usable
+[    0.000000] Xen: [mem 0x00000000000a0000-0x00000000000fffff] reserved
+[    0.000000] Xen: [mem 0x0000000000100000-0x000000003fffffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] DMI not present or invalid.
+[    0.000000] Hypervisor detected: Xen PV
+[    0.084196] tsc: Fast TSC calibration failed
+[    0.084199] tsc: Detected 1996.970 MHz processor
+[    0.084235] last_pfn = 0x40000 max_arch_pfn = 0x400000000
+[    0.084237] Disabled
+[    0.084238] x86/PAT: MTRRs disabled, skipping PAT initialization too.
+[    0.084243] x86/PAT: Configuration [0-7]: WB  WT  UC- UC  WC  WP  UC  UC  
+[    0.084275] Kernel/User page tables isolation: disabled on XEN PV.
+[    0.127298] NUMA turned off
+[    0.127304] Faking a node at [mem 0x0000000000000000-0x000000003fffffff]
+[    0.127309] NODE_DATA(0) allocated [mem 0x3fe24000-0x3fe27fff]
+[    0.131046] Zone ranges:
+[    0.131048]   DMA32    [mem 0x0000000000001000-0x000000003fffffff]
+[    0.131052]   Normal   empty
+[    0.131053]   Device   empty
+[    0.131055] Movable zone start for each node
+[    0.131057] Early memory node ranges
+[    0.131057]   node   0: [mem 0x0000000000001000-0x000000000009ffff]
+[    0.131059]   node   0: [mem 0x0000000000100000-0x000000003fffffff]
+[    0.131061] Initmem setup node 0 [mem 0x0000000000001000-0x000000003fffffff]
+[    0.131067] On node 0, zone DMA32: 1 pages in unavailable ranges
+[    0.133291] On node 0, zone DMA32: 96 pages in unavailable ranges
+[    0.133301] p2m virtual area at (____ptrval____), size is 40000000
+[    0.399131] Remapped 0 page(s)
+[    0.399277] smpboot: Allowing 1 CPUs, 0 hotplug CPUs
+[    0.399288] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.399291] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000fffff]
+[    0.399293] [mem 0x40000000-0xffffffff] available for PCI devices
+[    0.399297] Booting kernel on Xen
+[    0.399299] Xen version: 4.16.0 (preserve-AD)
+[    0.399304] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    0.399314] setup_percpu: NR_CPUS:256 nr_cpumask_bits:256 nr_cpu_ids:1 nr_node_ids:1
+[    0.399610] percpu: Embedded 57 pages/cpu s193640 r8192 d31640 u2097152
+[    0.399674] Fallback order for Node 0: 0 
+[    0.399678] Built 1 zonelists, mobility grouping on.  Total pages: 257792
+[    0.399681] Policy zone: DMA32
+[    0.399683] Kernel command line: root=/dev/null
+[    0.399785] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.399833] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.400003] mem auto-init: stack:off, heap alloc:on, heap free:off
+[    0.405072] Memory: 985992K/1048188K available (20493K kernel code, 3565K rwdata, 6756K rodata, 2396K init, 2032K bss, 61944K reserved, 0K cma-reserved)
+[    0.405820] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.406727] ftrace: allocating 57994 entries in 227 pages
+[    0.415638] ftrace: allocated 227 pages with 5 groups
+[    0.417082] Dynamic Preempt: voluntary
+[    0.417198] rcu: Preemptible hierarchical RCU implementation.
+[    0.417199] rcu: 	RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.417201] 	Trampoline variant of Tasks RCU enabled.
+[    0.417202] 	Rude variant of Tasks RCU enabled.
+[    0.417203] 	Tracing variant of Tasks RCU enabled.
+[    0.417204] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.417205] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.431706] Using NULL legacy PIC
+[    0.431708] NR_IRQS: 16640, nr_irqs: 32, preallocated irqs: 0
+[    0.431776] xen:events: Using FIFO-based ABI
+[    0.431789] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.431878] Console: colour dummy device 80x25
+[    0.432140] printk: console [tty0] enabled
+[    0.443152] printk: console [hvc0] enabled
+[    0.443221] clocksource: xen: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.443245] installing Xen timer for CPU 0
+[    0.443292] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x3991fffe490, max_idle_ns: 881590608194 ns
+[    0.443312] Calibrating delay loop (skipped), value calculated using timer frequency.. 3993.94 BogoMIPS (lpj=7987880)
+[    0.443325] pid_max: default: 32768 minimum: 301
+[    0.443539] LSM: Security Framework initializing
+[    0.443583] Yama: becoming mindful.
+[    0.443694] AppArmor: AppArmor initialized
+[    0.443706] TOMOYO Linux initialized
+[    0.443906] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.443920] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.444826] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.444836] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.444849] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.444859] Spectre V2 : Mitigation: Retpolines
+[    0.444866] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.444873] Spectre V2 : Spectre v2 / SpectreRSB : Filling RSB on VMEXIT
+[    0.444880] Spectre V2 : Enabling Restricted Speculation for firmware calls
+[    0.444888] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.444897] Spectre V2 : User space: Mitigation: STIBP via prctl
+[    0.444904] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+[    0.555505] Freeing SMP alternatives memory: 56K
+[    0.555916] VPMU disabled by hypervisor.
+[    0.556411] cblist_init_generic: Setting adjustable number of callback queues.
+[    0.556422] cblist_init_generic: Setting shift to 0 and lim to 1.
+[    0.556487] cblist_init_generic: Setting shift to 0 and lim to 1.
+[    0.556545] cblist_init_generic: Setting shift to 0 and lim to 1.
+[    0.556601] Performance Events: unsupported p6 CPU model 122 no PMU driver, software events only.
+[    0.556822] rcu: Hierarchical SRCU implementation.
+[    0.556832] rcu: 	Max phase no-delay instances is 1000.
+[    0.557565] NMI watchdog: Perf NMI watchdog permanently disabled
+[    0.557701] smp: Bringing up secondary CPUs ...
+[    0.557710] smp: Brought up 1 node, 1 CPU
+[    0.557716] smpboot: Max logical packages: 1
+[    0.558100] devtmpfs: initialized
+[    0.558192] x86/mm: Memory block size: 128MB
+[    0.558640] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.558659] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.558763] pinctrl core: initialized pinctrl subsystem
+[    0.559275] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.559344] xen:grant_table: Grant tables using version 1 layout
+[    0.559369] Grant table initialized
+[    0.559410] audit: initializing netlink subsys (disabled)
+[    0.559650] audit: type=2000 audit(1662991500.012:1): state=initialized audit_enabled=0 res=1
+[    0.559824] thermal_sys: Registered thermal governor 'fair_share'
+[    0.559827] thermal_sys: Registered thermal governor 'bang_bang'
+[    0.559835] thermal_sys: Registered thermal governor 'step_wise'
+[    0.559841] thermal_sys: Registered thermal governor 'user_space'
+[    0.560778] PCI: setting up Xen PCI frontend stub
+[    0.563467] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.887313] raid6: sse2x4   gen()  9210 MB/s
+[    0.955318] raid6: sse2x2   gen()  9692 MB/s
+[    1.023311] raid6: sse2x1   gen()  7819 MB/s
+[    1.023322] raid6: using algorithm sse2x2 gen() 9692 MB/s
+[    1.091313] raid6: .... xor() 6174 MB/s, rmw enabled
+[    1.091327] raid6: using ssse3x2 recovery algorithm
+[    1.099885] fbcon: Taking over console
+[    1.099913] ACPI: Interpreter disabled.
+[    1.099970] xen:balloon: Initialising balloon driver
+[    1.107421] iommu: Default domain type: Translated 
+[    1.107434] iommu: DMA domain TLB invalidation policy: lazy mode 
+[    1.107776] SCSI subsystem initialized
+[    1.107935] usbcore: registered new interface driver usbfs
+[    1.107960] usbcore: registered new interface driver hub
+[    1.107974] usbcore: registered new device driver usb
+[    1.108081] EDAC MC: Ver: 3.0.0
+[    1.108500] Bluetooth: Core ver 2.22
+[    1.108517] NET: Registered PF_BLUETOOTH protocol family
+[    1.108524] Bluetooth: HCI device and connection manager initialized
+[    1.108532] Bluetooth: HCI socket layer initialized
+[    1.108539] Bluetooth: L2CAP socket layer initialized
+[    1.108548] Bluetooth: SCO socket layer initialized
+[    1.108557] NetLabel: Initializing
+[    1.108562] NetLabel:  domain hash size = 128
+[    1.108568] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    1.108593] NetLabel:  unlabeled traffic allowed by default
+[    1.108679] PCI: System does not support PCI
+[    1.108845] clocksource: Switched to clocksource xen
+[    1.109124] VFS: Disk quotas dquot_6.6.0
+[    1.109156] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    1.109195] hugetlbfs: disabling because there are no supported hugepage sizes
+[    1.109404] AppArmor: AppArmor Filesystem Enabled
+[    1.109432] pnp: PnP ACPI: disabled
+[    1.120195] NET: Registered PF_INET protocol family
+[    1.135466] IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    1.135937] tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+[    1.135985] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    1.136014] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    1.136067] TCP bind hash table entries: 8192 (order: 5, 131072 bytes, linear)
+[    1.136089] TCP: Hash tables configured (established 8192 bind 8192)
+[    1.136183] MPTCP token hash table entries: 1024 (order: 2, 24576 bytes, linear)
+[    1.136220] UDP hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    1.136234] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    1.136343] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.143606] RPC: Registered named UNIX socket transport module.
+[    1.143629] RPC: Registered udp transport module.
+[    1.143635] RPC: Registered tcp transport module.
+[    1.143641] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.143999] NET: Registered PF_XDP protocol family
+[    1.144014] PCI: CLS 0 bytes, default 64
+[    1.144080] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x3991fffe490, max_idle_ns: 881590608194 ns
+[    1.160520] Initialise system trusted keyrings
+[    1.162768] workingset: timestamp_bits=40 max_order=18 bucket_order=0
+[    1.164752] zbud: loaded
+[    1.169316] NFS: Registering the id_resolver key type
+[    1.169340] Key type id_resolver registered
+[    1.169347] Key type id_legacy registered
+[    1.169399] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    1.169410] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+[    1.169720] fuse: init (API version 7.36)
+[    1.170163] Allocating IMA blacklist keyring.
+[    1.179142] xor: measuring software checksum speed
+[    1.179881]    prefetch64-sse  : 13689 MB/sec
+[    1.180731]    generic_sse     : 11707 MB/sec
+[    1.180736] xor: using function: prefetch64-sse (13689 MB/sec)
+[    1.180745] Key type asymmetric registered
+[    1.180751] Asymmetric key parser 'x509' registered
+[    1.181256] alg: self-tests for CTR-KDF (hmac(sha256)) passed
+[    1.181284] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+[    1.181358] io scheduler mq-deadline registered
+[    1.181857] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    1.182146] xen:xen_evtchn: Event-channel device installed
+[    1.182819] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    1.185788] Linux agpgart interface v0.103
+[    1.191116] brd: module loaded
+[    1.193483] loop: module loaded
+[    1.194222] tun: Universal TUN/TAP device driver, 1.6
+[    1.194328] PPP generic driver version 2.4.2
+[    1.194425] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.194438] ehci-pci: EHCI PCI platform driver
+[    1.194452] ehci-platform: EHCI generic platform driver
+[    1.194465] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    1.194474] ohci-pci: OHCI PCI platform driver
+[    1.194487] ohci-platform: OHCI generic platform driver
+[    1.194499] uhci_hcd: USB Universal Host Controller Interface driver
+[    1.194575] i8042: PNP: No PS/2 controller found.
+[    1.194582] i8042: Probing ports directly.
+[    1.195436] i8042: No controller found
+[    1.195580] mousedev: PS/2 mouse device common for all mice
+[    1.195678] i2c_dev: i2c /dev entries driver
+[    1.195756] device-mapper: uevent: version 1.0.3
+[    1.195865] device-mapper: ioctl: 4.47.0-ioctl (2022-07-28) initialised: dm-devel@redhat.com
+[    1.195876] Bluetooth: HCI UART driver ver 2.3
+[    1.195884] Bluetooth: HCI UART protocol H4 registered
+[    1.195890] Bluetooth: HCI UART protocol BCSP registered
+[    1.195901] Bluetooth: HCI UART protocol LL registered
+[    1.195908] Bluetooth: HCI UART protocol ATH3K registered
+[    1.203326] Bluetooth: HCI UART protocol Three-wire (H5) registered
+[    1.203345] Bluetooth: HCI UART protocol Intel registered
+[    1.203362] Bluetooth: HCI UART protocol Broadcom registered
+[    1.203374] Bluetooth: HCI UART protocol QCA registered
+[    1.203382] Bluetooth: HCI UART protocol AG6XX registered
+[    1.203425] Bluetooth: HCI UART protocol Marvell registered
+[    1.203447] usbcore: registered new interface driver btusb
+[    1.203531] CAPI 2.0 started up with major 68 (middleware)
+[    1.203542] intel_pstate: CPU model not supported
+[    1.203571] sdhci: Secure Digital Host Controller Interface driver
+[    1.203579] sdhci: Copyright(c) Pierre Ossman
+[    1.203622] ledtrig-cpu: registered to indicate activity on CPUs
+[    1.203678] hid: raw HID events driver (C) Jiri Kosina
+[    1.203707] usbcore: registered new interface driver usbhid
+[    1.203716] usbhid: USB HID core driver
+[    1.204044] NET: Registered PF_INET6 protocol family
+[    1.204575] Segment Routing with IPv6
+[    1.204601] In-situ OAM (IOAM) with IPv6
+[    1.204634] NET: Registered PF_PACKET protocol family
+[    1.204716] Bluetooth: RFCOMM TTY layer initialized
+[    1.204726] Bluetooth: RFCOMM socket layer initialized
+[    1.204737] Bluetooth: RFCOMM ver 1.11
+[    1.204745] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    1.204751] Bluetooth: BNEP filters: protocol multicast
+[    1.204759] Bluetooth: BNEP socket layer initialized
+[    1.204765] Bluetooth: CMTP (CAPI Emulation) ver 1.0
+[    1.204780] Bluetooth: CMTP socket layer initialized
+[    1.204787] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.204794] Bluetooth: HIDP socket layer initialized
+[    1.204856] 9pnet: Installing 9P2000 support
+[    1.204885] Key type dns_resolver registered
+[    1.205024] IPI shorthand broadcast: enabled
+[    1.205056] sched_clock: Marking stable (1191888535, 11516107)->(1292546537, -89141895)
+[    1.205355] registered taskstats version 1
+[    1.205370] Loading compiled-in X.509 certificates
+[    1.205599] zswap: loaded using pool lzo/zbud
+[    1.207072] Btrfs loaded, crc32c=crc32c-intel, zoned=yes, fsverity=yes
+[    1.207934] Key type encrypted registered
+[    1.207945] AppArmor: AppArmor sha1 policy hashing enabled
+[    1.207961] ima: No TPM chip found, activating TPM-bypass!
+[    1.207984] ima: Allocated hash algorithm: sha1
+[    1.208000] ima: No architecture policies found
+[    1.208030] evm: Initialising EVM extended attributes:
+[    1.208037] evm: security.selinux
+[    1.208043] evm: security.SMACK64
+[    1.208047] evm: security.SMACK64EXEC
+[    1.208052] evm: security.SMACK64TRANSMUTE
+[    1.208057] evm: security.SMACK64MMAP
+[    1.208061] evm: security.apparmor
+[    1.208073] evm: security.ima
+[    1.208078] evm: security.capability
+[    1.208083] evm: HMAC attrs: 0x1
+[    1.230322] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    1.230769] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    1.279039] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    1.279057] cfg80211: failed to load regulatory.db
+[    1.279248] md: Waiting for all devices to be available before autodetect
+[    1.279258] md: If you don't use raid, use raid=noautodetect
+[    1.279266] md: Autodetecting RAID arrays.
+[    1.279271] md: autorun ...
+[    1.279276] md: ... autorun DONE.
+[    1.279531] /dev/root: Can't open blockdev
+[    1.279543] VFS: Cannot open root device "null" or unknown-block(0,0): error -6
+[    1.279552] Please append a correct "root=" boot option; here are the available partitions:
+[    1.279562] 0100           65536 ram0 
+[    1.279570]  (driver?)
+[    1.279580] 0101           65536 ram1 
+[    1.279585]  (driver?)
+[    1.279595] 0102           65536 ram2 
+[    1.279596]  (driver?)
+[    1.279608] 0103           65536 ram3 
+[    1.279610]  (driver?)
+[    1.279619] 0104           65536 ram4 
+[    1.279620]  (driver?)
+[    1.279634] 0105           65536 ram5 
+[    1.279635]  (driver?)
+[    1.279647] 0106           65536 ram6 
+[    1.279649]  (driver?)
+[    1.279658] 0107           65536 ram7 
+[    1.279663]  (driver?)
+[    1.279673] 0108           65536 ram8 
+[    1.279674]  (driver?)
+[    1.279687] 0109           65536 ram9 
+[    1.279689]  (driver?)
+[    1.279701] 010a           65536 ram10 
+[    1.279703]  (driver?)
+[    1.279711] 010b           65536 ram11 
+[    1.279713]  (driver?)
+[    1.279727] 010c           65536 ram12 
+[    1.279728]  (driver?)
+[    1.279741] 010d           65536 ram13 
+[    1.279743]  (driver?)
+[    1.279755] 010e           65536 ram14 
+[    1.279756]  (driver?)
+[    1.279765] 010f           65536 ram15 
+[    1.279766]  (driver?)
+[    1.279782] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[    1.279795] CPU: 0 PID: 1 Comm: swapper/0 Tainted: G        W       T  6.0.0-rc4 #1 841c5f4f62f952ba4f3984390f28eb6eacafc65e
+[    1.279810] Call Trace:
+[    1.279817]  <TASK>
+[    1.279823]  dump_stack_lvl+0x49/0x63
+[    1.279837]  dump_stack+0x10/0x16
+[    1.279844]  panic+0x10c/0x2a5
+[    1.279853]  mount_block_root+0x144/0x1dd
+[    1.279865]  mount_root+0x1c9/0x1f0
+[    1.279873]  prepare_namespace+0x13f/0x174
+[    1.279880]  kernel_init_freeable+0x222/0x238
+[    1.279888]  ? rest_init+0xe0/0xe0
+[    1.279896]  kernel_init+0x1a/0x140
+[    1.279903]  ret_from_fork+0x22/0x30
+[    1.279914]  </TASK>
+[    1.279921] Kernel Offset: disabled
+Domain 3 has shut down, reason code 3 0x3
+Action for shutdown reason code 3 is destroy
+Domain 3 needs to be cleaned up: destroying the domain
+Done. Exiting now

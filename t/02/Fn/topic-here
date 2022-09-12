@@ -1,6 +1,6 @@
 topic-here () 
 { 
-    local D="xen-0: review";
+    local D="xen-0";
     local D1="$D";
     test -n "$*" && D1="$*";
     set_sprint_topic $D1
