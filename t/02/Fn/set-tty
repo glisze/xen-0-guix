@@ -1,0 +1,5 @@
+set-tty () 
+{ 
+    local D="GPG_TTY: used by gpg for your input";
+    export GPG_TTY=$( tty )
+}

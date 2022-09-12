@@ -1,0 +1,34 @@
+host                   : S10
+release                : 6.0.0-rc4
+version                : #1 SMP PREEMPT_DYNAMIC 1
+machine                : x86_64
+nr_cpus                : 2
+max_cpu_id             : 1
+nr_nodes               : 1
+cores_per_socket       : 2
+threads_per_core       : 1
+cpu_mhz                : 1996.970
+hw_caps                : bfebfbff:47f8e3bf:2c100800:00000101:0000000f:2294e287:00400004:00000100
+virt_caps              : pv hvm hvm_directio pv_directio hap shadow iommu_hap_pt_share vmtrace gnttab-v1 gnttab-v2
+total_memory           : 8013
+free_memory            : 5850
+sharing_freed_memory   : 0
+sharing_used_memory    : 0
+outstanding_claims     : 0
+free_cpus              : 0
+xen_major              : 4
+xen_minor              : 16
+xen_extra              : .0
+xen_version            : 4.16.0
+xen_caps               : xen-3.0-x86_64 xen-3.0-x86_32p hvm-3.0-x86_32 hvm-3.0-x86_32p hvm-3.0-x86_64 
+xen_scheduler          : credit2
+xen_pagesize           : 4096
+platform_params        : virt_start=0xffff800000000000
+xen_changeset          : 
+xen_commandline        : root=device:hd0s1 iommu=1 dom0-max_vcpus=4 dom0_mem=2048M
+cc_compiler            : gcc (GCC) 10.3.0
+cc_compile_by          : 
+cc_compile_domain      : [unknown]
+cc_compile_date        : Thu Jan  1 01:00:01 CET 1970
+build_id               : 4e07e26eedf1b842fa783d41af74fe9356e19faa
+xend_config_format     : 4

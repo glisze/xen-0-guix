@@ -1,0 +1,99 @@
+Usage xl [-vfNtT] <subcommand> [args]
+
+xl full list of subcommands:
+
+ create              Create a domain from config file <filename>
+ config-update       Update a running domain's saved configuration, used when rebuilding the domain after reboot.
+WARNING: xl now has better capability to manage domain configuration, avoid using this command when possible
+ list                List information about all/some domains
+ destroy             Terminate a domain immediately
+ shutdown            Issue a shutdown signal to a domain
+ reboot              Issue a reboot signal to a domain
+ pci-attach          Insert a new pass-through pci device
+ pci-detach          Remove a domain's pass-through pci device
+ pci-list            List pass-through pci devices for a domain
+ pci-assignable-add  Make a device assignable for pci-passthru
+ pci-assignable-remove 
+                     Remove a device from being assignable
+ pci-assignable-list List all the assignable pci devices
+ pause               Pause execution of a domain
+ unpause             Unpause a paused domain
+ console             Attach to domain's console
+ vncviewer           Attach to domain's VNC server.
+ save                Save a domain state to restore later
+ migrate             Migrate a domain to another host
+ restore             Restore a domain from a saved state
+ migrate-receive     Restore a domain from a saved state
+ dump-core           Core dump a domain
+ cd-insert           Insert a cdrom into a guest's cd drive
+ cd-eject            Eject a cdrom from a guest's cd drive
+ mem-max             Set the maximum amount reservation for a domain
+ mem-set             Set the current memory usage for a domain
+ button-press        Indicate an ACPI button press to the domain
+ vcpu-list           List the VCPUs for all/some domains
+ vcpu-pin            Set which CPUs a VCPU can use
+ vcpu-set            Set the number of active VCPUs allowed for the domain
+ vm-list             List guest domains, excluding dom0, stubdoms, etc.
+ info                Get information about Xen host
+ sharing             Get information about page sharing
+ sched-credit        Get/set credit scheduler parameters
+ sched-credit2       Get/set credit2 scheduler parameters
+ sched-rtds          Get/set rtds scheduler parameters
+ domid               Convert a domain name to domain id
+ domname             Convert a domain id to domain name
+ rename              Rename a domain
+ trigger             Send a trigger to a domain
+ sysrq               Send a sysrq to a domain
+ debug-keys          Send debug keys to Xen
+ set-parameters      Set hypervisor parameters
+ dmesg               Read and/or clear dmesg buffer
+ top                 Monitor a host and the domains in real time
+ network-attach      Create a new virtual network device
+ network-list        List virtual network interfaces for a domain
+ network-detach      Destroy a domain's virtual network device
+ channel-list        List virtual channel devices for a domain
+ block-attach        Create a new virtual block device
+ block-list          List virtual block devices for a domain
+ block-detach        Destroy a domain's virtual block device
+ vtpm-attach         Create a new virtual TPM device
+ vtpm-list           List virtual TPM devices for a domain
+ vtpm-detach         Destroy a domain's virtual TPM device
+ vkb-attach          Create a new virtual keyboard device
+ vkb-list            List virtual keyboard devices for a domain
+ vkb-detach          Destroy a domain's virtual keyboard device
+ vdispl-attach       Create a new virtual display device
+ vdispl-list         List virtual display devices for a domain
+ vdispl-detach       Destroy a domain's virtual display device
+ vsnd-attach         Create a new virtual sound device
+ vsnd-list           List virtual display devices for a domain
+ vsnd-detach         Destroy a domain's virtual sound device
+ uptime              Print uptime for all/some domains
+ claims              List outstanding claim information about all domains
+ cpupool-create      Create a new CPU pool
+ cpupool-list        List CPU pools on host
+ cpupool-destroy     Deactivates a CPU pool
+ cpupool-rename      Renames a CPU pool
+ cpupool-cpu-add     Adds a CPU to a CPU pool
+ cpupool-cpu-remove  Removes a CPU from a CPU pool
+ cpupool-migrate     Moves a domain into a CPU pool
+ cpupool-numa-split  Splits up the machine into one CPU pool per NUMA node
+ getenforce          Returns the current enforcing mode of the Flask Xen security module
+ setenforce          Sets the current enforcing mode of the Flask Xen security module
+ loadpolicy          Loads a new policy into the Flask Xen security module
+ remus               Enable Remus HA for domain
+ devd                Daemon that listens for devices and launches backends
+ psr-hwinfo          Show hardware information for Platform Shared Resource
+ psr-cmt-attach      Attach Cache Monitoring Technology service to a domain
+ psr-cmt-detach      Detach Cache Monitoring Technology service from a domain
+ psr-cmt-show        Show Cache Monitoring Technology information
+ psr-cat-set         Set cache capacity bitmasks(CBM) for a domain
+ psr-cat-show        Show Cache Allocation Technology information
+ psr-mba-set         Set throttling value (THRTL) for a domain
+ psr-mba-show        Show Memory Bandwidth Allocation information
+ usbctrl-attach      Create a virtual USB controller for a domain
+ usbctrl-detach      Remove the virtual USB controller specified by <DevId> for a domain
+ usbdev-attach       Attach a USB device to a domain
+ usbdev-detach       Detach a USB device from a domain
+ usb-list            List information about all USB controllers and devices for a domain
+ qemu-monitor-command 
+                     Issue a qemu monitor command to the device model of a domain
